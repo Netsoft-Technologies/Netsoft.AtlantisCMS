@@ -5,21 +5,27 @@ VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.DataAccess", "1.DataAccess", "{194E09AF-7589-4F57-9E99-4A141EE467EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netsoft.AtlantisCMS.Dal", "Netsoft.AtlantisCMS.Dal\Netsoft.AtlantisCMS.Dal.csproj", "{31074770-16D6-4D15-B1DA-594F0B88714A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netsoft.AtlantisCMS.Dal", "Netsoft.AtlantisCMS.Dal\Netsoft.AtlantisCMS.Dal.csproj", "{31074770-16D6-4D15-B1DA-594F0B88714A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netsoft.AtlantisCMS.DalEfCore", "Netsoft.AtlantisCMS.DalEfCore\Netsoft.AtlantisCMS.DalEfCore.csproj", "{2FA8B65E-8042-4757-9F14-470EEE6B357B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netsoft.AtlantisCMS.DalEfCore", "Netsoft.AtlantisCMS.DalEfCore\Netsoft.AtlantisCMS.DalEfCore.csproj", "{2FA8B65E-8042-4757-9F14-470EEE6B357B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.BusinessLibrary", "2.BusinessLibrary", "{FEB21B26-BD3F-4462-8515-F39AFBE40801}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netsoft.AtlantisCMS.BusinessLibrary", "Netsoft.AtlantisCMS.BusinessLibrary\Netsoft.AtlantisCMS.BusinessLibrary.csproj", "{E3BD3696-48AF-4E7E-B146-82A69E90256C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netsoft.AtlantisCMS.BusinessLibrary", "Netsoft.AtlantisCMS.BusinessLibrary\Netsoft.AtlantisCMS.BusinessLibrary.csproj", "{E3BD3696-48AF-4E7E-B146-82A69E90256C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "9.Server", "9.Server", "{A9D66FF0-3669-401B-98A1-DCCD6851C526}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netsoft.AtlantisCMS.WebApi", "Netsoft.AtlantisCMS.WebApi\Netsoft.AtlantisCMS.WebApi.csproj", "{87CB1B3F-BE6F-4381-ADE3-E847CB0AE416}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netsoft.AtlantisCMS.WebApi", "Netsoft.AtlantisCMS.WebApi\Netsoft.AtlantisCMS.WebApi.csproj", "{87CB1B3F-BE6F-4381-ADE3-E847CB0AE416}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.UI", "3.UI", "{C697C429-05D0-45EF-812B-40DE60BC1E89}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "netsoft.atlantiscms.web", "Netsoft.AtlantisCMS.Web\netsoft.atlantiscms.web.esproj", "{AB9861D4-F811-499D-9320-8E5311B42D99}"
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Netsoft.AtlantisCMS.Web", "Netsoft.AtlantisCMS.Web\Netsoft.AtlantisCMS.Web.esproj", "{AB9861D4-F811-499D-9320-8E5311B42D99}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.Core", "0.Core", "{A315A1CC-A421-4DD0-A65A-54AE607511D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netsoft.AtlantisCMS.Core", "Netsoft.AtlantisCMS.Core\Netsoft.AtlantisCMS.Core.csproj", "{C69A71CB-6962-4C69-A1CF-BCE3D58C2DFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netsoft.AtlantisCMS.Models", "Netsoft.AtlantisCMS.Models\Netsoft.AtlantisCMS.Models.csproj", "{360065D3-3F7C-4547-A679-C99682017615}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +55,14 @@ Global
 		{AB9861D4-F811-499D-9320-8E5311B42D99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB9861D4-F811-499D-9320-8E5311B42D99}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AB9861D4-F811-499D-9320-8E5311B42D99}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{C69A71CB-6962-4C69-A1CF-BCE3D58C2DFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C69A71CB-6962-4C69-A1CF-BCE3D58C2DFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C69A71CB-6962-4C69-A1CF-BCE3D58C2DFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C69A71CB-6962-4C69-A1CF-BCE3D58C2DFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{360065D3-3F7C-4547-A679-C99682017615}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{360065D3-3F7C-4547-A679-C99682017615}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{360065D3-3F7C-4547-A679-C99682017615}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{360065D3-3F7C-4547-A679-C99682017615}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +73,8 @@ Global
 		{E3BD3696-48AF-4E7E-B146-82A69E90256C} = {FEB21B26-BD3F-4462-8515-F39AFBE40801}
 		{87CB1B3F-BE6F-4381-ADE3-E847CB0AE416} = {A9D66FF0-3669-401B-98A1-DCCD6851C526}
 		{AB9861D4-F811-499D-9320-8E5311B42D99} = {C697C429-05D0-45EF-812B-40DE60BC1E89}
+		{C69A71CB-6962-4C69-A1CF-BCE3D58C2DFA} = {A315A1CC-A421-4DD0-A65A-54AE607511D3}
+		{360065D3-3F7C-4547-A679-C99682017615} = {A315A1CC-A421-4DD0-A65A-54AE607511D3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {75DF8CFB-97BD-41C1-B8D9-3750CDB95237}

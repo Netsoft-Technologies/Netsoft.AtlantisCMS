@@ -15,4 +15,12 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Netsoft.AtlantisCMS.BusinessLibrary\Netsoft.AtlantisCMS.BusinessLibrary.csproj" />
+    <ProjectReference Include="..\Netsoft.AtlantisCMS.Core\Netsoft.AtlantisCMS.Core.csproj" />
+    <ProjectReference Include="..\Netsoft.AtlantisCMS.DalEfCore\Netsoft.AtlantisCMS.DalEfCore.csproj" />
+    <ProjectReference Include="..\Netsoft.AtlantisCMS.Dal\Netsoft.AtlantisCMS.Dal.csproj" />
+    <ProjectReference Include="..\Netsoft.AtlantisCMS.Models\Netsoft.AtlantisCMS.Models.csproj" />
+  </ItemGroup>
+
 </Project>
