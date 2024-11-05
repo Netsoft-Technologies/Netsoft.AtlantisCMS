@@ -9,8 +9,9 @@ namespace Netsoft.AtlantisCMS.WebApi.Infrastructure
     public class AutomapperConfiguration : Profile
     {
         public AutomapperConfiguration()
-        { 
+        {
             CreateMap<OnlineStringModels, COnlineStringRO>().ReverseMap();
+            CreateMap<COnlineStringEdit, OnlineStringModels>().ReverseMap();
         }
     }
 }

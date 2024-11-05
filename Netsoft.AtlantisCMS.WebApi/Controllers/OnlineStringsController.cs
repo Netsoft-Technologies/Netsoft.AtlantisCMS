@@ -38,7 +38,7 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             {
                 return NotFound($"");
             }
-            var result = _mapper.Map<OnlinePageModel>(page);
+            var result = _mapper.Map<OnlineStringModels>(page);
             return Ok(result);
         }
         [HttpPost]
