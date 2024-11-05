@@ -18,9 +18,8 @@ namespace Netsoft.AtlantisCMS.DalEfCore
             _configuration = configuration;
             _connectionString = configuration.GetConnectionString("DefaultConnection");
         }
-
-        public DbSet<OnlinePages_Entity> _OnlinePages { get; set; }
         public DbSet<OnlineStrings_Entity> _OnlineStrings { get; set; }
+        public DbSet<TestingTable_Entity> _TestingTable { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
        => options.UseSqlServer(_connectionString);
@@ -41,5 +40,14 @@ namespace Netsoft.AtlantisCMS.DalEfCore
         public int? MessageId { get; set; }
         public string Message { get; set; }
         public byte? MessageType { get; set; }
+    }
+    public class TestingTable_Entity
+    {
+        [Key]
+        public int TestId { get; set; }
+        public string TestTitle { get; set; }
+        public string TestContent { get; set; }
+        public int? TestOrder { get; set; }
+        public DateTime? TestTimeCreated { get; set; }
     }
 }
