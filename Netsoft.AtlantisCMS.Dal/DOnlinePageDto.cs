@@ -9,7 +9,7 @@ namespace Netsoft.AtlantisCMS.Dal
     public class DOnlinePageDto
     {
         public int Id { get; set; }
-        public string? Title { get; set; }
+        public string Title { get; set; }
         public int? PageOrder {  get; set; }
     }
 }

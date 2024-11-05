@@ -13,7 +13,7 @@ namespace Netsoft.AtlantisCMS.Models
         public List<OnlinePageComponentModel> Components { get; set; }
         public OnlinePageModel()
         {
-            Components = new List<OnlinePageComponentModel>(); 
+            Components = new List<OnlinePageComponentModel>();
         }
     }
 }
