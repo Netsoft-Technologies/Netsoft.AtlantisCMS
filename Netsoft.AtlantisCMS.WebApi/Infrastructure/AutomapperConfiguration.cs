@@ -10,7 +10,7 @@ namespace Netsoft.AtlantisCMS.WebApi.Infrastructure
     {
         public AutomapperConfiguration()
         { 
-            CreateMap<OnlinePageModel, COnlinePageRO>().ReverseMap();
+            CreateMap<OnlineStringModels, COnlineStringRO>().ReverseMap();
         }
     }
 }

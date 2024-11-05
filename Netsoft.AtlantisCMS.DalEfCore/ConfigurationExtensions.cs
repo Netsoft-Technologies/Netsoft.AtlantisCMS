@@ -15,6 +15,7 @@ namespace Netsoft.AtlantisCMS.DalEfCore
         {
             services.AddScoped<TicketContext>();
             services.AddTransient<IOnlinePagesDal, OnlinePageDal>();
+            services.AddTransient<IOnlineStringDal, OnlineStringDal>();
         }
     }
 }
