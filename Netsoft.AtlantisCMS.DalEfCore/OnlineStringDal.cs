@@ -32,7 +32,10 @@ namespace Netsoft.AtlantisCMS.DalEfCore
         public void Insert (DOnlineStringDto dto)
         {
             var newItem = new OnlineStrings_Entity
-            { Title = dto.Title, MessageId = dto.MessageId, Message = dto.Message };
+            { Title = dto.Title,
+              MessageId = dto.MessageId,
+              Message = dto.Message };
+            db._OnlineStrings.Add(newItem);
             db.SaveChanges();
             dto.Id = newItem.Id;
         }
