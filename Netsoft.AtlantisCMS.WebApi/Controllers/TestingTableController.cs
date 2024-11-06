@@ -31,7 +31,7 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             return Ok(testsRequest);
         }
         // TODO: fix
-        /*
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<TestingTableModel>> GetSingleTest(int id)
         {
@@ -55,6 +55,7 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             testingTablePost.TestContent = testingTable.TestContent;
             testingTablePost.TestOrder = testingTable.TestOrder;
             testingTablePost.TestDate = DateTime.Now;
+            testingTablePost =await testingTablePost.SaveAsync();
             var result = _mapper.Map<TestingTableModel>(testingTablePost);
             return Ok(result);
         }
@@ -79,7 +80,7 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             var result = _mapper.Map<TestingTableModel>(entryEdit);
             return Ok(result);
         }
-        */
+        
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTest (int id)
         {
