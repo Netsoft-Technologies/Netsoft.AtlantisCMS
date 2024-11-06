@@ -66,7 +66,7 @@ namespace Netsoft.AtlantisCMS.DalEfCore
             var idData = (from r in db._OnlinePages
                           where r.PageId == id
                           select r).FirstOrDefault();
-            if (idData == null)
+            if (idData != null)
             {
                 db._OnlinePages.Remove(idData);
                 db.SaveChanges();
