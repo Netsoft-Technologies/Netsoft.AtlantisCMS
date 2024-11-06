@@ -19,7 +19,7 @@ namespace Netsoft.AtlantisCMS.DalEfCore
             _connectionString = configuration.GetConnectionString("DefaultConnection");
         }
         public DbSet<OnlinePages_Entity> _OnlinePages { get; set; }
-        public DbSet<OnlinePageComponents_Entity> _OnlinePages_Components { get; set; }
+        public DbSet<OnlinePageComponents_Entity> _OnlinePage_Components { get; set; }
         public DbSet<OnlineComponents_Entity> _OnlineComponents {  get; set; }
         public DbSet<OnlineStrings_Entity> _OnlineStrings { get; set; }
         public DbSet<TestingTable_Entity> _TestingTable { get; set; }

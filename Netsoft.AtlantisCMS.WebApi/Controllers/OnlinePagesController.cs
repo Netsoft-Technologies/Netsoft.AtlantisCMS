@@ -46,10 +46,10 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<OnlinePageModel>> CreatePage(OnlinePageModel onlinePagePost)
         {
-            //if (onlinePagePost == null || onlinePagePost.PageId == 0 || !ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
+            if (onlinePagePost == null || !ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             COnlinePageEdit newPage = await _OnlinePageEditDataPortal.CreateAsync();
             newPage.PageTitle = onlinePagePost.PageTitle;
             newPage.PageOrder = onlinePagePost.PageOrder;
