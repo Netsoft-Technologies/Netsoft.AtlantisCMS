@@ -20,13 +20,24 @@ namespace Netsoft.AtlantisCMS.DalEfCore
             var result = (from r in db._OnlineStrings
                           where r.Id == id
                           select new DOnlineStringDto
-                          { Id = r.Id, Title = r.Title, MessageId = r.MessageId, Message = r.Message }).FirstOrDefault();
+                          { 
+                              Id = r.Id,
+                              Title = r.Title,
+                              MessageId = r.MessageId,
+                              Message = r.Message
+                          }).FirstOrDefault();
             return result;
         }
         public List<DOnlineStringDto> Fetch()
         {
             var result = from r in db._OnlineStrings
-                         select new DOnlineStringDto { Id = r.Id, Title = r.Title, MessageId = r.MessageId, Message = r.Message };
+                         select new DOnlineStringDto
+                         {
+                             Id = r.Id,
+                             Title = r.Title,
+                             MessageId = r.MessageId,
+                             Message = r.Message
+                         };
             return result.ToList();
         }
         public void Insert (DOnlineStringDto dto)

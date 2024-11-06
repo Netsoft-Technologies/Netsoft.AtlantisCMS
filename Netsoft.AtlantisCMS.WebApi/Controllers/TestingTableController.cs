@@ -30,12 +30,10 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             }
             return Ok(testsRequest);
         }
-        // TODO: fix
-        
         [HttpGet("{id}")]
         public async Task<ActionResult<TestingTableModel>> GetSingleTest(int id)
         {
-            var testPage = await _TestingDataPortal.FetchAsync(id);
+            var testPage = await _TestingEditDataPortal.FetchAsync(id);
             if (testPage == null)
             {
                 return NotFound();

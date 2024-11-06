@@ -1,5 +1,4 @@
 ﻿using Csla;
-using Csla.Serialization;
 using Netsoft.AtlantisCMS.Dal;
 using System;
 using System.Collections.Generic;
