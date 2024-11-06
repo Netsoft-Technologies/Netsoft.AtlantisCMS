@@ -13,8 +13,10 @@ namespace Netsoft.AtlantisCMS.DalEfCore
     {
         public static void AddDalEfCore(this IServiceCollection services)
         {
-            services.AddScoped<TicketContext>();
+            services.AddScoped<DbContext>();
             //services.AddTransient<IOnlinePagesDal, OnlinePageDal>();
+            services.AddTransient<IOnlinePageDal, OnlinePageDal>();
+            services.AddTransient<IOnlinePageComponentDal, OnlinePageComponentDal>();
             services.AddTransient<IOnlineStringDal, OnlineStringDal>();
             services.AddTransient<ITestingTableDal, TestingTableDal>();
         }

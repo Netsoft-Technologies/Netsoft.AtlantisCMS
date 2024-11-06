@@ -9,8 +9,8 @@ namespace Netsoft.AtlantisCMS.DalEfCore
 {
     public class TestingTableDal : ITestingTableDal
     {
-        private readonly TicketContext db;
-        public TestingTableDal (TicketContext context)
+        private readonly DbContext db;
+        public TestingTableDal (DbContext context)
         {
             db = context;
         }

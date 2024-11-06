@@ -10,8 +10,8 @@ namespace Netsoft.AtlantisCMS.DalEfCore
 {
     public class OnlineStringDal : IOnlineStringDal
     {
-        private readonly TicketContext db;
-        public OnlineStringDal(TicketContext context) 
+        private readonly DbContext db;
+        public OnlineStringDal(DbContext context) 
         {
             db = context;
         }
