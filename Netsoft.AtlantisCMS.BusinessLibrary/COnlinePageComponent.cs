@@ -63,6 +63,23 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             //CompHTMLClassName = compDto.ComponentHTMLClassName;
             //CompHTMLElementId = compDto.ComponentHTMLElementID;
         }
+
+        //preliminary support for component editing functions
+
+        //[InsertChild]
+        //private void Insert([Inject] IOnlinePageComponentDal componentDal, int pageid)
+        //{
+        //    using (BypassPropertyChecks)
+        //    {
+        //        var item = new DOnlinePageComponentDto
+        //        {
+        //            ParentPageId = pageid,
+        //            ComponentId = this.ComponentId,
+        //        };
+        //        componentDal.Insert(item);
+        //    }
+        //}
+
         [Insert]
         private void Insert([Inject] IOnlinePageComponentDal componentDal)
         {

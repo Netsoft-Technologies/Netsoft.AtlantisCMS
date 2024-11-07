@@ -11,5 +11,6 @@ namespace Netsoft.AtlantisCMS.Dal
         public int PageId { get; set; }
         public string PageTitle { get; set; }
         public int? PageOrder {  get; set; }
+        public List<DOnlinePageComponentDto>? Components { get; set; }
     }
 }

@@ -10,6 +10,11 @@ namespace Netsoft.AtlantisCMS.Dal
     {
         DOnlinePageComponentDto Fetch(int pageId, int componentId);
         List<DOnlinePageComponentDto> FetchComponentsForPage(int pageId);
+        //DOnlinePageComponentDto FetchComponentForPage(int pageId);
+        //
+        //
+        //
+        //
         //List<DOnlinePageComponentDto> FetchPagesForComponent(int componentId);
         void Insert(DOnlinePageComponentDto pageComponentDto);
         void Update(int pageId, int componentId, DOnlinePageComponentDto pageComponentDto);

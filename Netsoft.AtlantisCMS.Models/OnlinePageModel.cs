@@ -11,10 +11,10 @@ namespace Netsoft.AtlantisCMS.Models
         public int PageId { get; set; }
         public string PageTitle { get; set; }
         public int? PageOrder {  get; set; }
-        public List<OnlinePageComponentModel> onlinePageComponents { get; set; }
+        public List<OnlinePageComponentModel> Components { get; set; }
         public OnlinePageModel()
         {
-            onlinePageComponents = new List<OnlinePageComponentModel>();
+            Components = new List<OnlinePageComponentModel>();
         }
     }
 }

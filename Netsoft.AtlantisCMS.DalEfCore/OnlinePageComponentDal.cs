@@ -20,8 +20,9 @@ namespace Netsoft.AtlantisCMS.DalEfCore
                           where r.ParentPageId == pageId && r.ComponentId == compId
                           select new DOnlinePageComponentDto
                           {
-                              ParentPageId = r.ParentPageId,
-                              ComponentId = r.ComponentId
+
+                              ComponentId = r.ComponentId,
+                              ParentPageId = r.ParentPageId
                           }).FirstOrDefault();
             return result;
         }
@@ -46,21 +47,33 @@ namespace Netsoft.AtlantisCMS.DalEfCore
         //}
         public List<DOnlinePageComponentDto> FetchComponentsForPage(int pageId)
         {
-            var result = from page in _dbContext._OnlinePages
-                         join pageComponent in _dbContext._OnlinePage_Components
-                            on page.PageId equals pageComponent.ParentPageId
-                         join component in _dbContext._OnlineComponents
-                            on pageComponent.ComponentId equals component.Id
-                         where pageComponent.ParentPageId == pageId
+            //var result = from page in _dbContext._OnlinePages
+            //             join pageComponent in _dbContext._OnlinePage_Components
+            //                on page.PageId equals pageComponent.ParentPageId
+            //             join component in _dbContext._OnlineComponents
+            //                on pageComponent.ComponentId equals component.Id
+            //             where pageComponent.ParentPageId == pageId
+            //             select new DOnlinePageComponentDto
+            //             {
+            //                 ParentPageId = pageId,
+            //                 //ParentPageTitle = pageComponent.ParentPageTitle,
+            //                 ComponentId = component.Id,
+            //                 ComponentDesc = pageComponent.ComponentDescription,
+            //                 //ComponentHTMLClassName = pageComponent.ComponentHTMLClassName,
+            //                 //ComponentHTMLElementID = pageComponent.ComponentHTMLElementID
+            //             };
+            var result = from comp in _dbContext._OnlinePage_Components
+                         where comp.ParentPageId == pageId
                          select new DOnlinePageComponentDto
                          {
-                             ParentPageId = pageId,
-                             //ParentPageTitle = pageComponent.ParentPageTitle,
-                             ComponentId = component.Id,
-                             ComponentDesc = pageComponent.ComponentDescription,
+                             ComponentId = comp.ComponentId,
+                             ParentPageId = comp.ParentPageId,
+                             //ParentPageTitle = pageComponent.ParentPageTitle,                             
+                             ComponentDesc = comp.ComponentDescription,
                              //ComponentHTMLClassName = pageComponent.ComponentHTMLClassName,
                              //ComponentHTMLElementID = pageComponent.ComponentHTMLElementID
                          };
+
             return result.ToList();
         }
         public void Insert(DOnlinePageComponentDto pageComponentDto)
