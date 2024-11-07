@@ -20,8 +20,6 @@ namespace Netsoft.AtlantisCMS.DalEfCore
             services.AddTransient<IOnlinePageComponentDal, OnlinePageComponentDal>();
 
             services.AddTransient<IOnlineStringDal, OnlineStringDal>();
-
-            services.AddTransient<ITestingTableDal, TestingTableDal>();
         }
     }
 }

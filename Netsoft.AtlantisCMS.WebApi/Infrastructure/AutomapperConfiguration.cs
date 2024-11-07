@@ -13,9 +13,6 @@ namespace Netsoft.AtlantisCMS.WebApi.Infrastructure
             CreateMap<OnlineStringModels, COnlineStringRO>().ReverseMap();
             CreateMap<COnlineStringEdit, OnlineStringModels>().ReverseMap();
 
-            CreateMap<TestingTableModel, CTestingTableRO>().ReverseMap();
-            CreateMap<CTestingTableEdit, TestingTableModel>().ReverseMap();
-
             CreateMap<OnlinePageModel, COnlinePageRO>().ReverseMap();
             CreateMap<OnlinePageModel, COnlinePageEdit>().ReverseMap();
             CreateMap<COnlinePageEdit, OnlinePageModel>().ReverseMap();

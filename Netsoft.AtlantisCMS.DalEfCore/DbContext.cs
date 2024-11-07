@@ -18,9 +18,12 @@ namespace Netsoft.AtlantisCMS.DalEfCore
             _configuration = configuration;
             _connectionString = configuration.GetConnectionString("DefaultConnection");
         }
+
+        public DbSet<OnlineCompStylingProp_Entity> _OnlineCompStylingProp { get; set; }
+        public DbSet<OnlineComp_Entity> _OnlineComp {  get; set; }
+
         public DbSet<OnlinePages_Entity> _OnlinePages { get; set; }
         public DbSet<OnlinePageComponents_Entity> _OnlinePage_Components { get; set; }
-        public DbSet<OnlineComponents_Entity> _OnlineComponents {  get; set; }
         public DbSet<OnlineStrings_Entity> _OnlineStrings { get; set; }
         public DbSet<TestingTable_Entity> _TestingTable { get; set; }
 
@@ -29,6 +32,22 @@ namespace Netsoft.AtlantisCMS.DalEfCore
        => options.UseSqlServer(_connectionString);
     }
 
+    public class OnlineCompStylingProp_Entity
+    {
+        [Key]
+        public int StylingPropId { get; set; }
+        public int ParentCompId { get; set; }
+        public string StyleValue { get; set; }
+    }
+    public class OnlineComp_Entity
+    {
+        [Key]
+        public int Id { get; set; }
+        public string Description { get; set; }
+        public string HTMLClassName { get; set; }
+        public string HTMLElementId { get; set; }
+        public int? StringContentId { get; set; }
+    }
     public class OnlinePages_Entity
     {
         [Key]
@@ -45,15 +64,6 @@ namespace Netsoft.AtlantisCMS.DalEfCore
         public string ComponentDescription { get; set; }
         //public string ComponentHTMLClassName { get; set; }
         //public string ComponentHTMLElementID { get; set; }
-    }
-    public class OnlineComponents_Entity
-    {
-        [Key]
-        public int Id { get; set; }
-        public string Description { get; set; }
-        public string HTMLClassName { get; set; }
-        public string HTMLElementId { get; set; }
-        public int? StringContentId { get; set; }
     }
     public class OnlineStrings_Entity
     {
