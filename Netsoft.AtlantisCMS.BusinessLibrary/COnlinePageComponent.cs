@@ -17,12 +17,12 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             get { return GetProperty(ParentPageIdProperty); }
             set {  SetProperty(ParentPageIdProperty, value); }
         }
-        public static readonly PropertyInfo<string> ParentPageTitleProperty = RegisterProperty<string>(c => c.ParentPageTitle);
-        public string ParentPageTitle
-        {
-            get { return GetProperty(ParentPageTitleProperty); }
-            set { SetProperty(ParentPageTitleProperty, value); }
-        }
+        //public static readonly PropertyInfo<string> ParentPageTitleProperty = RegisterProperty<string>(c => c.ParentPageTitle);
+        //public string ParentPageTitle
+        //{
+        //    get { return GetProperty(ParentPageTitleProperty); }
+        //    set { SetProperty(ParentPageTitleProperty, value); }
+        //}
         public static readonly PropertyInfo<int> ComponentIdProperty = RegisterProperty<int>(c => c.ComponentId);
         public int ComponentId
         {
@@ -35,18 +35,18 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             get { return GetProperty(ComponentDescriptionProperty); }
             set { SetProperty (ComponentDescriptionProperty, value); }
         }
-        public static readonly PropertyInfo<string> ComponentHTMLClassNameProperty = RegisterProperty<string>(c => c.CompHTMLClassName);
-        public string CompHTMLClassName
-        {
-            get { return GetProperty(ComponentHTMLClassNameProperty); }
-            set { SetProperty (ComponentHTMLClassNameProperty, value); }
-        }
-        public static readonly PropertyInfo<string> ComponentHTMLElementIdProperty = RegisterProperty<string>(c => c.CompHTMLElementId);
-        public string CompHTMLElementId
-        {
-            get { return GetProperty(ComponentHTMLElementIdProperty); }
-            set { SetProperty(ComponentHTMLElementIdProperty, value); }
-        }
+        //public static readonly PropertyInfo<string> ComponentHTMLClassNameProperty = RegisterProperty<string>(c => c.CompHTMLClassName);
+        //public string CompHTMLClassName
+        //{
+        //    get { return GetProperty(ComponentHTMLClassNameProperty); }
+        //    set { SetProperty (ComponentHTMLClassNameProperty, value); }
+        //}
+        //public static readonly PropertyInfo<string> ComponentHTMLElementIdProperty = RegisterProperty<string>(c => c.CompHTMLElementId);
+        //public string CompHTMLElementId
+        //{
+        //    get { return GetProperty(ComponentHTMLElementIdProperty); }
+        //    set { SetProperty(ComponentHTMLElementIdProperty, value); }
+        //}
         [Create]
         [RunLocal]
         private void Create()
@@ -57,11 +57,11 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         private void Fetch(DOnlinePageComponentDto compDto)
         {
             ParentPageId = compDto.ParentPageId;
-            ParentPageTitle = compDto.ParentPageTitle;
+            //ParentPageTitle = compDto.ParentPageTitle;
             ComponentId = compDto.ComponentId;
             ComponentDesc = compDto.ComponentDesc;
-            CompHTMLClassName = compDto.ComponentHTMLClassName;
-            CompHTMLElementId = compDto.ComponentHTMLElementID;
+            //CompHTMLClassName = compDto.ComponentHTMLClassName;
+            //CompHTMLElementId = compDto.ComponentHTMLElementID;
         }
         [Insert]
         private void Insert([Inject] IOnlinePageComponentDal componentDal)

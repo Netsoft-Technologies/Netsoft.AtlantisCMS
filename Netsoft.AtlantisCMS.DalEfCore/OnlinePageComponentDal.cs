@@ -25,25 +25,25 @@ namespace Netsoft.AtlantisCMS.DalEfCore
                           }).FirstOrDefault();
             return result;
         }
-        public List<DOnlinePageComponentDto> FetchPagesForComponent(int compId)
-        {
-            var result = from page in _dbContext._OnlinePages
-                         join pageComponent in _dbContext._OnlinePage_Components
-                            on page.PageId equals pageComponent.ParentPageId
-                         join component in _dbContext._OnlineComponents
-                            on pageComponent.ComponentId equals component.Id
-                         where pageComponent.ComponentId == compId
-                         select new DOnlinePageComponentDto
-                         {
-                             ParentPageId = pageComponent.ParentPageId,
-                             ParentPageTitle = pageComponent.ParentPageTitle,
-                             ComponentId = component.Id,
-                             ComponentDesc = pageComponent.ComponentDesc,
-                             ComponentHTMLClassName = pageComponent.ComponentHTMLClassName,
-                             ComponentHTMLElementID = pageComponent.ComponentHTMLElementID,
-                         };
-            return result.ToList();
-        }
+        //public List<DOnlinePageComponentDto> FetchPagesForComponent(int compId)
+        //{
+        //    var result = from page in _dbContext._OnlinePages
+        //                 join pageComponent in _dbContext._OnlinePage_Components
+        //                    on page.PageId equals pageComponent.ParentPageId
+        //                 join component in _dbContext._OnlineComponents
+        //                    on pageComponent.ComponentId equals component.Id
+        //                 where pageComponent.ComponentId == compId
+        //                 select new DOnlinePageComponentDto
+        //                 {
+        //                     ParentPageId = pageComponent.ParentPageId,
+        //                     //ParentPageTitle = pageComponent.ParentPageTitle,
+        //                     ComponentId = component.Id,
+        //                     ComponentDesc = pageComponent.ComponentDescription,
+        //                     //ComponentHTMLClassName = pageComponent.ComponentHTMLClassName,
+        //                     //ComponentHTMLElementID = pageComponent.ComponentHTMLElementID,
+        //                 };
+        //    return result.ToList();
+        //}
         public List<DOnlinePageComponentDto> FetchComponentsForPage(int pageId)
         {
             var result = from page in _dbContext._OnlinePages
@@ -51,13 +51,13 @@ namespace Netsoft.AtlantisCMS.DalEfCore
                             on page.PageId equals pageComponent.ParentPageId
                          join component in _dbContext._OnlineComponents
                             on pageComponent.ComponentId equals component.Id
-                         where pageComponent.ComponentId == pageId
+                         where pageComponent.ParentPageId == pageId
                          select new DOnlinePageComponentDto
                          {
                              ParentPageId = pageId,
                              //ParentPageTitle = pageComponent.ParentPageTitle,
                              ComponentId = component.Id,
-                             //ComponentDesc = pageComponent.ComponentDesc,
+                             ComponentDesc = pageComponent.ComponentDescription,
                              //ComponentHTMLClassName = pageComponent.ComponentHTMLClassName,
                              //ComponentHTMLElementID = pageComponent.ComponentHTMLElementID
                          };

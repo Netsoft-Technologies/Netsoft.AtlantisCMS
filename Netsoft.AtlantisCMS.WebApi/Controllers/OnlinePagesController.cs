@@ -36,7 +36,7 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
         public async Task<ActionResult<OnlinePageModel>> GetSinglePage(int id)
         {
             var page = await _OnlinePageEditDataPortal.FetchAsync(id);
-            if (page == null)
+            if (page == null || page.PageId == 0)
             {
                 return NotFound();
             }

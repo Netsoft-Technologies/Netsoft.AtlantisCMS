@@ -46,15 +46,19 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             BusinessRules.CheckRules();
         }
         [Fetch]
-        private void Fetch(int id, [Inject] IOnlinePageDal pageDal, [Inject] IChildDataPortal<COnlinePageComponents> childPortal)
+        private void Fetch(int pageId, [Inject] IOnlinePageDal pageDal, [Inject] IChildDataPortal<COnlinePageComponents> childPortal)
         {
-            var data = pageDal.Fetch(id);
+            var data = pageDal.Fetch(pageId);
+            if (data == null) //not good -- TBC
+            {
+                return;
+            }
             using (BypassPropertyChecks)
             {
                 PageId = data.PageId;
                 PageTitle = data.PageTitle;
                 PageOrder = data.PageOrder;
-                Components = childPortal.FetchChild(id);
+                Components = childPortal.FetchChild(pageId);
             }
         }
         [FetchChild]
