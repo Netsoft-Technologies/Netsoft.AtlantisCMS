@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 namespace Netsoft.AtlantisCMS.BusinessLibrary
 {
     [Serializable]
-    public class COnlineCompStylingPropsRO : ReadOnlyListBase<COnlineCompStylingPropsRO, COnlineCompStylingPropRO>
+    public class COnlineComponentsRO : ReadOnlyListBase<COnlineComponentsRO, COnlineComponentRO>
     {
         [Fetch]
-        private void Fetch([Inject] IOnlineComponentStylingPropertyDal dal, [Inject] IChildDataPortal<COnlineCompStylingPropRO> childPortal)
+        private void Fetch([Inject] IOnlineComponentDal compDal, [Inject] IChildDataPortal<COnlineComponentRO> childDataPortal)
         {
             using (LoadListMode)
             {
-                List<DOnlineComponentStylingPropertyDto> list = null;
-                list = dal.Fetch();
+                List<DOnlineComponentDto> list = null;
+                list = compDal.Fetch();
                 foreach (var item in list)
                 {
-                    Add(childPortal.FetchChild(item));
+                    Add(childDataPortal.FetchChild(item));
                 }
             }
         }

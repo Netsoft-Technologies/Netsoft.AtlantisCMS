@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Netsoft.AtlantisCMS.Models
 {
-    public class OnlineComponentStylingPropertModel
+    public class OnlineComponentStylingPropertyModel
     {
         public int StylingPropId { get; set; }
         public int ParentCompId { get; set; }

@@ -13,7 +13,7 @@ namespace Netsoft.AtlantisCMS.Models
         public string? HTMLClassName { get; set; }
         public string? HTMLElementId { get; set; }
         public int? StringContentId { get; set; }
-        public List<OnlineComponentStylingPropertModel> StylingProps { get; set; }
+        public List<OnlineComponentStylingPropertyModel> StylingProps { get; set; }
     }
 
     public class OnlineComponentCreateRequestModel

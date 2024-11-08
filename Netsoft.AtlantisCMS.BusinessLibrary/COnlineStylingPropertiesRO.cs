@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 namespace Netsoft.AtlantisCMS.BusinessLibrary
 {
     [Serializable]
-    public class COnlineCompStylingPropsRO : ReadOnlyListBase<COnlineCompStylingPropsRO, COnlineCompStylingPropRO>
+    public class COnlineStylingPropertiesRO : ReadOnlyListBase<COnlineStylingPropertiesRO, COnlineStylingPropertyRO>
     {
         [Fetch]
-        private void Fetch([Inject] IOnlineComponentStylingPropertyDal dal, [Inject] IChildDataPortal<COnlineCompStylingPropRO> childPortal)
+        private void Fetch([Inject] IOnlineStylingPropertyDal stylePropDal, [Inject]IChildDataPortal<COnlineStylingPropertyRO> childPortal)
         {
             using (LoadListMode)
             {
-                List<DOnlineComponentStylingPropertyDto> list = null;
-                list = dal.Fetch();
+                List<DOnlineStylingPropertyDto> list = null;
+                list = stylePropDal.Fetch();
                 foreach (var item in list)
                 {
                     Add(childPortal.FetchChild(item));
