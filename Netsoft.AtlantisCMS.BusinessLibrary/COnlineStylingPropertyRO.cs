@@ -35,14 +35,14 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         {
             var style = styleDal.Fetch(id);
             Id = style.Id;
-            Desc = style.Desc;
+            Desc = style.Description;
             CSS = style.CSSProp;
         }
         [FetchChild]
         private void FetchChild(DOnlineStylingPropertyDto dto)
         {
             Id = dto.Id;
-            Desc = dto.Desc;
+            Desc = dto.Description;
             CSS = dto.CSSProp;
         }
     }

@@ -9,7 +9,7 @@ namespace Netsoft.AtlantisCMS.Dal
     public class DOnlineStylingPropertyDto
     {
         public int Id { get; set; }
-        public string? Desc { get; set; }
+        public string? Description { get; set; }
         public string? CSSProp { get; set; }
     }
 }

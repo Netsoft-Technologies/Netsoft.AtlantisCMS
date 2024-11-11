@@ -21,7 +21,7 @@ namespace Netsoft.AtlantisCMS.DalEfCore
                        select new DOnlineStylingPropertyDto
                        {
                            Id = r.Id,
-                           Desc = r.Description,
+                           Description = r.Description,
                            CSSProp = r.CSSProperty,
                        }).FirstOrDefault();
             return res;
@@ -32,7 +32,7 @@ namespace Netsoft.AtlantisCMS.DalEfCore
                       select new DOnlineStylingPropertyDto
                       {
                           Id = r.Id,
-                          Desc = r.Description,
+                          Description = r.Description,
                           CSSProp = r.CSSProperty,
                       };
             return res.ToList();
@@ -41,7 +41,7 @@ namespace Netsoft.AtlantisCMS.DalEfCore
         {
             var newStyleProp = new OnlineStylingProp_Entity
             {
-                Description = dto.Desc,
+                Description = dto.Description,
                 CSSProperty = dto.CSSProp
             };
             db._OnlineStylingProp.Add(newStyleProp);
@@ -57,7 +57,7 @@ namespace Netsoft.AtlantisCMS.DalEfCore
             {
                 throw new Exception();
             }
-            editStyleProp.Description = dto.Desc;
+            editStyleProp.Description = dto.Description;
             editStyleProp.CSSProperty = dto.CSSProp;
             var res = db.SaveChanges();
         }

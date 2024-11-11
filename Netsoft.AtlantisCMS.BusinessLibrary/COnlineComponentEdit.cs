@@ -60,7 +60,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             var item = compDal.Fetch(compId);
             using (BypassPropertyChecks)
             {
-                CompId = item.Id;
+                CompId = item.CompId;
                 CompDesc = item.Description;
                 CompHTMLClass = item.HTMLClassName;
                 CompHTMLElement = item.HTMLClassName;
@@ -81,7 +81,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                     StringContentId = this.StringContentId
                 };
                 compDal.Insert(item);
-                CompId = item.Id;
+                CompId = item.CompId;
             }
             FieldManager.UpdateChildren(this);
         }
@@ -92,7 +92,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             {
                 var item = new DOnlineComponentDto
                 {
-                    Id = this.CompId,
+                    CompId = this.CompId,
                     Description = this.CompDesc,
                     HTMLClassName = this.CompHTMLClass,
                     HTMLElementId = this.CompHTMLElement,

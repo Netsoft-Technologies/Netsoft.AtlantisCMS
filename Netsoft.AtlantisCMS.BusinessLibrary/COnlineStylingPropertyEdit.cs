@@ -44,7 +44,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             using (BypassPropertyChecks)
             {
                 Id = item.Id;
-                Desc = item.Desc;
+                Desc = item.Description;
                 CSS = item.CSSProp;
             }
         }
@@ -52,7 +52,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         private void Fetch(DOnlineStylingPropertyDto dto, [Inject]IDataPortal<COnlineStylingPropertyRO> portal)
         {
             Id = dto.Id;
-            Desc = dto.Desc;
+            Desc = dto.Description;
             CSS = dto.CSSProp;
         }
         [Insert]
@@ -63,7 +63,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                 var item = new DOnlineStylingPropertyDto
                 {
                     Id = this.Id,
-                    Desc = this.Desc,
+                    Description = this.Desc,
                     CSSProp = this.CSS,
                 };
                 onlineStylingPropertyDal.Insert(item);
@@ -79,7 +79,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                 var item = new DOnlineStylingPropertyDto
                 {
                     Id = this.Id,
-                    Desc = this.Desc,
+                    Description = this.Desc,
                     CSSProp = this.CSS,
                 };
                 dal.Update(item);

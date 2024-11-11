@@ -74,7 +74,7 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Error deleting ticket: {ex.Message}"); ;
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error deleting component style: {ex.Message}"); ;
             }
         }
     }

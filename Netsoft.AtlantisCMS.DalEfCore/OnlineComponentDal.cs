@@ -21,7 +21,7 @@ namespace Netsoft.AtlantisCMS.DalEfCore
                               where r.Id == id
                               select new DOnlineComponentDto
                               {
-                                  Id = r.Id,
+                                  CompId = r.Id,
                                   Description = r.Description,
                                   HTMLClassName = r.HTMLClassName,
                                   HTMLElementId = r.HTMLElementId,
@@ -34,7 +34,7 @@ namespace Netsoft.AtlantisCMS.DalEfCore
             var getAllResults = from r in db._OnlineComp
                                 select new DOnlineComponentDto
                                 {
-                                    Id = r.Id,
+                                    CompId = r.Id,
                                     Description = r.Description,
                                     HTMLClassName = r.HTMLClassName,
                                     HTMLElementId = r.HTMLElementId,
@@ -53,12 +53,12 @@ namespace Netsoft.AtlantisCMS.DalEfCore
             };
             db._OnlineComp.Add(addComp);
             db.SaveChanges();
-            dto.Id = addComp.Id;
+            dto.CompId = addComp.Id;
         }
         public void Update(DOnlineComponentDto dto)
         {
             var updateComp = (from r in db._OnlineComp
-                              where r.Id == dto.Id
+                              where r.Id == dto.CompId
                               select r).FirstOrDefault();
             if (updateComp == null)
             {

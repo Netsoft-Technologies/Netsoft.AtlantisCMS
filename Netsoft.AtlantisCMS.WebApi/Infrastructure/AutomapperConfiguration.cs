@@ -10,6 +10,23 @@ namespace Netsoft.AtlantisCMS.WebApi.Infrastructure
     {
         public AutomapperConfiguration()
         {
+
+            CreateMap<OnlineComponentStylingPropertyModel, COnlineCompStylingPropRO>().ReverseMap();
+            CreateMap<COnlineCompStylingProp, OnlineComponentStylingPropertyModel>().ReverseMap();
+
+            CreateMap<OnlineComponentModel, COnlineComponentEdit>().ReverseMap();
+            CreateMap<OnlineComponentModel, COnlineComponentRO>().ReverseMap();
+            CreateMap<COnlineComponentEdit, OnlineComponentModel>().ReverseMap();
+
+            CreateMap<OnlineSettingModels, COnlineSettingEdit>().ReverseMap();
+            CreateMap<OnlineSettingModels, COnlineSettingRO>().ReverseMap();
+            CreateMap<COnlineSettingEdit, OnlineSettingModels>().ReverseMap();
+
+            CreateMap<OnlineStylingPropertyModel, COnlineStylingPropertyEdit>().ReverseMap();
+            CreateMap<OnlineStylingPropertyModel, COnlineStylingPropertyRO>().ReverseMap();
+            CreateMap<COnlineStylingPropertyEdit, OnlineStylingPropertyModel>().ReverseMap();
+
+            CreateMap<OnlineStringModels, COnlineStringEdit>().ReverseMap();
             CreateMap<OnlineStringModels, COnlineStringRO>().ReverseMap();
             CreateMap<COnlineStringEdit, OnlineStringModels>().ReverseMap();
 
