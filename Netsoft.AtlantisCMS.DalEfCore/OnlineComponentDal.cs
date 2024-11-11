@@ -17,11 +17,11 @@ namespace Netsoft.AtlantisCMS.DalEfCore
         }
         public DOnlineComponentDto Fetch(int id)
         {
-            var getSingleResult = (from r in db._OnlineComp
-                              where r.Id == id
+            var getSingleResult = (from r in db._OnlineComponents
+                                   where r.CompId == id
                               select new DOnlineComponentDto
                               {
-                                  CompId = r.Id,
+                                  CompId = r.CompId,
                                   Description = r.Description,
                                   HTMLClassName = r.HTMLClassName,
                                   HTMLElementId = r.HTMLElementId,
@@ -31,10 +31,10 @@ namespace Netsoft.AtlantisCMS.DalEfCore
         }
         public List<DOnlineComponentDto> Fetch()
         {
-            var getAllResults = from r in db._OnlineComp
+            var getAllResults = from r in db._OnlineComponents
                                 select new DOnlineComponentDto
                                 {
-                                    CompId = r.Id,
+                                    CompId = r.CompId,
                                     Description = r.Description,
                                     HTMLClassName = r.HTMLClassName,
                                     HTMLElementId = r.HTMLElementId,
@@ -51,14 +51,14 @@ namespace Netsoft.AtlantisCMS.DalEfCore
                 HTMLElementId = dto.HTMLElementId,
                 StringContentId = dto.StringContentId
             };
-            db._OnlineComp.Add(addComp);
+            db._OnlineComponents.Add(addComp);
             db.SaveChanges();
-            dto.CompId = addComp.Id;
+            dto.CompId = addComp.CompId;
         }
         public void Update(DOnlineComponentDto dto)
         {
-            var updateComp = (from r in db._OnlineComp
-                              where r.Id == dto.CompId
+            var updateComp = (from r in db._OnlineComponents
+                              where r.CompId == dto.CompId
                               select r).FirstOrDefault();
             if (updateComp == null)
             {
@@ -72,12 +72,12 @@ namespace Netsoft.AtlantisCMS.DalEfCore
         }
         public void Delete(int id)
         {
-            var deleteComp = (from r in db._OnlineComp
-                              where r.Id == id
+            var deleteComp = (from r in db._OnlineComponents
+                              where r.CompId == id
                               select r).FirstOrDefault();
             if (deleteComp != null)
             {
-                db._OnlineComp.Remove(deleteComp);
+                db._OnlineComponents.Remove(deleteComp);
                 db.SaveChanges();
             }
         }

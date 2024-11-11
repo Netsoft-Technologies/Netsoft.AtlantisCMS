@@ -12,11 +12,13 @@ namespace Netsoft.AtlantisCMS.WebApi.Infrastructure
         {
 
             CreateMap<OnlineComponentStylingPropertyModel, COnlineCompStylingPropRO>().ReverseMap();
-            CreateMap<COnlineCompStylingProp, OnlineComponentStylingPropertyModel>().ReverseMap();
+            CreateMap<OnlineComponentStylingPropertyModel, COnlineCompStylingProp>().ReverseMap();
 
             CreateMap<OnlineComponentModel, COnlineComponentEdit>().ReverseMap();
             CreateMap<OnlineComponentModel, COnlineComponentRO>().ReverseMap();
             CreateMap<COnlineComponentEdit, OnlineComponentModel>().ReverseMap();
+            CreateMap<COnlineComponentRO, OnlineComponentModel>().ReverseMap();
+            CreateMap<OnlineComponentCreateRequestModel, COnlineComponentRO>().ReverseMap();
 
             CreateMap<OnlineSettingModels, COnlineSettingEdit>().ReverseMap();
             CreateMap<OnlineSettingModels, COnlineSettingRO>().ReverseMap();
@@ -37,6 +39,7 @@ namespace Netsoft.AtlantisCMS.WebApi.Infrastructure
             CreateMap<COnlinePageComponentRO, OnlinePageComponentModel>().ReverseMap();
             CreateMap<OnlinePageComponentModel, COnlinePageComponentRO>().ReverseMap();
             CreateMap<OnlinePageComponentModel, COnlinePageComponent>().ReverseMap();
+
         }
     }
 }

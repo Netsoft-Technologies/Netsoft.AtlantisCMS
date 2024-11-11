@@ -20,7 +20,7 @@ namespace Netsoft.AtlantisCMS.DalEfCore
         }
 
         public DbSet<OnlineCompStylingProp_Entity> _OnlineCompStylingProp { get; set; }
-        public DbSet<OnlineComp_Entity> _OnlineComp {  get; set; }
+        public DbSet<OnlineComp_Entity> _OnlineComponents {  get; set; }
         public DbSet<OnlinePageComponents_Entity> _OnlinePage_Components { get; set; }
         public DbSet<OnlinePages_Entity> _OnlinePages { get; set; }
         public DbSet<OnlineSetting_Entity> _OnlineSetting { get; set; }
@@ -41,11 +41,12 @@ namespace Netsoft.AtlantisCMS.DalEfCore
     public class OnlineComp_Entity
     {
         [Key]
-        public int Id { get; set; }
+        public int CompId { get; set; }
         public string Description { get; set; }
         public string HTMLClassName { get; set; }
         public string HTMLElementId { get; set; }
         public int? StringContentId { get; set; }
+        public int? StylingGroupId { get; set; }
     }
     public class OnlinePages_Entity
     {

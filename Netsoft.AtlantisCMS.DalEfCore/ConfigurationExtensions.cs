@@ -16,10 +16,12 @@ namespace Netsoft.AtlantisCMS.DalEfCore
             services.AddScoped<DbContext>();
 
             services.AddTransient<IOnlinePageDal, OnlinePageDal>();
-
             services.AddTransient<IOnlinePageComponentDal, OnlinePageComponentDal>();
-
             services.AddTransient<IOnlineStringDal, OnlineStringDal>();
+            services.AddTransient<IOnlineComponentDal, OnlineComponentDal>();
+            services.AddTransient<IOnlineSettingDal, OnlineSettingDal>();
+            services.AddTransient<IOnlineStringDal, OnlineStringDal>();
+            services.AddTransient<IOnlineStylingPropertyDal, OnlineStylingPropertyDal>();
         }
     }
 }
