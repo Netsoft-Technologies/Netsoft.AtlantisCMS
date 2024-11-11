@@ -35,7 +35,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         public COnlinePageComponents Components
         {
             get { return GetProperty(ComponentsProperty); }
-            private set { LoadProperty(ComponentsProperty, value);}
+            set { SetProperty(ComponentsProperty, value);}
         }
         [Create]
         [RunLocal]
@@ -96,11 +96,11 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                         };
                         componentDal.Insert(componentDto);
                     }
-                    foreach (var component in Components)
-                    {
-                        component.ParentPageId = pageDto.PageId;
-                        component.ParentPageTitle = pageDto.PageTitle;
-                    }
+                    //foreach (var component in Components)
+                    //{
+                    //    component.ParentPageId = pageDto.PageId;
+                    //    component.ParentPageTitle = pageDto.PageTitle;
+                    //}
                 }
             }
             FieldManager.UpdateChildren(this);

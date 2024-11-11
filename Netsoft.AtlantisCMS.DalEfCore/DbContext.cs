@@ -56,11 +56,11 @@ namespace Netsoft.AtlantisCMS.DalEfCore
         public int? PageOrder { get; set; }
     }
     public class OnlinePageComponents_Entity
-    {
+    { 
         [Key]
-        public int ParentPageId { get; set; }
-        public string ParentPageTitle { get; set; }
         public int ComponentId { get; set; }
+        public int ParentPageId { get; set; }
+        public string ParentPageTitle { get; set; }        
         public string ComponentDescription { get; set; }
         public string ComponentHTMLClassName { get; set; }
         public string ComponentHTMLElementID { get; set; }

@@ -56,9 +56,9 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         [FetchChild]
         private void Fetch(DOnlinePageComponentDto compDto)
         {
+            ComponentId = compDto.ComponentId;
             ParentPageId = compDto.ParentPageId;
             ParentPageTitle = compDto.ParentPageTitle;
-            ComponentId = compDto.ComponentId;
             ComponentDesc = compDto.ComponentDesc;
             CompHTMLClassName = compDto.ComponentHTMLClassName;
             CompHTMLElementId = compDto.ComponentHTMLElementID;
@@ -67,7 +67,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
 
 
         [InsertChild]
-        private void Insert([Inject] IOnlinePageComponentDal componentDal, int pageid)
+        private void InsertChild([Inject] IOnlinePageComponentDal componentDal, int pageid)
         {
             using (BypassPropertyChecks)
             {

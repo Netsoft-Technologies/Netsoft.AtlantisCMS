@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Csla;
+using Csla.Server;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
@@ -14,6 +15,9 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
     {
         private readonly IDataPortal<COnlinePagesRO> _OnlinePagesDataPortal;
         private readonly IDataPortal<COnlinePageEdit> _OnlinePageEditDataPortal;
+
+        private readonly IDataPortal<COnlinePageComponents> _OnlinePageComponentsDataPortal;
+
         private readonly IMapper _mapper;
 
         public OnlinePagesController(IDataPortal<COnlinePagesRO> onlinePagesDataPortal, IDataPortal<COnlinePageEdit> onlinePageEditDataPortal, IMapper mapper)
@@ -53,6 +57,19 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             COnlinePageEdit newPage = await _OnlinePageEditDataPortal.CreateAsync();
             newPage.PageTitle = onlinePagePost.PageTitle;
             newPage.PageOrder = onlinePagePost.PageOrder;
+            var comps = new List<OnlinePageComponentModel>();
+            foreach (var comp in onlinePagePost.Components)
+            {
+                //COnlinePageComponents component = await _OnlinePageComponentsDataPortal.CreateAsync();
+                
+
+
+                //var component = DataPortal.CreateChild<COnlinePageComponent>
+                //comp.ParentPageId = onlinePagePost.PageId;
+                //comp.ParentPageTitle = onlinePagePost.PageTitle;
+                //comp.ComponentDescription = onlinePagePost.Components;
+                comps.Add(comp);
+            }
             newPage = await newPage.SaveAsync();
             var result = _mapper.Map<OnlinePageModel>(newPage);
             return Ok(result);
