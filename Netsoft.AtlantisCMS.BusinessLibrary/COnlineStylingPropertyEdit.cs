@@ -3,6 +3,7 @@ using Netsoft.AtlantisCMS.Dal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -41,6 +42,10 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         private void Fetch(int id, [Inject]IOnlineStylingPropertyDal stylingPropertyDal, [Inject]IDataPortal<COnlineStylingPropertyRO> portal)
         {
             var item = stylingPropertyDal.Fetch(id);
+            if (item == null)
+            {
+                return;
+            }
             using (BypassPropertyChecks)
             {
                 Id = item.Id;

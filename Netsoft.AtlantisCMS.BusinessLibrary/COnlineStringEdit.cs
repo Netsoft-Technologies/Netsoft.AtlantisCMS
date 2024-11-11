@@ -54,6 +54,10 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         private void Fetch(int id, [Inject]IOnlineStringDal onlineStringDal)
         {
             var data = onlineStringDal.Fetch(id);
+            if (data == null)
+            {
+                return;
+            }
             using (BypassPropertyChecks)
             {
                 Id = data.Id;

@@ -16,24 +16,24 @@ namespace Netsoft.AtlantisCMS.DalEfCore
         }
         public DOnlineStylingPropertyDto Fetch(int id)
         {
-            var res = (from r in db._OnlineStylingProp
+            var res = (from r in db._OnlineStylingProperties
                        where r.Id == id
                        select new DOnlineStylingPropertyDto
                        {
                            Id = r.Id,
                            Description = r.Description,
-                           CSSProp = r.CSSProperty,
+                           CSSProp = r.CSSProp,
                        }).FirstOrDefault();
             return res;
         }
         public List<DOnlineStylingPropertyDto> Fetch()
         {
-            var res = from r in db._OnlineStylingProp
+            var res = from r in db._OnlineStylingProperties
                       select new DOnlineStylingPropertyDto
                       {
                           Id = r.Id,
                           Description = r.Description,
-                          CSSProp = r.CSSProperty,
+                          CSSProp = r.CSSProp,
                       };
             return res.ToList();
         }
@@ -42,15 +42,15 @@ namespace Netsoft.AtlantisCMS.DalEfCore
             var newStyleProp = new OnlineStylingProp_Entity
             {
                 Description = dto.Description,
-                CSSProperty = dto.CSSProp
+                CSSProp = dto.CSSProp
             };
-            db._OnlineStylingProp.Add(newStyleProp);
+            db._OnlineStylingProperties.Add(newStyleProp);
             db.SaveChanges();
             dto.Id = newStyleProp.Id;
         }
         public void Update(DOnlineStylingPropertyDto dto)
         {
-            var editStyleProp = (from r in db._OnlineStylingProp
+            var editStyleProp = (from r in db._OnlineStylingProperties
                                  where r.Id == dto.Id
                                  select r).FirstOrDefault();
             if (editStyleProp == null)
@@ -58,17 +58,17 @@ namespace Netsoft.AtlantisCMS.DalEfCore
                 throw new Exception();
             }
             editStyleProp.Description = dto.Description;
-            editStyleProp.CSSProperty = dto.CSSProp;
+            editStyleProp.CSSProp = dto.CSSProp;
             var res = db.SaveChanges();
         }
         public void Delete(int id)
         {
-            var deleteStyleProp = (from r in db._OnlineStylingProp
+            var deleteStyleProp = (from r in db._OnlineStylingProperties
                                    where r.Id == id
                                    select r).FirstOrDefault();
             if(deleteStyleProp != null)
             {
-                db._OnlineStylingProp.Remove(deleteStyleProp);
+                db._OnlineStylingProperties.Remove(deleteStyleProp);
                 db.SaveChanges();
             }
         }

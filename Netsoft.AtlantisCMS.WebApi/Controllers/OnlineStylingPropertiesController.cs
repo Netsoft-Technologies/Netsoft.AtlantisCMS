@@ -31,6 +31,17 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             }
             return Ok(onlineStyleProps);
         }
+        [HttpGet("{styleId}")]
+        public async Task<ActionResult<OnlineStylingPropertyModel>> GetOnlineStylingProperty(int styleId)
+        {
+            var singleStyleProp = await _OnlineStylingPropsEditPortal.FetchAsync(styleId);
+            if (singleStyleProp == null)
+            {
+                return NotFound();
+            }
+            var res = _mapper.Map<OnlineStylingPropertyModel>(singleStyleProp);
+            return Ok(res);
+        }
         [HttpPost]
         public async Task<ActionResult<OnlineStylingPropertyModel>> Create(OnlineStylingPropertyModel newStylePropreq)
         {
@@ -46,15 +57,15 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             var res = _mapper.Map<OnlineStylingPropertyModel>(newOnlineStyleProp);
             return Ok(res);
         }
-        [HttpPut]
-        public async Task<ActionResult<OnlineStylingPropertyModel>> Update(OnlineStylingPropertyModel newStylePropreq)
+        [HttpPut("{styleId}")]
+        public async Task<ActionResult<OnlineStylingPropertyModel>> Update(int styleId, OnlineStylingPropertyModel newStylePropreq)
         {
             if (!ModelState.IsValid || newStylePropreq == null || newStylePropreq.Id == 0)
             {
                 return BadRequest(ModelState);
             }
-            var editStyleProp = await _OnlineStylingPropsEditPortal.FetchAsync(newStylePropreq.Id);
-            if (editStyleProp.Id != newStylePropreq.Id)
+            var editStyleProp = await _OnlineStylingPropsEditPortal.FetchAsync(styleId);
+            if (editStyleProp.Id != styleId)
             {
                 return BadRequest(ModelState);
             }
@@ -65,12 +76,17 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             var res = _mapper.Map<OnlineStylingPropertyModel>(editStyleProp);
             return Ok(res);
         }
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        [HttpDelete("{styleId}")]
+        public async Task<IActionResult> Delete(int styleId)
         {
+            var styleToDelete = await _OnlineStylingPropsEditPortal.FetchAsync(styleId);
+            if (styleToDelete == null || styleToDelete.Id == 0)
+            {
+                return NotFound($"Styling property with id: {styleId} not found.");
+            }
             try
             {
-                await _OnlineStylingPropsEditPortal.DeleteAsync(id);
+                await _OnlineStylingPropsEditPortal.DeleteAsync(styleId);
                 return Ok();
             }
             catch (Exception ex)

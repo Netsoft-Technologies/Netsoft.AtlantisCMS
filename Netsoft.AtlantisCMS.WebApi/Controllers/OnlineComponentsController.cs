@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Netsoft.AtlantisCMS.BusinessLibrary;
 using Netsoft.AtlantisCMS.Models;
+using System.ComponentModel;
 
 namespace Netsoft.AtlantisCMS.WebApi.Controllers
 {
@@ -77,12 +78,17 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             var res = _mapper.Map<OnlineComponentModel>(editComp);
             return Ok(res);
         }
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteComp(int id)
+        [HttpDelete("{componentId}")]
+        public async Task<IActionResult> DeleteComp(int componentId)
         {
+            var compToDelete = await _OnlineComponentEditPortal.FetchAsync(componentId);
+            if (compToDelete == null || compToDelete.CompId == 0)
+            {
+                return NotFound($"Component with id: {componentId} not found.");
+            }
             try
             {
-                await _OnlineComponentEditPortal.DeleteAsync(id);
+                await _OnlineComponentEditPortal.DeleteAsync(componentId);
                 return Ok();
             }
             catch (Exception ex)

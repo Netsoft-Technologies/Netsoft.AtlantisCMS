@@ -49,7 +49,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         private void Fetch(int pageId, [Inject] IOnlinePageDal pageDal, [Inject] IChildDataPortal<COnlinePageComponents> childPortal)
         {
             var data = pageDal.Fetch(pageId);
-            if (data == null) //not good -- TBC
+            if (data == null)
             {
                 return;
             }

@@ -30,6 +30,17 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             }
             return Ok(onlineSettings);
         }
+        [HttpGet("{settingId}")]
+        public async Task<ActionResult<OnlineSettingModels>> GetOnlineSetting(int settingId)
+        {
+            var setting = await _OnlineSettingsDataPortal.FetchAsync(settingId);
+            if (setting == null)
+            {
+                return NotFound();
+            }
+            var res = _mapper.Map<OnlineSettingModels>(setting);
+            return Ok(res);
+        }
         [HttpPost]
         public async Task<ActionResult<OnlineSettingModels>> Create(OnlineSettingModels newSettingReq)
         {
@@ -86,15 +97,15 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             var res = _mapper.Map<OnlineSettingModels>(newOnlineSetting);
             return Ok(res);
         }
-        [HttpPut("{id}")]
-        public async Task<ActionResult<OnlineSettingModels>> EditOnlineSettings(int id, OnlineSettingModels editSettingReq)
+        [HttpPut("{settingId}")]
+        public async Task<ActionResult<OnlineSettingModels>> EditOnlineSettings(int settingId, OnlineSettingModels editSettingReq)
         {
-            if (editSettingReq == null || editSettingReq.PropertyId == 0 || !ModelState.IsValid)
+            if (editSettingReq == null || !ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var settingEdit = await _OnlineSettingsEditPortal.FetchAsync(id);
-            if( settingEdit.PropertyId != id)
+            var settingEdit = await _OnlineSettingsEditPortal.FetchAsync(settingId);
+            if( settingEdit.PropertyId != settingId)
             {
                 return BadRequest("Missmatch");
             }
@@ -146,12 +157,17 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             var res = _mapper.Map<OnlineSettingModels>(settingEdit);
             return Ok(res);
         }
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSettings (int id)
+        [HttpDelete("{settingId}")]
+        public async Task<IActionResult> DeleteSettings (int settingId)
         {
+            var settingForDeletion = await _OnlineSettingsEditPortal.FetchAsync(settingId);
+            if (settingForDeletion == null || settingForDeletion.PropertyId == 0)
+            {
+                return NotFound($"Settings with id: {settingId} not found.");
+            }
             try
             {
-                await _OnlineSettingsEditPortal.DeleteAsync(id);
+                await _OnlineSettingsEditPortal.DeleteAsync(settingId);
                 return Ok();
             }
             catch (Exception ex)

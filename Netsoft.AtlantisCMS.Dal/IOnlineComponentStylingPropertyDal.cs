@@ -13,6 +13,6 @@ namespace Netsoft.AtlantisCMS.Dal
         List<DOnlineComponentStylingPropertyDto> Fetch();
         void Insert (DOnlineComponentStylingPropertyDto dtoData);
         void Update (DOnlineComponentStylingPropertyDto dtoData);
-        void Delete (int stylingPropId, int compId);
+        void Delete (int stylingPropId, int parentCompId);
     }
 }

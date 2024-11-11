@@ -291,6 +291,10 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         private void Fetch(int id, [Inject] IOnlineSettingDal dal)
         {
             var data = dal.Fetch(id);
+            if (data == null)
+            {
+                return;
+            }
             using (BypassPropertyChecks)
             {
                 PropertyId = data.PropertyId;

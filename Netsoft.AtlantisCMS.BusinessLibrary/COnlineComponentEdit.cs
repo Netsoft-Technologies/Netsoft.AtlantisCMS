@@ -58,6 +58,10 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         private void Fetch(int compId, [Inject] IOnlineComponentDal compDal, [Inject] IChildDataPortal<COnlineCompStylingProps> childPortal)
         {
             var item = compDal.Fetch(compId);
+            if (item == null)
+            {
+                return;
+            }
             using (BypassPropertyChecks)
             {
                 CompId = item.CompId;

@@ -30,15 +30,15 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             }
             return Ok(OnlineStringsRequest);
         }
-        [HttpGet("{id}")]
-        public async Task<ActionResult<OnlineStringModels>> GetSingleOnlineString(int id)
+        [HttpGet("{stringId}")]
+        public async Task<ActionResult<OnlineStringModels>> GetSingleOnlineString(int stringId)
         {
-            var page = await _OnlineStringEditDataPortal.FetchAsync(id);
-            if (page == null)
+            var stringEntry = await _OnlineStringEditDataPortal.FetchAsync(stringId);
+            if (stringEntry == null)
             {
-                return NotFound($"");
+                return NotFound();
             }
-            var result = _mapper.Map<OnlineStringModels>(page);
+            var result = _mapper.Map<OnlineStringModels>(stringEntry);
             return Ok(result);
         }
         [HttpPost]
@@ -57,19 +57,18 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             var result = _mapper.Map<OnlineStringModels>(newOnlineStyleProp);
             return Ok(result);
         }
-        [HttpPut]
-        public async Task<ActionResult<OnlineStringModels>> Edit(OnlineStringModels onlineString)
+        [HttpPut("{stringId}")]
+        public async Task<ActionResult<OnlineStringModels>> Edit(int stringId, OnlineStringModels onlineString)
         {
-            if (!ModelState.IsValid || onlineString.Id == 0 || onlineString == null)
+            if (!ModelState.IsValid || onlineString == null)
             {
-                return BadRequest(ModelState);
+                return BadRequest("Invalid Request");
             }
-            var newOnlineStyleProp = await _OnlineStringEditDataPortal.FetchAsync(onlineString.Id);
-            if (newOnlineStyleProp.Id != onlineString.Id)
+            var newOnlineStyleProp = await _OnlineStringEditDataPortal.FetchAsync(stringId);
+            if (newOnlineStyleProp.Id != stringId)
             {
-                return BadRequest(ModelState);
+                return BadRequest("Invalid Request");
             }
-            newOnlineStyleProp.Id = onlineString.Id;
             newOnlineStyleProp.Title = onlineString.Title;
             newOnlineStyleProp.MessageId = onlineString.MessageId;
             newOnlineStyleProp.Message = onlineString.Message;
@@ -78,37 +77,42 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             var result = _mapper.Map<OnlineStringModels>(newOnlineStyleProp);
             return Ok(result);
         }
-        [HttpPost("createMultiple")]
-        public async Task<ActionResult<List<OnlineStringModels>>> CreateMultiple(List<OnlineStringModels> onlineStrings)
+        [HttpDelete("{stringId}")]
+        public async Task<ActionResult<OnlineStringModels>> Deleteticket(int stringId)
         {
-            if (onlineStrings == null || !ModelState.IsValid)
+            var stringForDeletion = await _OnlineStringEditDataPortal.FetchAsync(stringId);
+            if (stringForDeletion == null || stringForDeletion.Id == 0)
             {
-                return BadRequest(ModelState);
+                return NotFound($"String with id: {stringId} not found.");
             }
-            var list = new List<OnlineStringModels>();
-            foreach (var singleOnlineString in onlineStrings)
-            {
-                COnlineStringEdit newOnlineStyleProp = await _OnlineStringEditDataPortal.CreateAsync();
-                newOnlineStyleProp.Title = singleOnlineString.Title;
-                newOnlineStyleProp.MessageId = singleOnlineString.MessageId;
-                newOnlineStyleProp.Message = singleOnlineString.Message;
-                newOnlineStyleProp.MessageType = singleOnlineString.MessageType;
-                list.Add(_mapper.Map<OnlineStringModels>(newOnlineStyleProp));
-            }
-            return Ok(list);
-        }
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Deleteticket(int id)
-        {
             try
             {
-                await _OnlineStringEditDataPortal.DeleteAsync(id);
-                return StatusCode(StatusCodes.Status200OK);
+                await _OnlineStringEditDataPortal.DeleteAsync(stringId);
+                return Ok("Succesfully deleted");
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error deleting string: {ex.Message}");
             }
         }
+        //[HttpPost("createMultiple")]
+        //public async Task<ActionResult<List<OnlineStringModels>>> CreateMultiple(List<OnlineStringModels> onlineStrings)
+        //{
+        //    if (onlineStrings == null || !ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+        //    var list = new List<OnlineStringModels>();
+        //    foreach (var singleOnlineString in onlineStrings)
+        //    {
+        //        COnlineStringEdit newOnlineStyleProp = await _OnlineStringEditDataPortal.CreateAsync();
+        //        newOnlineStyleProp.Title = singleOnlineString.Title;
+        //        newOnlineStyleProp.MessageId = singleOnlineString.MessageId;
+        //        newOnlineStyleProp.Message = singleOnlineString.Message;
+        //        newOnlineStyleProp.MessageType = singleOnlineString.MessageType;
+        //        list.Add(_mapper.Map<OnlineStringModels>(newOnlineStyleProp));
+        //    }
+        //    return Ok(list);
+        //}
     }
 }

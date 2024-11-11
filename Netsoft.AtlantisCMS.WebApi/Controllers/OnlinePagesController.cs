@@ -77,8 +77,13 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             return Ok(result);
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePage (int id)
+        public async Task<ActionResult<OnlinePageModel>> DeletePage (int id)
         {
+            var pageForDeletion = await _OnlinePageEditDataPortal.FetchAsync(id);
+            if (pageForDeletion == null || pageForDeletion.PageId == 0)
+            {
+                return NotFound($"Page with id: {id} not found.");
+            }
             try
             {
                 await _OnlinePageEditDataPortal.DeleteAsync(id);

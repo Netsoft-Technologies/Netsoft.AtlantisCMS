@@ -17,7 +17,7 @@ namespace Netsoft.AtlantisCMS.DalEfCore
         }
         public DOnlineSettingDto Fetch(int id)
         {
-            var res = (from r in db._OnlineSetting
+            var res = (from r in db._OnlineSettings
                        where r.PropertyId == id
                        select new DOnlineSettingDto
                        {
@@ -71,7 +71,7 @@ namespace Netsoft.AtlantisCMS.DalEfCore
         }
         public List<DOnlineSettingDto> Fetch()
         {
-            var res = from r in db._OnlineSetting
+            var res = from r in db._OnlineSettings
                       select new DOnlineSettingDto
                       {
                           PropertyId = r.PropertyId,
@@ -172,12 +172,13 @@ namespace Netsoft.AtlantisCMS.DalEfCore
                 RescheduleInfoEmailList = dto.RescheduleInfoEmailList,
                 HTMLPagesStylingId = dto.HTMLPagesStylingId
             };
+            db._OnlineSettings.Add(newSetting);
             db.SaveChanges();
             dto.PropertyId = newSetting.PropertyId;
         }
         public void Update(DOnlineSettingDto dto)
         {
-            var editSetting = (from r in db._OnlineSetting
+            var editSetting = (from r in db._OnlineSettings
                                where r.PropertyId == dto.PropertyId
                                select r).FirstOrDefault();
             if (editSetting == null)
@@ -233,12 +234,12 @@ namespace Netsoft.AtlantisCMS.DalEfCore
         }
         public void Delete(int id)
         {
-            var data = (from r in db._OnlineSetting 
+            var data = (from r in db._OnlineSettings 
                         where r.PropertyId == id 
                         select r).FirstOrDefault();
             if (data != null)
             {
-                db._OnlineSetting.Remove(data);
+                db._OnlineSettings.Remove(data);
                 db.SaveChanges();
             }
         }

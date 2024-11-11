@@ -19,13 +19,13 @@ namespace Netsoft.AtlantisCMS.DalEfCore
             _connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
-        public DbSet<OnlineCompStylingProp_Entity> _OnlineCompStylingProp { get; set; }
+        public DbSet<OnlineCompStylingProp_Entity> _OnlineComponent_StylingProperties { get; set; }
         public DbSet<OnlineComp_Entity> _OnlineComponents {  get; set; }
         public DbSet<OnlinePageComponents_Entity> _OnlinePage_Components { get; set; }
         public DbSet<OnlinePages_Entity> _OnlinePages { get; set; }
-        public DbSet<OnlineSetting_Entity> _OnlineSetting { get; set; }
+        public DbSet<OnlineSetting_Entity> _OnlineSettings { get; set; }
         public DbSet<OnlineStrings_Entity> _OnlineStrings { get; set; }
-        public DbSet<OnlineStylingProp_Entity> _OnlineStylingProp { get; set; }
+        public DbSet<OnlineStylingProp_Entity> _OnlineStylingProperties { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
        => options.UseSqlServer(_connectionString);
@@ -128,6 +128,6 @@ namespace Netsoft.AtlantisCMS.DalEfCore
         [Key]
         public int Id { get; set; }
         public string Description { get; set; }
-        public string CSSProperty { get; set; }
+        public string CSSProp { get; set; }
     }
 }
