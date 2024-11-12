@@ -29,20 +29,20 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             get { return GetProperty(ComponentIdProperty); }
             set { SetProperty(ComponentIdProperty, value); }
         }
-        public static readonly PropertyInfo<string> ComponentDescriptionProperty = RegisterProperty<string>(c => c.ComponentDesc);
-        public string ComponentDesc
+        public static readonly PropertyInfo<string> ComponentDescriptionProperty = RegisterProperty<string>(c => c.ComponentDescription);
+        public string ComponentDescription
         {
             get { return GetProperty(ComponentDescriptionProperty); }
             set { SetProperty (ComponentDescriptionProperty, value); }
         }
-        public static readonly PropertyInfo<string> ComponentHTMLClassNameProperty = RegisterProperty<string>(c => c.CompHTMLClassName);
-        public string CompHTMLClassName
+        public static readonly PropertyInfo<string> ComponentHTMLClassNameProperty = RegisterProperty<string>(c => c.ComponentHTMLClassName);
+        public string ComponentHTMLClassName
         {
             get { return GetProperty(ComponentHTMLClassNameProperty); }
             set { SetProperty(ComponentHTMLClassNameProperty, value); }
         }
-        public static readonly PropertyInfo<string> ComponentHTMLElementIdProperty = RegisterProperty<string>(c => c.CompHTMLElementId);
-        public string CompHTMLElementId
+        public static readonly PropertyInfo<string> ComponentHTMLElementIdProperty = RegisterProperty<string>(c => c.ComponentHTMLElementId);
+        public string ComponentHTMLElementId
         {
             get { return GetProperty(ComponentHTMLElementIdProperty); }
             set { SetProperty(ComponentHTMLElementIdProperty, value); }
@@ -59,21 +59,21 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             ComponentId = compDto.ComponentId;
             ParentPageId = compDto.ParentPageId;
             ParentPageTitle = compDto.ParentPageTitle;
-            ComponentDesc = compDto.ComponentDesc;
-            CompHTMLClassName = compDto.ComponentHTMLClassName;
-            CompHTMLElementId = compDto.ComponentHTMLElementID;
+            ComponentDescription = compDto.ComponentDesc;
+            ComponentHTMLClassName = compDto.ComponentHTMLClassName;
+            ComponentHTMLElementId = compDto.ComponentHTMLElementID;
         }
 
 
 
         [InsertChild]
-        private void InsertChild([Inject] IOnlinePageComponentDal componentDal, int pageid)
+        private void InsertChild(COnlinePageEdit parent, [Inject] IOnlinePageComponentDal componentDal)
         {
             using (BypassPropertyChecks)
             {
                 var item = new DOnlinePageComponentDto
                 {
-                    ParentPageId = pageid,
+                    ParentPageId = parent.PageId,
                     ComponentId = this.ComponentId,
                 };
                 componentDal.Insert(item);

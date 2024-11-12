@@ -17,4 +17,7 @@ namespace Netsoft.AtlantisCMS.Models
             Components = new List<OnlinePageComponentModel>();
         }
     }
+
+   
+
 }

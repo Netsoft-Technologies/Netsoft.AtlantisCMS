@@ -39,10 +39,11 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         }
         [Create]
         [RunLocal]
-        private void Create()
+        private void Create([Inject] IChildDataPortal<COnlinePageComponents> childPortal)
         {
             PageTitle = "New Page Title";
             PageOrder = 0;
+            Components=childPortal.CreateChild();
             BusinessRules.CheckRules();
         }
         [Fetch]
@@ -69,7 +70,8 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             PageOrder= pageDto.PageOrder;
         }
         [Insert]
-        private void Insert([Inject]IOnlinePageDal pageDal, [Inject]IOnlinePageComponentDal componentDal)
+        [Transactional]
+        private void Insert([Inject]IOnlinePageDal pageDal)
         {
             using (BypassPropertyChecks)
             {
@@ -81,27 +83,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                 pageDal.Insert(pageDto);
                 this.PageId = pageDto.PageId;
 
-                if (Components != null && Components.Any())
-                {
-                    foreach (var component in Components)
-                    {
-                        var componentDto = new DOnlinePageComponentDto
-                        {
-                            ParentPageId = pageDto.PageId,
-                            ComponentId = component.ComponentId,
-                            ParentPageTitle = pageDto.PageTitle,
-                            ComponentDesc = component.ComponentDesc,
-                            ComponentHTMLClassName = component.CompHTMLClassName,
-                            ComponentHTMLElementID = component.CompHTMLElementId
-                        };
-                        componentDal.Insert(componentDto);
-                    }
-                    //foreach (var component in Components)
-                    //{
-                    //    component.ParentPageId = pageDto.PageId;
-                    //    component.ParentPageTitle = pageDto.PageTitle;
-                    //}
-                }
+            
             }
             FieldManager.UpdateChildren(this);
         }

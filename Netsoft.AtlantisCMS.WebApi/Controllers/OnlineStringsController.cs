@@ -64,17 +64,17 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             {
                 return BadRequest("Invalid Request");
             }
-            var newOnlineStyleProp = await _OnlineStringEditDataPortal.FetchAsync(stringId);
-            if (newOnlineStyleProp.Id != stringId)
+            var editOnlineStyleProp = await _OnlineStringEditDataPortal.FetchAsync(stringId);
+            if (editOnlineStyleProp.Id != stringId)
             {
                 return BadRequest("Invalid Request");
             }
-            newOnlineStyleProp.Title = onlineString.Title;
-            newOnlineStyleProp.MessageId = onlineString.MessageId;
-            newOnlineStyleProp.Message = onlineString.Message;
-            newOnlineStyleProp.MessageType= onlineString.MessageType;
-            newOnlineStyleProp = await newOnlineStyleProp.SaveAsync();
-            var result = _mapper.Map<OnlineStringModels>(newOnlineStyleProp);
+            editOnlineStyleProp.Title = onlineString.Title;
+            editOnlineStyleProp.MessageId = editOnlineStyleProp.MessageId;
+            editOnlineStyleProp.Message = onlineString.Message;
+            editOnlineStyleProp.MessageType= onlineString.MessageType;
+            editOnlineStyleProp = await editOnlineStyleProp.SaveAsync();
+            var result = _mapper.Map<OnlineStringModels>(editOnlineStyleProp);
             return Ok(result);
         }
         [HttpDelete("{stringId}")]
@@ -88,7 +88,7 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             try
             {
                 await _OnlineStringEditDataPortal.DeleteAsync(stringId);
-                return Ok("Succesfully deleted");
+                return Ok();
             }
             catch (Exception ex)
             {

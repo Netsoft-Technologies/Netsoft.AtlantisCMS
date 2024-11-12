@@ -33,19 +33,19 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                 }
             }
         }
-        [CreateChild]
-        public void AddNewComp(COnlinePageComponent component)
-        {
-            if (component != null)
-            {
-                Add(component);
-            }
-        }
+        //[CreateChild]
+        //public void AddNewComp(COnlinePageComponent component)
+        //{
+        //    if (component != null)
+        //    {
+        //        Add(component);
+        //    }
+        //}
 
-        [UpdateChild]
-        public void UpdateComp(COnlinePageComponent component)
-        {
-            var existingComp = this
-        }
+        //[UpdateChild]
+        //public void UpdateComp(COnlinePageComponent component)
+        //{
+        //    var existingComp = this;
+        //}
     }
 }

@@ -39,7 +39,7 @@ namespace Netsoft.AtlantisCMS.DalEfCore
                              ParentPageId = pageComponent.ParentPageId,
                              ParentPageTitle = pageComponent.ParentPageTitle,
                              ComponentId = component.CompId,
-                             ComponentDesc = pageComponent.ComponentDescription,
+                             ComponentDesc = pageComponent.ComponentDesc,
                              ComponentHTMLClassName = pageComponent.ComponentHTMLClassName,
                              ComponentHTMLElementID = pageComponent.ComponentHTMLElementID,
                          };
@@ -68,12 +68,11 @@ namespace Netsoft.AtlantisCMS.DalEfCore
                          {
                              ComponentId = comp.ComponentId,
                              ParentPageId = comp.ParentPageId,
-                             //ParentPageTitle = pageComponent.ParentPageTitle,                             
-                             //ComponentDesc = comp.ComponentDescription,
-                             //ComponentHTMLClassName = pageComponent.ComponentHTMLClassName,
-                             //ComponentHTMLElementID = pageComponent.ComponentHTMLElementID
+                             ParentPageTitle = comp.ParentPageTitle,                             
+                             ComponentDesc = comp.ComponentDesc,
+                             ComponentHTMLClassName = comp.ComponentHTMLClassName,
+                             ComponentHTMLElementID = comp.ComponentHTMLElementID
                          };
-
             return result.ToList();
         }
         public void Insert(DOnlinePageComponentDto pageComponentDto)
@@ -82,7 +81,10 @@ namespace Netsoft.AtlantisCMS.DalEfCore
             {
                 ParentPageId = pageComponentDto.ParentPageId,
                 ComponentId = pageComponentDto.ComponentId,
-                ComponentDescription = pageComponentDto.ComponentDesc
+                ComponentDesc = string.Empty,
+                ComponentHTMLClassName= string.Empty,
+                ComponentHTMLElementID=string.Empty,
+                ParentPageTitle=string.Empty
             };
             _dbContext._OnlinePage_Components.Add(newComp);
             _dbContext.SaveChanges();

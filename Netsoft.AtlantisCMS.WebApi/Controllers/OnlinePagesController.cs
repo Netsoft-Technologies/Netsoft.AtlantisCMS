@@ -16,7 +16,7 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
         private readonly IDataPortal<COnlinePagesRO> _OnlinePagesDataPortal;
         private readonly IDataPortal<COnlinePageEdit> _OnlinePageEditDataPortal;
 
-        private readonly IDataPortal<COnlinePageComponents> _OnlinePageComponentsDataPortal;
+        //private readonly IDataPortal<COnlinePageComponents> _OnlinePageComponentsDataPortal;
 
         private readonly IMapper _mapper;
 
@@ -36,10 +36,10 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             }
             return Ok(pagesRequest);
         }
-        [HttpGet("{id}")]
-        public async Task<ActionResult<OnlinePageModel>> GetSinglePage(int id)
+        [HttpGet("{pageId}")]
+        public async Task<ActionResult<OnlinePageModel>> GetSinglePage(int pageId)
         {
-            var page = await _OnlinePageEditDataPortal.FetchAsync(id);
+            var page = await _OnlinePageEditDataPortal.FetchAsync(pageId);
             if (page == null || page.PageId == 0)
             {
                 return NotFound();
@@ -57,53 +57,48 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             COnlinePageEdit newPage = await _OnlinePageEditDataPortal.CreateAsync();
             newPage.PageTitle = onlinePagePost.PageTitle;
             newPage.PageOrder = onlinePagePost.PageOrder;
-            var comps = new List<OnlinePageComponentModel>();
+
+            //var comps = new List<OnlinePageComponentModel>();
             foreach (var comp in onlinePagePost.Components)
             {
-                //COnlinePageComponents component = await _OnlinePageComponentsDataPortal.CreateAsync();
-                
-
-
-                //var component = DataPortal.CreateChild<COnlinePageComponent>
-                //comp.ParentPageId = onlinePagePost.PageId;
-                //comp.ParentPageTitle = onlinePagePost.PageTitle;
-                //comp.ComponentDescription = onlinePagePost.Components;
-                comps.Add(comp);
+                var pagecomp=newPage.Components.AddNew();
+                pagecomp.ComponentId = comp.ComponentId;
             }
+
             newPage = await newPage.SaveAsync();
             var result = _mapper.Map<OnlinePageModel>(newPage);
             return Ok(result);
         }
-        [HttpPut]
-        public async Task<ActionResult<OnlinePageModel>> EditPage(OnlinePageModel onlinePageEdit)
+        [HttpPut("{pageId}")]
+        public async Task<ActionResult<OnlinePageModel>> EditPage(int pageId, OnlinePageModel onlinePageEdit)
         {
-            if (onlinePageEdit == null || onlinePageEdit.PageId == 0 || !ModelState.IsValid)
+            if (onlinePageEdit == null || !ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var newPageEdit = await _OnlinePageEditDataPortal.FetchAsync(onlinePageEdit.PageId);
-            if (newPageEdit.PageId != onlinePageEdit.PageId)
+            var newPageEdit = await _OnlinePageEditDataPortal.FetchAsync(pageId);
+            if (newPageEdit.PageId != pageId)
             {
                 return BadRequest("Missmatch");
             }
-            //newPageEdit.PageId = onlinePageEdit.PageId;
+            newPageEdit.PageId = pageId;
             newPageEdit.PageTitle = onlinePageEdit.PageTitle;
             newPageEdit.PageOrder = onlinePageEdit.PageOrder;
             newPageEdit = await newPageEdit.SaveAsync();
             var result = _mapper.Map<OnlinePageModel>(newPageEdit);
             return Ok(result);
         }
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<OnlinePageModel>> DeletePage (int id)
+        [HttpDelete("{pageId}")]
+        public async Task<ActionResult<OnlinePageModel>> DeletePage (int pageId)
         {
-            var pageForDeletion = await _OnlinePageEditDataPortal.FetchAsync(id);
+            var pageForDeletion = await _OnlinePageEditDataPortal.FetchAsync(pageId);
             if (pageForDeletion == null || pageForDeletion.PageId == 0)
             {
-                return NotFound($"Page with id: {id} not found.");
+                return NotFound($"Page with id: {pageId} not found.");
             }
             try
             {
-                await _OnlinePageEditDataPortal.DeleteAsync(id);
+                await _OnlinePageEditDataPortal.DeleteAsync(pageId);
                 return Ok();
             }
             catch (Exception ex)
