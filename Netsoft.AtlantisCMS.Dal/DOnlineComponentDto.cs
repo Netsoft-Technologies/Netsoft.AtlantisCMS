@@ -8,7 +8,7 @@ namespace Netsoft.AtlantisCMS.Dal
 {
     public class DOnlineComponentDto
     {
-        public int CompId { get; set; }
+        public int Id { get; set; }
         public string Description { get; set; }
         public string HTMLClassName { get; set; }
         public string HTMLElementId { get; set; }

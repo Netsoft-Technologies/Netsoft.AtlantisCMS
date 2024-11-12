@@ -49,9 +49,10 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         }
         [Create]
         [RunLocal]
-        private void Create()
+        private void Create([Inject] IChildDataPortal<COnlineCompStylingProps> childPortal)
         {
             CompDesc = "New Description";
+            StylingProps = childPortal.CreateChild();
             BusinessRules.CheckRules();
         }
         [Fetch]
@@ -64,7 +65,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             }
             using (BypassPropertyChecks)
             {
-                CompId = item.CompId;
+                CompId = item.Id;
                 CompDesc = item.Description;
                 CompHTMLClass = item.HTMLClassName;
                 CompHTMLElement = item.HTMLClassName;
@@ -73,6 +74,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             }
         }
         [Insert]
+        [Transactional]
         private void Insert([Inject] IOnlineComponentDal compDal)
         {
             using (BypassPropertyChecks)
@@ -85,7 +87,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                     StringContentId = this.StringContentId
                 };
                 compDal.Insert(item);
-                CompId = item.CompId;
+                CompId = item.Id;
             }
             FieldManager.UpdateChildren(this);
         }
@@ -96,7 +98,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             {
                 var item = new DOnlineComponentDto
                 {
-                    CompId = this.CompId,
+                    Id = this.CompId,
                     Description = this.CompDesc,
                     HTMLClassName = this.CompHTMLClass,
                     HTMLElementId = this.CompHTMLElement,

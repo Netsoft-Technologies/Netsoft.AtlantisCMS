@@ -58,15 +58,15 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             var res = _mapper.Map<OnlineComponentModel>(newComp);
             return Ok(res);
         }
-        [HttpPut("{id}")]
-        public async Task<ActionResult<OnlineComponentModel>> EditComp(int id, OnlineComponentModel compModel)
+        [HttpPut("{componentId}")]
+        public async Task<ActionResult<OnlineComponentModel>> EditComp(int componentId, OnlineComponentModel compModel)
         {
             if (compModel == null || !ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var editComp = await _OnlineComponentEditPortal.FetchAsync(id);
-            if (editComp.CompId != id)
+            var editComp = await _OnlineComponentEditPortal.FetchAsync(componentId);
+            if (editComp.CompId != componentId)
             {
                 return BadRequest(ModelState);
             }

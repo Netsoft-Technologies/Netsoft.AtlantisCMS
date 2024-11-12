@@ -82,8 +82,6 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                 };
                 pageDal.Insert(pageDto);
                 this.PageId = pageDto.PageId;
-
-            
             }
             FieldManager.UpdateChildren(this);
         }

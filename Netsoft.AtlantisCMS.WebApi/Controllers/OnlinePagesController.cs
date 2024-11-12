@@ -84,6 +84,11 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             newPageEdit.PageId = pageId;
             newPageEdit.PageTitle = onlinePageEdit.PageTitle;
             newPageEdit.PageOrder = onlinePageEdit.PageOrder;
+            //foreach (var comp in onlinePageEdit.Components)
+            //{
+            //    var editPageComp = newPageEdit.Components.AddNew();
+            //    editPageComp.ComponentId = comp.ComponentId;
+            //}
             newPageEdit = await newPageEdit.SaveAsync();
             var result = _mapper.Map<OnlinePageModel>(newPageEdit);
             return Ok(result);
