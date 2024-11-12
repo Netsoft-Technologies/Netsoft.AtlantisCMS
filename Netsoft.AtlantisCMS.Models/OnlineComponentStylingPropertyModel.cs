@@ -8,8 +8,9 @@ namespace Netsoft.AtlantisCMS.Models
 {
     public class OnlineComponentStylingPropertyModel
     {
-        public int StylingPropId { get; set; }
-        public int ParentCompId { get; set; }
-        public string StyleValue { get; set; }
+        public int StylingPropertyId { get; set; }
+        public int ComponentId { get; set; }
+        public string Value { get; set; }
+        public string CSSVariable { get; set; }
     }
 }
