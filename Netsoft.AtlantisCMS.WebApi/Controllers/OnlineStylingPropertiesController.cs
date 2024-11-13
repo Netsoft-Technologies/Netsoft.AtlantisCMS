@@ -35,9 +35,9 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
         public async Task<ActionResult<OnlineStylingPropertyModel>> GetOnlineStylingProperty(int styleId)
         {
             var singleStyleProp = await _OnlineStylingPropsEditPortal.FetchAsync(styleId);
-            if (singleStyleProp == null)
+            if (singleStyleProp.Id == 0)
             {
-                return NotFound();
+                return NotFound($"Styling Property with id: {styleId} doesn't exist.");
             }
             var res = _mapper.Map<OnlineStylingPropertyModel>(singleStyleProp);
             return Ok(res);

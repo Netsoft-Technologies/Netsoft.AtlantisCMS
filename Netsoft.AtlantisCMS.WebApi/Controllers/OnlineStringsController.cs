@@ -28,15 +28,16 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             {
                 return NotFound();
             }
-            return Ok(OnlineStringsRequest);
+            var result = _mapper.Map<List<OnlineStringModels>>(OnlineStringsRequest);
+            return Ok(result);
         }
         [HttpGet("{stringId}")]
         public async Task<ActionResult<OnlineStringModels>> GetSingleOnlineString(int stringId)
         {
             var stringEntry = await _OnlineStringEditDataPortal.FetchAsync(stringId);
-            if (stringEntry == null)
+            if (stringEntry.Id == 0)
             {
-                return NotFound();
+                return NotFound($"String with id: {stringId} doesn't exist.");
             }
             var result = _mapper.Map<OnlineStringModels>(stringEntry);
             return Ok(result);

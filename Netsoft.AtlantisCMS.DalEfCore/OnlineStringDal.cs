@@ -24,7 +24,8 @@ namespace Netsoft.AtlantisCMS.DalEfCore
                               Id = r.Id,
                               Title = r.Title,
                               MessageId = r.MessageId,
-                              Message = r.Message
+                              Message = r.Message,
+                              MessageType = r.MessageType
                           }).FirstOrDefault();
             return result;
         }
@@ -36,7 +37,8 @@ namespace Netsoft.AtlantisCMS.DalEfCore
                              Id = r.Id,
                              Title = r.Title,
                              MessageId = r.MessageId,
-                             Message = r.Message
+                             Message = r.Message,
+                             MessageType = r.MessageType
                          };
             return result.ToList();
         }
@@ -45,7 +47,9 @@ namespace Netsoft.AtlantisCMS.DalEfCore
             var newItem = new OnlineStrings_Entity
             { Title = dto.Title,
               MessageId = dto.MessageId,
-              Message = dto.Message };
+              Message = dto.Message,
+              MessageType = dto.MessageType
+            };
             db._OnlineStrings.Add(newItem);
             db.SaveChanges();
             dto.Id = newItem.Id;

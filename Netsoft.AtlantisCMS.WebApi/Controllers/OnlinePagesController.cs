@@ -57,6 +57,13 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             COnlinePageEdit newPage = await _OnlinePageEditDataPortal.CreateAsync();
             newPage.PageTitle = onlinePagePost.PageTitle;
             newPage.PageOrder = onlinePagePost.PageOrder;
+            var comp1 = newPage.Components.AddNew();
+            comp1.ComponentId = 1;
+            var style = comp1.ComponentStyling.AddNew();
+            style.StylingPropertyId = 1;
+            style.Value = "panagiotis";
+            style.CSSVariable = "color";
+            newPage =await newPage.SaveAsync();
 
             foreach (var comp in onlinePagePost.Components)
             {

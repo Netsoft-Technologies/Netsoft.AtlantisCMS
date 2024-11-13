@@ -28,12 +28,13 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             {
                 return NotFound();
             }
-            return Ok(onlineSettings);
+            var res = _mapper.Map<List<OnlineSettingModels>>(onlineSettings);
+            return Ok(res);
         }
         [HttpGet("{settingId}")]
         public async Task<ActionResult<OnlineSettingModels>> GetOnlineSetting(int settingId)
         {
-            var setting = await _OnlineSettingsDataPortal.FetchAsync(settingId);
+            var setting = await _OnlineSettingsEditPortal.FetchAsync(settingId);
             if (setting == null)
             {
                 return NotFound();

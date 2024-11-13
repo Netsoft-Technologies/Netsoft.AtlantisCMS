@@ -48,12 +48,12 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         //    set { SetProperty(ComponentHTMLElementIdProperty, value); }
         //}
         public static readonly PropertyInfo<COnlineCompStylingProps> ComponentStylingProperty = RegisterProperty<COnlineCompStylingProps>(nameof(ComponentStyling));
-        public COnlineCompStylingProps ComponentStyling
+        public COnlineCompStylingProps  ComponentStyling
         {
             get { return GetProperty(ComponentStylingProperty); }
             set { SetProperty(ComponentStylingProperty, value); } //not good
         }
-        [Create]
+        [CreateChild]
         [RunLocal]
         private void Create([Inject] IChildDataPortal<COnlineCompStylingProps> childPortal)
         {
@@ -61,10 +61,11 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             BusinessRules.CheckRules();
         }
         [FetchChild]
-        private void Fetch(DOnlinePageComponentDto compDto)
+        private void Fetch(DOnlinePageComponentDto compDto, [Inject] IChildDataPortal<COnlineCompStylingProps> childPortal)
         {
             ComponentId = compDto.ComponentId;
             ParentPageId = compDto.ParentPageId;
+            ComponentStyling = childPortal.FetchChild(compDto.ComponentId);
             //ParentPageTitle = compDto.ParentPageTitle;
             //ComponentDescription = compDto.ComponentDesc;
             //ComponentHTMLClassName = compDto.ComponentHTMLClassName;
@@ -74,14 +75,15 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
 
 
         [InsertChild]
-        private void InsertChild(COnlinePageEdit parent, [Inject] IOnlinePageComponentDal componentDal)
+        private void InsertChild(COnlinePageEdit parent, [Inject] IOnlinePageComponentDal componentDal, [Inject] IChildDataPortal<COnlineCompStylingProps> childPortal)
         {
             using (BypassPropertyChecks)
             {
                 var item = new DOnlinePageComponentDto
                 {
                     ParentPageId = parent.PageId,
-                    ComponentId = this.ComponentId,
+                    ComponentId = this.ComponentId
+                    //StylingProperty = ComponentStyling
                 };
                 componentDal.Insert(item);
             }

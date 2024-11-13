@@ -71,7 +71,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         }
         [Insert]
         [Transactional]
-        private void Insert([Inject]IOnlinePageDal pageDal)
+        private async void Insert([Inject]IOnlinePageDal pageDal)
         {
             using (BypassPropertyChecks)
             {
