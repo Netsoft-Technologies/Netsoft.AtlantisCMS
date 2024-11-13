@@ -18,24 +18,24 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             get { return GetProperty(IdProperty); }
             set { SetProperty(IdProperty, value); }
         }
-        public static readonly PropertyInfo<string> DescProperty = RegisterProperty<string>(c => c.Desc);
-        public string Desc
+        public static readonly PropertyInfo<string> DescProp = RegisterProperty<string>(c => c.Description);
+        public string Description
         {
-            get { return GetProperty(DescProperty); }
-            set { SetProperty(DescProperty, value); }
+            get { return GetProperty(DescProp); }
+            set { SetProperty(DescProp, value); }
         }
-        public static readonly PropertyInfo<string> CSSProperty = RegisterProperty<string>(c => c.CSS);
-        public string CSS
+        public static readonly PropertyInfo<string> CSSProp = RegisterProperty<string>(c => c.CSSProperty);
+        public string CSSProperty
         {
-            get { return GetProperty(CSSProperty); }
-            set { SetProperty(CSSProperty, value); }
+            get { return GetProperty(CSSProp); }
+            set { SetProperty(CSSProp, value); }
         }
         [Create]
         [RunLocal]
         private void Create()
         {
-            Desc = "New Description";
-            CSS = "New CSS";
+            Description = "New Description";
+            CSSProperty = "New CSS";
             BusinessRules.CheckRules();
         }
         [Fetch]
@@ -49,16 +49,16 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             using (BypassPropertyChecks)
             {
                 Id = item.Id;
-                Desc = item.Description;
-                CSS = item.CSSProp;
+                Description = item.Description;
+                CSSProperty = item.CSSProp;
             }
         }
         [FetchChild]
         private void Fetch(DOnlineStylingPropertyDto dto, [Inject]IDataPortal<COnlineStylingPropertyRO> portal)
         {
             Id = dto.Id;
-            Desc = dto.Description;
-            CSS = dto.CSSProp;
+            Description = dto.Description;
+            CSSProperty = dto.CSSProp;
         }
         [Insert]
         private void Insert([Inject] IOnlineStylingPropertyDal onlineStylingPropertyDal)
@@ -68,8 +68,8 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                 var item = new DOnlineStylingPropertyDto
                 {
                     Id = this.Id,
-                    Description = this.Desc,
-                    CSSProp = this.CSS,
+                    Description = this.Description,
+                    CSSProp = this.CSSProperty,
                 };
                 onlineStylingPropertyDal.Insert(item);
                 Id = item.Id;
@@ -84,8 +84,8 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                 var item = new DOnlineStylingPropertyDto
                 {
                     Id = this.Id,
-                    Description = this.Desc,
-                    CSSProp = this.CSS,
+                    Description = this.Description,
+                    CSSProp = this.CSSProperty,
                 };
                 dal.Update(item);
             }

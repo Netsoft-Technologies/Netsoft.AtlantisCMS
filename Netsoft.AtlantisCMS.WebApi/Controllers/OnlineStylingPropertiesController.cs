@@ -51,8 +51,8 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             }
             COnlineStylingPropertyEdit newOnlineStyleProp = await _OnlineStylingPropsEditPortal.CreateAsync();
             newOnlineStyleProp.Id = newStylePropreq.Id;
-            newOnlineStyleProp.Desc = newStylePropreq.Description;
-            newOnlineStyleProp.CSS = newStylePropreq.CSSProperty;
+            newOnlineStyleProp.Description = newStylePropreq.Description;
+            newOnlineStyleProp.CSSProperty = newStylePropreq.CSSProperty;
             newOnlineStyleProp = await newOnlineStyleProp.SaveAsync();
             var res = _mapper.Map<OnlineStylingPropertyModel>(newOnlineStyleProp);
             return Ok(res);
@@ -70,8 +70,8 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
                 return BadRequest(ModelState);
             }
             editStyleProp.Id = newStylePropreq.Id;
-            editStyleProp.Desc = newStylePropreq.Description;
-            editStyleProp.CSS = newStylePropreq.CSSProperty;
+            editStyleProp.Description = newStylePropreq.Description;
+            editStyleProp.CSSProperty = newStylePropreq.CSSProperty;
             editStyleProp = await editStyleProp.SaveAsync();
             var res = _mapper.Map<OnlineStylingPropertyModel>(editStyleProp);
             return Ok(res);
