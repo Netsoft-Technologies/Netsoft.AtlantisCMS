@@ -37,11 +37,11 @@ namespace Netsoft.AtlantisCMS.DalEfCore
                          select new DOnlinePageComponentDto
                          {
                              ParentPageId = pageComponent.ParentPageId,
-                             ParentPageTitle = pageComponent.ParentPageTitle,
+                             //ParentPageTitle = pageComponent.ParentPageTitle,
                              ComponentId = component.CompId,
-                             ComponentDesc = pageComponent.ComponentDesc,
-                             ComponentHTMLClassName = pageComponent.ComponentHTMLClassName,
-                             ComponentHTMLElementID = pageComponent.ComponentHTMLElementID,
+                             //ComponentDesc = pageComponent.ComponentDesc,
+                             //ComponentHTMLClassName = pageComponent.ComponentHTMLClassName,
+                             //ComponentHTMLElementID = pageComponent.ComponentHTMLElementID,
                          };
             return result.ToList();
         }
@@ -68,10 +68,10 @@ namespace Netsoft.AtlantisCMS.DalEfCore
                          {
                              ComponentId = comp.ComponentId,
                              ParentPageId = comp.ParentPageId,
-                             ParentPageTitle = comp.ParentPageTitle,                             
-                             ComponentDesc = comp.ComponentDesc,
-                             ComponentHTMLClassName = comp.ComponentHTMLClassName,
-                             ComponentHTMLElementID = comp.ComponentHTMLElementID
+                             //ParentPageTitle = comp.ParentPageTitle,                             
+                             //ComponentDesc = comp.ComponentDesc,
+                             //ComponentHTMLClassName = comp.ComponentHTMLClassName,
+                             //ComponentHTMLElementID = comp.ComponentHTMLElementID
                          };
             return result.ToList();
         }

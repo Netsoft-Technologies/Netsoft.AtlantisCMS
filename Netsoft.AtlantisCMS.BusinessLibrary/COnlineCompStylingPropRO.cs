@@ -33,16 +33,16 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         private void Fetch(int compId, int stylingPropId, [Inject] IOnlineComponentStylingPropertyDal dal, [Inject] IDataPortal<COnlineCompStylingPropRO> dataPortal)
         {
             var style = dal.Fetch(compId, stylingPropId);
-            StylingPropId = style.StylingPropId;
-            CompId = style.ParentCompId;
-            StyleValue = style.StyleValue;
+            StylingPropId = style.StylingPropertyId;
+            CompId = style.ComponentId;
+            StyleValue = style.Value;
         }
         [FetchChild]
         private void FetchChild(DOnlineComponentStylingPropertyDto dto)
         {
-            StylingPropId = dto.StylingPropId;
-            CompId = dto.ParentCompId;
-            StyleValue = dto.StyleValue;
+            StylingPropId = dto.StylingPropertyId;
+            CompId = dto.ComponentId;
+            StyleValue = dto.Value;
         }
     }
 }

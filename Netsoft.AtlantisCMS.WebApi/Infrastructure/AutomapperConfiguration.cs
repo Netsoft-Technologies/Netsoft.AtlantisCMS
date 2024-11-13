@@ -39,6 +39,7 @@ namespace Netsoft.AtlantisCMS.WebApi.Infrastructure
             CreateMap<COnlinePageComponentRO, OnlinePageComponentModel>().ReverseMap();
             CreateMap<OnlinePageComponentModel, COnlinePageComponentRO>().ReverseMap();
             CreateMap<OnlinePageComponentModel, COnlinePageComponent>().ReverseMap();
+            CreateMap<OnlinePageComponentModel, COnlineCompStylingProp>().ReverseMap();
         }
     }
 }

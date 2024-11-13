@@ -14,27 +14,29 @@ namespace Netsoft.AtlantisCMS.DalEfCore
         {
             db = context;
         }
-        public DOnlineComponentStylingPropertyDto Fetch(int compId, int stylingPropId)
+        public DOnlineComponentStylingPropertyDto Fetch(int compId, int StylingPropertyId)
         {
             var getSingleResult = (from r in db._OnlineComponent_StylingProperties
-                                   where r.ParentCompId == compId && r.StylingPropId == stylingPropId
+                                   where r.ComponentId == compId && r.StylingPropertyId == StylingPropertyId
                                    select new DOnlineComponentStylingPropertyDto
                                    {
-                                       StylingPropId = r.StylingPropId,
-                                       ParentCompId = r.ParentCompId,
-                                       StyleValue = r.StyleValue
+                                       StylingPropertyId = r.StylingPropertyId,
+                                       ComponentId = r.ComponentId,
+                                       Value = r.Value,
+                                       CSSVariable = r.CSSVariable
                                    }).FirstOrDefault();
             return getSingleResult;
         }
         public List<DOnlineComponentStylingPropertyDto> FetchPropertiesForComponent(int compId)
         {
             var getMultiStyleResult = from r in db._OnlineComponent_StylingProperties
-                                      where r.ParentCompId == compId
+                                      where r.ComponentId == compId
                                       select new DOnlineComponentStylingPropertyDto
                                       {
-                                          StylingPropId = r.StylingPropId,
-                                          ParentCompId = r.ParentCompId,
-                                          StyleValue = r.StyleValue
+                                          StylingPropertyId = r.StylingPropertyId,
+                                          ComponentId = r.ComponentId,
+                                          Value = r.Value,
+                                          CSSVariable = r.CSSVariable
                                       };
             return getMultiStyleResult.ToList();
         }
@@ -43,9 +45,10 @@ namespace Netsoft.AtlantisCMS.DalEfCore
             var getAllStyleResult = from r in db._OnlineComponent_StylingProperties
                                     select new DOnlineComponentStylingPropertyDto
                                     {
-                                        StylingPropId = r.StylingPropId,
-                                        ParentCompId = r.ParentCompId,
-                                        StyleValue = r.StyleValue
+                                        StylingPropertyId = r.StylingPropertyId,
+                                        ComponentId = r.ComponentId,
+                                        Value = r.Value,
+                                        CSSVariable = r.CSSVariable
                                     };
             return getAllStyleResult.ToList();
         }
@@ -53,32 +56,34 @@ namespace Netsoft.AtlantisCMS.DalEfCore
         {
             var newStyleProp = new OnlineCompStylingProp_Entity
             {
-                StylingPropId = dto.StylingPropId,
-                ParentCompId = dto.ParentCompId,
-                StyleValue = dto.StyleValue
+                StylingPropertyId = dto.StylingPropertyId,
+                ComponentId = dto.ComponentId,
+                Value = dto.Value,
+                CSSVariable = dto.CSSVariable
             };
             db._OnlineComponent_StylingProperties.Add(newStyleProp);
             db.SaveChanges();
-            dto.StylingPropId = newStyleProp.StylingPropId;
+            dto.StylingPropertyId = newStyleProp.StylingPropertyId;
         }
         public void Update(DOnlineComponentStylingPropertyDto dto)
         {
             var editStyleProp = (from r in db._OnlineComponent_StylingProperties
-                                 where r.ParentCompId == dto.ParentCompId && r.StylingPropId == dto.StylingPropId
+                                 where r.ComponentId == dto.ComponentId && r.StylingPropertyId == dto.StylingPropertyId
                                  select r).FirstOrDefault();
             if (editStyleProp == null)
             {
                 throw new Exception();
             }
-            editStyleProp.ParentCompId = dto.ParentCompId;
-            editStyleProp.StylingPropId = dto.StylingPropId;
-            editStyleProp.StyleValue = dto.StyleValue;
+            editStyleProp.ComponentId = dto.ComponentId;
+            editStyleProp.StylingPropertyId = dto.StylingPropertyId;
+            editStyleProp.Value = dto.Value;
+            editStyleProp.CSSVariable = dto.CSSVariable;
             var saveEdits = db.SaveChanges();
         }
-        public void Delete (int stylingPropId, int parentCompId)
+        public void Delete (int StylingPropertyId, int ComponentId)
         {
             var deleteStyleProp = (from r in db._OnlineComponent_StylingProperties
-                                   where r.StylingPropId == stylingPropId
+                                   where r.StylingPropertyId == StylingPropertyId
                                    select r).FirstOrDefault();
             if (deleteStyleProp != null)
             {

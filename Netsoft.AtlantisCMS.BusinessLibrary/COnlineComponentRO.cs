@@ -46,7 +46,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         private void Fetch(int compId, [Inject] IOnlineComponentDal compDal, [Inject] IDataPortal<COnlineComponentRO> dataPortal)
         {
             var item = compDal.Fetch(compId);
-            CompId = item.CompId;
+            CompId = item.Id;
             CompDesc = item.Description;
             CompHTMLClass = item.HTMLClassName;
             CompHTMLElement = item.HTMLElementId;
@@ -55,7 +55,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         [FetchChild]
         private void FetchChild(DOnlineComponentDto compDto)
         {
-            CompId = compDto.CompId;
+            CompId = compDto.Id;
             CompDesc = compDto.Description;
             CompHTMLClass = compDto.HTMLClassName;
             CompHTMLElement = compDto.HTMLElementId;

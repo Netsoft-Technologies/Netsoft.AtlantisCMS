@@ -58,7 +58,6 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             newPage.PageTitle = onlinePagePost.PageTitle;
             newPage.PageOrder = onlinePagePost.PageOrder;
 
-            //var comps = new List<OnlinePageComponentModel>();
             foreach (var comp in onlinePagePost.Components)
             {
                 var pagecomp=newPage.Components.AddNew();

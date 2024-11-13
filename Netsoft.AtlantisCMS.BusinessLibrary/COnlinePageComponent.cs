@@ -17,40 +17,47 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             get { return GetProperty(ParentPageIdProperty); }
             set {  SetProperty(ParentPageIdProperty, value); }
         }
-        public static readonly PropertyInfo<string> ParentPageTitleProperty = RegisterProperty<string>(c => c.ParentPageTitle);
-        public string ParentPageTitle
-        {
-            get { return GetProperty(ParentPageTitleProperty); }
-            set { SetProperty(ParentPageTitleProperty, value); }
-        }
+        //public static readonly PropertyInfo<string> ParentPageTitleProperty = RegisterProperty<string>(c => c.ParentPageTitle);
+        //public string ParentPageTitle
+        //{
+        //    get { return GetProperty(ParentPageTitleProperty); }
+        //    set { SetProperty(ParentPageTitleProperty, value); }
+        //}
         public static readonly PropertyInfo<int> ComponentIdProperty = RegisterProperty<int>(c => c.ComponentId);
         public int ComponentId
         {
             get { return GetProperty(ComponentIdProperty); }
             set { SetProperty(ComponentIdProperty, value); }
         }
-        public static readonly PropertyInfo<string> ComponentDescriptionProperty = RegisterProperty<string>(c => c.ComponentDescription);
-        public string ComponentDescription
+        //public static readonly PropertyInfo<string> ComponentDescriptionProperty = RegisterProperty<string>(c => c.ComponentDescription);
+        //public string ComponentDescription
+        //{
+        //    get { return GetProperty(ComponentDescriptionProperty); }
+        //    set { SetProperty (ComponentDescriptionProperty, value); }
+        //}
+        //public static readonly PropertyInfo<string> ComponentHTMLClassNameProperty = RegisterProperty<string>(c => c.ComponentHTMLClassName);
+        //public string ComponentHTMLClassName
+        //{
+        //    get { return GetProperty(ComponentHTMLClassNameProperty); }
+        //    set { SetProperty(ComponentHTMLClassNameProperty, value); }
+        //}
+        //public static readonly PropertyInfo<string> ComponentHTMLElementIdProperty = RegisterProperty<string>(c => c.ComponentHTMLElementId);
+        //public string ComponentHTMLElementId
+        //{
+        //    get { return GetProperty(ComponentHTMLElementIdProperty); }
+        //    set { SetProperty(ComponentHTMLElementIdProperty, value); }
+        //}
+        public static readonly PropertyInfo<COnlineCompStylingProps> ComponentStylingProperty = RegisterProperty<COnlineCompStylingProps>(nameof(ComponentStyling));
+        public COnlineCompStylingProps ComponentStyling
         {
-            get { return GetProperty(ComponentDescriptionProperty); }
-            set { SetProperty (ComponentDescriptionProperty, value); }
-        }
-        public static readonly PropertyInfo<string> ComponentHTMLClassNameProperty = RegisterProperty<string>(c => c.ComponentHTMLClassName);
-        public string ComponentHTMLClassName
-        {
-            get { return GetProperty(ComponentHTMLClassNameProperty); }
-            set { SetProperty(ComponentHTMLClassNameProperty, value); }
-        }
-        public static readonly PropertyInfo<string> ComponentHTMLElementIdProperty = RegisterProperty<string>(c => c.ComponentHTMLElementId);
-        public string ComponentHTMLElementId
-        {
-            get { return GetProperty(ComponentHTMLElementIdProperty); }
-            set { SetProperty(ComponentHTMLElementIdProperty, value); }
+            get { return GetProperty(ComponentStylingProperty); }
+            set { SetProperty(ComponentStylingProperty, value); } //not good
         }
         [Create]
         [RunLocal]
-        private void Create()
+        private void Create([Inject] IChildDataPortal<COnlineCompStylingProps> childPortal)
         {
+            ComponentStyling = childPortal.CreateChild();
             BusinessRules.CheckRules();
         }
         [FetchChild]
@@ -58,10 +65,10 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         {
             ComponentId = compDto.ComponentId;
             ParentPageId = compDto.ParentPageId;
-            ParentPageTitle = compDto.ParentPageTitle;
-            ComponentDescription = compDto.ComponentDesc;
-            ComponentHTMLClassName = compDto.ComponentHTMLClassName;
-            ComponentHTMLElementId = compDto.ComponentHTMLElementID;
+            //ParentPageTitle = compDto.ParentPageTitle;
+            //ComponentDescription = compDto.ComponentDesc;
+            //ComponentHTMLClassName = compDto.ComponentHTMLClassName;
+            //ComponentHTMLElementId = compDto.ComponentHTMLElementID;
         }
 
 
@@ -78,6 +85,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                 };
                 componentDal.Insert(item);
             }
+            FieldManager.UpdateChildren(this);
         }
 
         [Insert]

@@ -14,7 +14,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         public void Remove(int stylingPropId)
         {
             var item = (from r in this
-                        where r.StylingPropId == stylingPropId
+                        where r.StylingPropertyId == stylingPropId
                         select r).FirstOrDefault();
             if (item != null)
             {

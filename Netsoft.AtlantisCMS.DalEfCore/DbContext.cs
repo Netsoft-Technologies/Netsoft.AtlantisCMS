@@ -34,9 +34,10 @@ namespace Netsoft.AtlantisCMS.DalEfCore
     public class OnlineCompStylingProp_Entity
     {
         [Key]
-        public int StylingPropId { get; set; }
-        public int ParentCompId { get; set; }
-        public string StyleValue { get; set; }
+        public int StylingPropertyId { get; set; }
+        public int ComponentId { get; set; }
+        public string Value { get; set; }
+        public string CSSVariable { get; set; }
     }
     public class OnlineComp_Entity
     {
