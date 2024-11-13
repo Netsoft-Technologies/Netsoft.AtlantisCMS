@@ -17,7 +17,7 @@ namespace Netsoft.AtlantisCMS.WebApi.Infrastructure
             CreateMap<OnlineComponentModel, COnlineComponentEdit>().ReverseMap();
             CreateMap<OnlineComponentModel, COnlineComponentRO>().ReverseMap();
             CreateMap<COnlineComponentEdit, OnlineComponentModel>().ReverseMap();
-            CreateMap<COnlineComponentRO, OnlineComponentModel>().ReverseMap();
+            //CreateMap<COnlineComponentRO, OnlineComponentModel>().ReverseMap();
             CreateMap<OnlineComponentCreateRequestModel, COnlineComponentRO>().ReverseMap();
 
             CreateMap<OnlineSettingModels, COnlineSettingEdit>().ReverseMap();

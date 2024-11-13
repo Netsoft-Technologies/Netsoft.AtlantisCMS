@@ -12,26 +12,26 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
     [Serializable]
     public class COnlineComponentRO : ReadOnlyBase<COnlineComponentRO>
     {
-        public static readonly PropertyInfo<int> CompIdProperty = RegisterProperty<int>(p => p.CompId);
-        public int CompId
+        public static readonly PropertyInfo<int> CompIdProperty = RegisterProperty<int>(p => p.ComponentId);
+        public int ComponentId
         {
             get { return GetProperty(CompIdProperty); }
             private set { LoadProperty(CompIdProperty, value); }
         }
-        public static readonly PropertyInfo<string> CompDescProperty = RegisterProperty<string>(p => p.CompDesc);
-        public string CompDesc
+        public static readonly PropertyInfo<string> CompDescProperty = RegisterProperty<string>(p => p.Description);
+        public string Description
         {
             get { return GetProperty(CompDescProperty); }
             private set { LoadProperty(CompDescProperty, value); }
         }
-        public static readonly PropertyInfo<string> CompHTMLClassProperty = RegisterProperty<string>(p => p.CompHTMLClass);
-        public string CompHTMLClass
+        public static readonly PropertyInfo<string> CompHTMLClassProperty = RegisterProperty<string>(p => p.HTMLClassName);
+        public string HTMLClassName
         {
             get { return GetProperty(CompHTMLClassProperty); }
             private set { LoadProperty(CompHTMLClassProperty, value); }
         }
-        public static readonly PropertyInfo<string> CompHTMLElementProperty = RegisterProperty<string>(p => p.CompHTMLElement);
-        public string CompHTMLElement
+        public static readonly PropertyInfo<string> CompHTMLElementProperty = RegisterProperty<string>(p => p.HTMLElementId);
+        public string HTMLElementId
         {
             get { return GetProperty(CompHTMLElementProperty); }
             private set { LoadProperty(CompHTMLElementProperty, value); }
@@ -42,24 +42,32 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             get { return GetProperty(StringContentIdProperty); }
             private set { LoadProperty(StringContentIdProperty, value); }   
         }
+        public static readonly PropertyInfo<int?> StylingGroupIdProperty = RegisterProperty<int?>(p => p.StylingGroupId);
+        public int? StylingGroupId
+        {
+            get { return GetProperty(StylingGroupIdProperty); }
+            private set { LoadProperty(StylingGroupIdProperty, value); }
+        }
         [Fetch]
         private void Fetch(int compId, [Inject] IOnlineComponentDal compDal, [Inject] IDataPortal<COnlineComponentRO> dataPortal)
         {
             var item = compDal.Fetch(compId);
-            CompId = item.Id;
-            CompDesc = item.Description;
-            CompHTMLClass = item.HTMLClassName;
-            CompHTMLElement = item.HTMLElementId;
+            ComponentId = item.Id;
+            Description = item.Description;
+            HTMLClassName = item.HTMLClassName;
+            HTMLElementId = item.HTMLElementId;
             StringContentId = item.StringContentId;
+            StylingGroupId = item.StylingGroupId;
         }
         [FetchChild]
         private void FetchChild(DOnlineComponentDto compDto)
         {
-            CompId = compDto.Id;
-            CompDesc = compDto.Description;
-            CompHTMLClass = compDto.HTMLClassName;
-            CompHTMLElement = compDto.HTMLElementId;
+            ComponentId = compDto.Id;
+            Description = compDto.Description;
+            HTMLClassName = compDto.HTMLClassName;
+            HTMLElementId = compDto.HTMLElementId;
             StringContentId = compDto.StringContentId;
+            StylingGroupId = compDto.StylingGroupId;
         }
     }
 }

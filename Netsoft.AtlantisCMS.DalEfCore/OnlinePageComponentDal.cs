@@ -32,13 +32,13 @@ namespace Netsoft.AtlantisCMS.DalEfCore
                          join pageComponent in _dbContext._OnlinePage_Components
                             on page.PageId equals pageComponent.ParentPageId
                          join component in _dbContext._OnlineComponents
-                            on pageComponent.ComponentId equals component.CompId
+                            on pageComponent.ComponentId equals component.Id
                          where pageComponent.ComponentId == compId
                          select new DOnlinePageComponentDto
                          {
                              ParentPageId = pageComponent.ParentPageId,
                              //ParentPageTitle = pageComponent.ParentPageTitle,
-                             ComponentId = component.CompId,
+                             ComponentId = component.Id,
                              //ComponentDesc = pageComponent.ComponentDesc,
                              //ComponentHTMLClassName = pageComponent.ComponentHTMLClassName,
                              //ComponentHTMLElementID = pageComponent.ComponentHTMLElementID,
