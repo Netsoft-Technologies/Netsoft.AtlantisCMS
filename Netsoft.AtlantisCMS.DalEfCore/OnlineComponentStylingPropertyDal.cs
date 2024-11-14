@@ -23,7 +23,7 @@ namespace Netsoft.AtlantisCMS.DalEfCore
                                        StylingPropertyId = r.StylingPropertyId,
                                        ComponentId = r.ComponentId,
                                        Value = r.Value,
-                                       CSSVariable = r.CSSVariable
+                                       //CSSVariable = r.CSSVariable
                                    }).FirstOrDefault();
             return getSingleResult;
         }
@@ -36,7 +36,7 @@ namespace Netsoft.AtlantisCMS.DalEfCore
                                           StylingPropertyId = r.StylingPropertyId,
                                           ComponentId = r.ComponentId,
                                           Value = r.Value,
-                                          CSSVariable = r.CSSVariable
+                                          //CSSVariable = "placeholder"
                                       };
             return getMultiStyleResult.ToList();
         }
@@ -48,7 +48,7 @@ namespace Netsoft.AtlantisCMS.DalEfCore
                                         StylingPropertyId = r.StylingPropertyId,
                                         ComponentId = r.ComponentId,
                                         Value = r.Value,
-                                        CSSVariable = r.CSSVariable
+                                        //CSSVariable = r.CSSVariable
                                     };
             return getAllStyleResult.ToList();
         }
@@ -59,13 +59,14 @@ namespace Netsoft.AtlantisCMS.DalEfCore
                 StylingPropertyId = dto.StylingPropertyId,
                 ComponentId = dto.ComponentId,
                 Value = dto.Value,
-                CSSVariable = dto.CSSVariable
+                //CSSVariable = dto.CSSVariable
             };
             db._OnlineComponent_StylingProperties.Add(newStyleProp);
             db.SaveChanges();
             dto.StylingPropertyId = newStyleProp.StylingPropertyId;
+            dto.ComponentId = newStyleProp.ComponentId;
         }
-        public void Update(DOnlineComponentStylingPropertyDto dto)
+        public void Update(int componentId, int stylingPropId, DOnlineComponentStylingPropertyDto dto)
         {
             var editStyleProp = (from r in db._OnlineComponent_StylingProperties
                                  where r.ComponentId == dto.ComponentId && r.StylingPropertyId == dto.StylingPropertyId
@@ -77,7 +78,7 @@ namespace Netsoft.AtlantisCMS.DalEfCore
             editStyleProp.ComponentId = dto.ComponentId;
             editStyleProp.StylingPropertyId = dto.StylingPropertyId;
             editStyleProp.Value = dto.Value;
-            editStyleProp.CSSVariable = dto.CSSVariable;
+            //editStyleProp.CSSVariable = dto.CSSVariable;
             var saveEdits = db.SaveChanges();
         }
         public void Delete (int StylingPropertyId, int ComponentId)

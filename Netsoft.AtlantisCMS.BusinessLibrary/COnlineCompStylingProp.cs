@@ -32,12 +32,15 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             get { return GetProperty(StyleValueProperty); }
             set { SetProperty(StyleValueProperty, value); }
         }
-        public static readonly PropertyInfo<string> CSSVariableProperty = RegisterProperty<string>(p => p.CSSVariable);
-        public string CSSVariable
-        {
-            get { return GetProperty(CSSVariableProperty); }
-            set { SetProperty(CSSVariableProperty, value); }
-        }
+
+        //unused for now, may be used in the future
+        //public static readonly PropertyInfo<string> CSSVariableProperty = RegisterProperty<string>(p => p.CSSVariable);
+        //public string CSSVariable
+        //{
+        //    get { return GetProperty(CSSVariableProperty); }
+        //    set { SetProperty(CSSVariableProperty, value); }
+        //}
+
         [Create]
         [RunLocal]
         private void Create()
@@ -54,7 +57,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                 StylingPropertyId = styleData.StylingPropertyId;
                 ComponentId = styleData.ComponentId;
                 Value = styleData.Value;
-                CSSVariable = styleData.CSSVariable;
+                //CSSVariable = styleData.CSSVariable;
             }
         }
         [FetchChild]
@@ -63,7 +66,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             StylingPropertyId = styleDto.StylingPropertyId;
             ComponentId = styleDto.ComponentId;
             Value = styleDto.Value;
-            CSSVariable = styleDto.CSSVariable;
+            //CSSVariable = styleDto.CSSVariable;
         }
         [Insert]
         private void Insert([Inject] IOnlineComponentStylingPropertyDal styleDal)
@@ -75,28 +78,28 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                     StylingPropertyId = StylingPropertyId,
                     ComponentId = ComponentId,
                     Value = this.Value,
-                    CSSVariable = this.CSSVariable,
+                    //CSSVariable = this.CSSVariable,
                 };
                 styleDal.Insert(newStyleValue);
             }
             FieldManager.UpdateChildren(this);
         }
-        [InsertChild]
-        private void InsertChild(COnlinePageComponent parentComp, [Inject] IOnlineComponentStylingPropertyDal styleDal)
-        {
-            using (BypassPropertyChecks)
-            {
-                var newStyleValue = new DOnlineComponentStylingPropertyDto
-                {
-                    StylingPropertyId = this.StylingPropertyId,
-                    ComponentId = parentComp.ComponentId,
-                    Value = this.Value,
-                    CSSVariable = this.CSSVariable,
-                };
-                styleDal.Insert(newStyleValue);
-            }
-            FieldManager.UpdateChildren(this);
-        }
+        //[InsertChild]
+        //private void InsertChild(COnlinePageComponent parentComp, [Inject] IOnlineComponentStylingPropertyDal styleDal)
+        //{
+        //    using (BypassPropertyChecks)
+        //    {
+        //        var newStyleValue = new DOnlineComponentStylingPropertyDto
+        //        {
+        //            StylingPropertyId = this.StylingPropertyId,
+        //            ComponentId = parentComp.ComponentId,
+        //            Value = this.Value,
+        //            //CSSVariable = this.CSSVariable,
+        //        };
+        //        styleDal.Insert(newStyleValue);
+        //    }
+        //    FieldManager.UpdateChildren(this);
+        //}
         [Update]
         public void Update([Inject] IOnlineComponentStylingPropertyDal styleDal)
         {
@@ -107,9 +110,9 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                     StylingPropertyId = StylingPropertyId,
                     ComponentId = ComponentId,
                     Value = this.Value,
-                    CSSVariable = this.CSSVariable,
+                    //CSSVariable = this.CSSVariable,
                 };
-                styleDal.Update(editStyleValue);
+                styleDal.Update(this.ComponentId, this.StylingPropertyId, editStyleValue);
             }
         }
         [Delete]

@@ -48,6 +48,12 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             get { return GetProperty(StylingGroupIdProperty); }
             private set { LoadProperty(StylingGroupIdProperty, value); }
         }
+        public static readonly PropertyInfo<COnlineCompStylingProps> StylingPropsProperty = RegisterProperty<COnlineCompStylingProps>(p => p.StylingProps);
+        public COnlineCompStylingProps StylingProps
+        {
+            get { return GetProperty(StylingPropsProperty); }
+            private set { LoadProperty(StylingPropsProperty, value); }
+        }
         [Fetch]
         private void Fetch(int compId, [Inject] IOnlineComponentDal compDal, [Inject] IDataPortal<COnlineComponentRO> dataPortal)
         {

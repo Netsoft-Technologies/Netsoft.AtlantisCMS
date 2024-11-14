@@ -53,11 +53,11 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             get { return GetProperty(ComponentStylingProperty); }
             set { SetProperty(ComponentStylingProperty, value); } //not good
         }
-        [CreateChild]
+        [Create] //[CreateChild]
         [RunLocal]
-        private void Create([Inject] IChildDataPortal<COnlineCompStylingProps> childPortal)
+        private void Create() //[Inject] IChildDataPortal<COnlineCompStylingProps> childPortal
         {
-            ComponentStyling = childPortal.CreateChild();
+            //ComponentStyling = childPortal.CreateChild();
             BusinessRules.CheckRules();
         }
         [FetchChild]

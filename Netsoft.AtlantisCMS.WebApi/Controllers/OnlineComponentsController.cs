@@ -29,12 +29,13 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             {
                 return NotFound();
             }
-            return Ok(onlineCompReq);
+            var result = _mapper.Map<List<OnlineComponentModel>>(onlineCompReq);
+            return Ok(result);
         }
-        [HttpGet("{id}")]
-        public async Task<ActionResult<OnlineComponentModel>> GetOnlineComponent(int id)
+        [HttpGet("{componentId}")]
+        public async Task<ActionResult<OnlineComponentModel>> GetOnlineComponent(int componentId)
         {
-            var singleCompReq = await _OnlineComponentEditPortal.FetchAsync(id);
+            var singleCompReq = await _OnlineComponentEditPortal.FetchAsync(componentId);
             if (singleCompReq == null)
             {
                 return NotFound();
@@ -50,11 +51,20 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
                 return BadRequest(ModelState);
             }
             COnlineComponentEdit newComp = await _OnlineComponentEditPortal.CreateAsync();
-            newComp.CompDesc = compModel.Description;
-            newComp.CompHTMLClass = compModel.HTMLClassName;
-            newComp.CompHTMLElement = compModel.HTMLElementId;
+            newComp.Description = compModel.Description;
+            newComp.HTMLClassName = compModel.HTMLClassName;
+            newComp.HTMLElementId = compModel.HTMLElementId;
             newComp.StringContentId = compModel.StringContentId;
+            newComp.StylingGroupId = compModel.StylingGroupId;
             newComp = await newComp.SaveAsync();
+
+            foreach (var style in compModel.StylingProps)
+            {
+                var compStyle = newComp.StylingProps.AddNew();
+                compStyle.StylingPropertyId = style.StylingPropertyId;
+            }
+            //newComp = await newComp.SaveAsync();
+
             var res = _mapper.Map<OnlineComponentModel>(newComp);
             return Ok(res);
         }
@@ -66,13 +76,13 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
                 return BadRequest(ModelState);
             }
             var editComp = await _OnlineComponentEditPortal.FetchAsync(componentId);
-            if (editComp.CompId != componentId)
+            if (editComp.Id != componentId)
             {
                 return BadRequest(ModelState);
             }
-            editComp.CompDesc = compModel.Description;
-            editComp.CompHTMLClass = compModel.HTMLClassName;
-            editComp.CompHTMLElement = compModel.HTMLElementId;
+            editComp.Description = compModel.Description;
+            editComp.HTMLClassName = compModel.HTMLClassName;
+            editComp.HTMLElementId = compModel.HTMLElementId;
             editComp.StringContentId = compModel.StringContentId;
             editComp = await editComp.SaveAsync();
             var res = _mapper.Map<OnlineComponentModel>(editComp);
@@ -82,7 +92,7 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
         public async Task<IActionResult> DeleteComp(int componentId)
         {
             var compToDelete = await _OnlineComponentEditPortal.FetchAsync(componentId);
-            if (compToDelete == null || compToDelete.CompId == 0)
+            if (compToDelete == null || compToDelete.Id == 0)
             {
                 return NotFound($"Component with id: {componentId} not found.");
             }

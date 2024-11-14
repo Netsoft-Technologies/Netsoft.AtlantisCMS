@@ -10,6 +10,6 @@ namespace Netsoft.AtlantisCMS.Models
     {
         public int Id {  get; set; }
         public string? Description { get; set; }
-        public string? CSSProperty { get; set; }
+        public string? CSSProp { get; set; }
     }
 }

@@ -11,26 +11,26 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
     [Serializable]
     public class COnlineComponentEdit : BusinessBase<COnlineComponentEdit>
     {
-        public static readonly PropertyInfo<int> CompIdProperty = RegisterProperty<int>(p => p.CompId);
-        public int CompId
+        public static readonly PropertyInfo<int> IdProperty = RegisterProperty<int>(p => p.Id);
+        public int Id
         {
-            get { return GetProperty(CompIdProperty); }
-            set { SetProperty(CompIdProperty, value); }
+            get { return GetProperty(IdProperty); }
+            set { SetProperty(IdProperty, value); }
         }
-        public static readonly PropertyInfo<string> CompDescProperty = RegisterProperty<string>(p => p.CompDesc);
-        public string CompDesc
+        public static readonly PropertyInfo<string> CompDescProperty = RegisterProperty<string>(p => p.Description);
+        public string Description
         {
             get { return GetProperty(CompDescProperty); }
             set { SetProperty(CompDescProperty, value); }
         }
-        public static readonly PropertyInfo<string> CompHTMLClassProperty = RegisterProperty<string>(p => p.CompHTMLClass);
-        public string CompHTMLClass
+        public static readonly PropertyInfo<string> CompHTMLClassProperty = RegisterProperty<string>(p => p.HTMLClassName);
+        public string HTMLClassName
         {
             get { return GetProperty(CompHTMLClassProperty); }
             set { SetProperty(CompHTMLClassProperty, value); }
         }
-        public static readonly PropertyInfo<string> CompHTMLElementProperty = RegisterProperty<string>(p => p.CompHTMLElement);
-        public string CompHTMLElement
+        public static readonly PropertyInfo<string> CompHTMLElementProperty = RegisterProperty<string>(p => p.HTMLElementId);
+        public string HTMLElementId
         {
             get { return GetProperty(CompHTMLElementProperty); }
             set { SetProperty(CompHTMLElementProperty, value); }
@@ -41,17 +41,23 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             get { return GetProperty(StringContentIdProperty); }
             set { SetProperty(StringContentIdProperty, value); }
         }
+        public static readonly PropertyInfo<int?> StylingGroupIdProperty = RegisterProperty<int?>(p => p.StylingGroupId);
+        public int? StylingGroupId
+        {
+            get { return GetProperty(StylingGroupIdProperty); }
+            set { SetProperty(StylingGroupIdProperty, value); }
+        }
         public static readonly PropertyInfo<COnlineCompStylingProps> StylingPropsProperty = RegisterProperty<COnlineCompStylingProps>(p => p.StylingProps);
         public COnlineCompStylingProps StylingProps
         {
             get { return GetProperty(StylingPropsProperty); }
-            private set {  LoadProperty(StylingPropsProperty, value); }
+            set { SetProperty(StylingPropsProperty, value); }
         }
         [Create]
         [RunLocal]
         private void Create([Inject] IChildDataPortal<COnlineCompStylingProps> childPortal)
         {
-            CompDesc = "New Description";
+            Description = "New Description";
             StylingProps = childPortal.CreateChild();
             BusinessRules.CheckRules();
         }
@@ -65,13 +71,24 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             }
             using (BypassPropertyChecks)
             {
-                CompId = item.Id;
-                CompDesc = item.Description;
-                CompHTMLClass = item.HTMLClassName;
-                CompHTMLElement = item.HTMLClassName;
+                Id = item.Id;
+                Description = item.Description;
+                HTMLClassName = item.HTMLClassName;
+                HTMLElementId = item.HTMLElementId;
                 StringContentId = item.StringContentId;
+                StylingGroupId = item.StylingGroupId;
                 StylingProps = childPortal.FetchChild(compId);
             }
+        }
+        [FetchChild]
+        private void Fetch(DOnlineComponentDto componentDto)
+        {
+            Id = componentDto.Id;
+            Description = componentDto.Description;
+            HTMLClassName = componentDto.HTMLClassName;
+            HTMLElementId = componentDto.HTMLClassName;
+            StringContentId = componentDto.StringContentId;
+            StylingGroupId = componentDto.StylingGroupId;
         }
         [Insert]
         [Transactional]
@@ -79,15 +96,16 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         {
             using (BypassPropertyChecks)
             {
-                var item = new DOnlineComponentDto
+                var componentDto = new DOnlineComponentDto
                 {
-                    Description = this.CompDesc,
-                    HTMLClassName = this.CompHTMLClass,
-                    HTMLElementId = this.CompHTMLElement,
-                    StringContentId = this.StringContentId
+                    Description = this.Description,
+                    HTMLClassName = this.HTMLClassName,
+                    HTMLElementId = this.HTMLElementId,
+                    StringContentId = this.StringContentId,
+                    StylingGroupId = this.StylingGroupId
                 };
-                compDal.Insert(item);
-                CompId = item.Id;
+                compDal.Insert(componentDto);
+                this.Id = componentDto.Id;
             }
             FieldManager.UpdateChildren(this);
         }
@@ -98,15 +116,16 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             {
                 var item = new DOnlineComponentDto
                 {
-                    Id = this.CompId,
-                    Description = this.CompDesc,
-                    HTMLClassName = this.CompHTMLClass,
-                    HTMLElementId = this.CompHTMLElement,
-                    StringContentId = this.StringContentId
+                    Id = this.Id,
+                    Description = this.Description,
+                    HTMLClassName = this.HTMLClassName,
+                    HTMLElementId = this.HTMLElementId,
+                    StringContentId = this.StringContentId,
+                    StylingGroupId = this.StylingGroupId
                 };
                 compDal.Update(item);
             }
-            FieldManager.UpdateChildren(this.CompId);
+            FieldManager.UpdateChildren(this.Id);
         }
         [Delete]
         private void Delete(int compId, [Inject] IOnlineComponentDal compDal)

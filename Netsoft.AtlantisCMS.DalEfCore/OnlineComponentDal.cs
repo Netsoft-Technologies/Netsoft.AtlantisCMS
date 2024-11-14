@@ -25,7 +25,8 @@ namespace Netsoft.AtlantisCMS.DalEfCore
                                   Description = r.Description,
                                   HTMLClassName = r.HTMLClassName,
                                   HTMLElementId = r.HTMLElementId,
-                                  StringContentId = r.StringContentId
+                                  StringContentId = r.StringContentId,
+                                  StylingGroupId = r.StylingGroupId
                               }).FirstOrDefault();
             return getSingleResult ?? new DOnlineComponentDto();
         }
@@ -38,7 +39,8 @@ namespace Netsoft.AtlantisCMS.DalEfCore
                                     Description = r.Description,
                                     HTMLClassName = r.HTMLClassName,
                                     HTMLElementId = r.HTMLElementId,
-                                    StringContentId = r.StringContentId
+                                    StringContentId = r.StringContentId,
+                                    StylingGroupId = r.StylingGroupId
                                 };
             return getAllResults.ToList();
         }
@@ -49,7 +51,8 @@ namespace Netsoft.AtlantisCMS.DalEfCore
                 Description = dto.Description,
                 HTMLClassName = dto.HTMLClassName,
                 HTMLElementId = dto.HTMLElementId,
-                StringContentId = dto.StringContentId
+                StringContentId = dto.StringContentId,
+                StylingGroupId = dto.StylingGroupId
             };
             db._OnlineComponents.Add(addComp);
             db.SaveChanges();
@@ -68,6 +71,7 @@ namespace Netsoft.AtlantisCMS.DalEfCore
             updateComp.HTMLClassName = dto.HTMLClassName;
             updateComp.HTMLElementId = dto.HTMLElementId;
             updateComp.StringContentId = dto.StringContentId;
+            updateComp.StylingGroupId = dto.StylingGroupId;
             var count = db.SaveChanges();
         }
         public void Delete(int id)

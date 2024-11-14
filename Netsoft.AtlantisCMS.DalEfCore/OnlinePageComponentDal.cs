@@ -81,10 +81,10 @@ namespace Netsoft.AtlantisCMS.DalEfCore
             {
                 ParentPageId = pageComponentDto.ParentPageId,
                 ComponentId = pageComponentDto.ComponentId,
-                ComponentDesc = string.Empty,
-                ComponentHTMLClassName= string.Empty,
-                ComponentHTMLElementID=string.Empty,
-                ParentPageTitle=string.Empty
+                //ComponentDesc = string.Empty,
+                //ComponentHTMLClassName= string.Empty,
+                //ComponentHTMLElementID=string.Empty,
+                //ParentPageTitle=string.Empty
             };
             _dbContext._OnlinePage_Components.Add(newComp);
             _dbContext.SaveChanges();
