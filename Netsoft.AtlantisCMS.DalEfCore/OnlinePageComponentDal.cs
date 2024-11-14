@@ -17,12 +17,12 @@ namespace Netsoft.AtlantisCMS.DalEfCore
         public DOnlinePageComponentDto Fetch(int pageId, int compId)
         {
             var result = (from r in _dbContext._OnlinePage_Components
-                          where r.ParentPageId == pageId && r.ComponentId == compId
+                          where r.PageId == pageId && r.ComponentId == compId
                           select new DOnlinePageComponentDto
                           {
 
                               ComponentId = r.ComponentId,
-                              ParentPageId = r.ParentPageId
+                              ParentPageId = r.PageId
                           }).FirstOrDefault();
             return result;
         }
@@ -30,13 +30,13 @@ namespace Netsoft.AtlantisCMS.DalEfCore
         {
             var result = from page in _dbContext._OnlinePages
                          join pageComponent in _dbContext._OnlinePage_Components
-                            on page.PageId equals pageComponent.ParentPageId
+                            on page.PageId equals pageComponent.PageId
                          join component in _dbContext._OnlineComponents
                             on pageComponent.ComponentId equals component.Id
                          where pageComponent.ComponentId == compId
                          select new DOnlinePageComponentDto
                          {
-                             ParentPageId = pageComponent.ParentPageId,
+                             ParentPageId = pageComponent.PageId,
                              //ParentPageTitle = pageComponent.ParentPageTitle,
                              ComponentId = component.Id,
                              //ComponentDesc = pageComponent.ComponentDesc,
@@ -63,11 +63,11 @@ namespace Netsoft.AtlantisCMS.DalEfCore
             //                 //ComponentHTMLElementID = pageComponent.ComponentHTMLElementID
             //             };
             var result = from comp in _dbContext._OnlinePage_Components
-                         where comp.ParentPageId == pageId
+                         where comp.PageId == pageId
                          select new DOnlinePageComponentDto
                          {
                              ComponentId = comp.ComponentId,
-                             ParentPageId = comp.ParentPageId,
+                             ParentPageId = comp.PageId,
                              //ParentPageTitle = comp.ParentPageTitle,                             
                              //ComponentDesc = comp.ComponentDesc,
                              //ComponentHTMLClassName = comp.ComponentHTMLClassName,
@@ -79,7 +79,7 @@ namespace Netsoft.AtlantisCMS.DalEfCore
         {
             var newComp = new OnlinePageComponents_Entity
             {
-                ParentPageId = pageComponentDto.ParentPageId,
+                PageId = pageComponentDto.ParentPageId,
                 ComponentId = pageComponentDto.ComponentId,
                 //ComponentDesc = string.Empty,
                 //ComponentHTMLClassName= string.Empty,
@@ -88,26 +88,26 @@ namespace Netsoft.AtlantisCMS.DalEfCore
             };
             _dbContext._OnlinePage_Components.Add(newComp);
             _dbContext.SaveChanges();
-            pageComponentDto.ParentPageId = newComp.ParentPageId;
+            pageComponentDto.ParentPageId = newComp.PageId;
             pageComponentDto.ComponentId = newComp.ComponentId;
         }
         public void Update(int pageId, int compId, DOnlinePageComponentDto dto)
         {
             var data = (from r in _dbContext._OnlinePage_Components
-                        where r.ParentPageId == pageId && r.ComponentId == compId
+                        where r.PageId == pageId && r.ComponentId == compId
                         select r).FirstOrDefault();
             if (data == null)
             {
                 throw new Exception();
             }
-            data.ParentPageId = dto.ParentPageId;
+            data.PageId = dto.ParentPageId;
             data.ComponentId = dto.ComponentId;
             var count = _dbContext.SaveChanges();
         }
         public void Delete(int pageId, int compId)
         {
             var data = (from r in _dbContext._OnlinePage_Components
-                        where r.ParentPageId == pageId && r.ComponentId == compId
+                        where r.PageId == pageId && r.ComponentId == compId
                         select r).FirstOrDefault();
             if (data != null)
             {
