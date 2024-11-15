@@ -13,7 +13,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
     public class COnlineComponentRO : ReadOnlyBase<COnlineComponentRO>
     {
         public static readonly PropertyInfo<int> CompIdProperty = RegisterProperty<int>(p => p.ComponentId);
-        public int ComponentId
+        public int Id
         {
             get { return GetProperty(CompIdProperty); }
             private set { LoadProperty(CompIdProperty, value); }
@@ -58,7 +58,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         private void Fetch(int compId, [Inject] IOnlineComponentDal compDal, [Inject] IDataPortal<COnlineComponentRO> dataPortal)
         {
             var item = compDal.Fetch(compId);
-            ComponentId = item.Id;
+            Id = item.Id;
             Description = item.Description;
             HTMLClassName = item.HTMLClassName;
             HTMLElementId = item.HTMLElementId;
@@ -68,7 +68,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         [FetchChild]
         private void FetchChild(DOnlineComponentDto compDto)
         {
-            ComponentId = compDto.Id;
+            Id = compDto.Id;
             Description = compDto.Description;
             HTMLClassName = compDto.HTMLClassName;
             HTMLElementId = compDto.HTMLElementId;

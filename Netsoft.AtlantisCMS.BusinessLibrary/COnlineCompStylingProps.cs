@@ -21,6 +21,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                 Remove(item);
             }
         }
+
         [FetchChild]
         private void Fetch(int parentCompId, [Inject] IOnlineComponentStylingPropertyDal dal, [Inject] IChildDataPortal<COnlineCompStylingProp> childPortal)
         {
