@@ -54,17 +54,37 @@ namespace Netsoft.AtlantisCMS.DalEfCore
         }
         public void Insert(DOnlineComponentStylingPropertyDto dto)
         {
-            var newStyleProp = new OnlineCompStylingProp_Entity
+
+            //var newStyleProp = new OnlineCompStylingProp_Entity
+            //{
+            //    StylingPropertyId = dto.StylingPropertyId,
+            //    ComponentId = dto.ComponentId,
+            //    Value = dto.Value,
+            //    //CSSVariable = dto.CSSVariable
+            //};
+            //db._OnlineComponent_StylingProperties.Add(newStyleProp);
+            //db.SaveChanges();
+            //dto.StylingPropertyId = newStyleProp.StylingPropertyId;
+            //dto.ComponentId = newStyleProp.ComponentId;
+            var newStyleProp = (from r in db._OnlineComponent_StylingProperties
+                                 where r.ComponentId == dto.ComponentId && r.StylingPropertyId == dto.StylingPropertyId
+                                 select r).FirstOrDefault();
+            if (newStyleProp == null)
             {
-                StylingPropertyId = dto.StylingPropertyId,
-                ComponentId = dto.ComponentId,
-                Value = dto.Value,
-                //CSSVariable = dto.CSSVariable
-            };
-            db._OnlineComponent_StylingProperties.Add(newStyleProp);
+                newStyleProp = new OnlineCompStylingProp_Entity
+                {
+                    StylingPropertyId = dto.StylingPropertyId,
+                    ComponentId = dto.ComponentId,
+                    Value = dto.Value,
+                    //CSSVariable = dto.CSSVariable
+                };
+                db._OnlineComponent_StylingProperties.Add(newStyleProp);
+            }
+            else
+            {
+                newStyleProp.Value = dto.Value;
+            }
             db.SaveChanges();
-            dto.StylingPropertyId = newStyleProp.StylingPropertyId;
-            dto.ComponentId = newStyleProp.ComponentId;
         }
         public void Update(int compId, int styleId, DOnlineComponentStylingPropertyDto dto)
         {
