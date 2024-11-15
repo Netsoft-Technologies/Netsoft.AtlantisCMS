@@ -29,7 +29,8 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             {
                 return NotFound();
             }
-            return Ok(onlineStyleProps);
+            var result = _mapper.Map<List<OnlineStylingPropertyModel>>(onlineStyleProps);
+            return Ok(result);
         }
         [HttpGet("{styleId}")]
         public async Task<ActionResult<OnlineStylingPropertyModel>> GetOnlineStylingProperty(int styleId)
@@ -52,7 +53,7 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             COnlineStylingPropertyEdit newOnlineStyleProp = await _OnlineStylingPropsEditPortal.CreateAsync();
             newOnlineStyleProp.Id = newStylePropreq.Id;
             newOnlineStyleProp.Description = newStylePropreq.Description;
-            newOnlineStyleProp.CSSProperty = newStylePropreq.CSSProp;
+            newOnlineStyleProp.CSSProp = newStylePropreq.CSSProp;
             newOnlineStyleProp = await newOnlineStyleProp.SaveAsync();
             var res = _mapper.Map<OnlineStylingPropertyModel>(newOnlineStyleProp);
             return Ok(res);
@@ -60,7 +61,7 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
         [HttpPut("{styleId}")]
         public async Task<ActionResult<OnlineStylingPropertyModel>> Update(int styleId, OnlineStylingPropertyModel newStylePropreq)
         {
-            if (!ModelState.IsValid || newStylePropreq == null || newStylePropreq.Id == 0)
+            if (!ModelState.IsValid || newStylePropreq == null)
             {
                 return BadRequest(ModelState);
             }
@@ -71,7 +72,7 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             }
             editStyleProp.Id = newStylePropreq.Id;
             editStyleProp.Description = newStylePropreq.Description;
-            editStyleProp.CSSProperty = newStylePropreq.CSSProp;
+            editStyleProp.CSSProp = newStylePropreq.CSSProp;
             editStyleProp = await editStyleProp.SaveAsync();
             var res = _mapper.Map<OnlineStylingPropertyModel>(editStyleProp);
             return Ok(res);

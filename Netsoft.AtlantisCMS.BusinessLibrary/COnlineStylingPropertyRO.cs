@@ -18,14 +18,14 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             get { return GetProperty(IdProperty); }
             private set { LoadProperty(IdProperty, value); }
         }
-        public static readonly PropertyInfo<string> DescProperty = RegisterProperty<string>(c => c.Desc);
-        public string Desc
+        public static readonly PropertyInfo<string> DescProperty = RegisterProperty<string>(c => c.Description);
+        public string Description
         {
             get { return GetProperty(DescProperty);}
             private set { LoadProperty(DescProperty, value); }
         }
-        public static readonly PropertyInfo<string> CSSProperty = RegisterProperty<string>(c => c.CSS);
-        public string CSS
+        public static readonly PropertyInfo<string> CSSProperty = RegisterProperty<string>(c => c.CSSProp);
+        public string CSSProp
         {
             get { return GetProperty(CSSProperty); }
             private set { LoadProperty(CSSProperty, value); }
@@ -35,15 +35,15 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         {
             var style = styleDal.Fetch(id);
             Id = style.Id;
-            Desc = style.Description;
-            CSS = style.CSSProp;
+            Description = style.Description;
+            CSSProp = style.CSSProp;
         }
         [FetchChild]
         private void FetchChild(DOnlineStylingPropertyDto dto)
         {
             Id = dto.Id;
-            Desc = dto.Description;
-            CSS = dto.CSSProp;
+            Description = dto.Description;
+            CSSProp = dto.CSSProp;
         }
     }
 }

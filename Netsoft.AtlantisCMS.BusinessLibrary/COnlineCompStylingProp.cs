@@ -128,10 +128,11 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         //    }
         //}
         [Delete]
-        private void Delete(int stylePropId, [Inject] IOnlineComponentStylingPropertyDal styleDal)
+        private void Delete(int compId, int styleId, [Inject] IOnlineComponentStylingPropertyDal styleDal)
         {
-            styleDal.Delete(stylePropId, ComponentId);
+            styleDal.Delete(compId, styleId);
         }
+
         [DeleteSelfChild]
         private void Delete(COnlineComponentEdit parentComp, [Inject] IOnlineComponentStylingPropertyDal styleDal)
         {

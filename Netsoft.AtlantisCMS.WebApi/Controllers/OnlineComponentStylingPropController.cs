@@ -28,12 +28,13 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             {
                 return NotFound();
             }
-            return Ok(onlineCompPropRequest);
+            var result = _mapper.Map<List<OnlineComponentStylingPropertyModel>>(onlineCompPropRequest);
+            return Ok(result);
         }
-        [HttpGet("{compStyleId}")]
-        public async Task<ActionResult<OnlineComponentStylingPropertyModel>> GetOnlineCompStylingProperty(int compStyleId)
+        [HttpGet("{compId},{styleId}")]
+        public async Task<ActionResult<OnlineComponentStylingPropertyModel>> GetOnlineCompStylingProperty(int compId, int styleId)
         {
-            var compStyle = await _OnlineCompPropEditPortal.FetchAsync();
+            var compStyle = await _OnlineCompPropEditPortal.FetchAsync(compId, styleId);
             if (compStyle == null)
             {
                 return NotFound();
@@ -56,35 +57,34 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             var res = _mapper.Map<OnlineComponentStylingPropertyModel>(newStyleProp);
             return Ok(res);
         }
-        [HttpPut("{compStyleId}")]
-        public async Task<ActionResult<OnlineComponentStylingPropertyModel>> EditStyle(int compStyleId, OnlineComponentStylingPropertyModel reqModel)
+        [HttpPut("{compId},{styleId}")]
+        public async Task<ActionResult<OnlineComponentStylingPropertyModel>> EditStyle(int compId, int styleId, OnlineComponentStylingPropertyModel reqModel)
         {
-            if (!ModelState.IsValid || reqModel == null || compStyleId == 0)
+            if (!ModelState.IsValid || reqModel == null || compId == 0 || styleId == 0)
             {
                 return BadRequest(ModelState);
             }
-            var editCompStyle = await _OnlineCompPropEditPortal.FetchAsync(compStyleId);
-            if (editCompStyle.StylingPropertyId != compStyleId)
+            var editCompStyle = await _OnlineCompPropEditPortal.FetchAsync(compId, styleId);
+            if (reqModel.StylingPropertyId != styleId || reqModel.ComponentId != compId)
             {
                 return BadRequest(ModelState);
             }
-            editCompStyle.ComponentId = reqModel.ComponentId;
             editCompStyle.Value = reqModel.Value;
             editCompStyle = await editCompStyle.SaveAsync();
             var res = _mapper.Map<OnlineComponentStylingPropertyModel>(editCompStyle);
             return Ok(res);
         }
-        [HttpDelete("{compStyleId}")]
-        public async Task<IActionResult> DeleteCompStyle(int compStyleId)
+        [HttpDelete("{compId},{styleId}")]
+        public async Task<IActionResult> DeleteCompStyle(int compId, int styleId)
         {
-            var compStyleForDeletion = await _OnlineCompPropEditPortal.FetchAsync(compStyleId);
+            var compStyleForDeletion = await _OnlineCompPropEditPortal.FetchAsync(compId, styleId);
             if (compStyleForDeletion == null || compStyleForDeletion.StylingPropertyId == 0)
             {
-                return NotFound($"Component style with id: {compStyleId} not found.");
+                return NotFound($"Component style with id(Component, Style): ({compId}, {styleId}) not found.");
             }
             try
             {
-                await _OnlineCompPropEditPortal.DeleteAsync(compStyleId);
+                await _OnlineCompPropEditPortal.DeleteAsync(compId, styleId);
                 return Ok();
             }
             catch (Exception ex)

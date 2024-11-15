@@ -24,18 +24,18 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             get { return GetProperty(DescProp); }
             set { SetProperty(DescProp, value); }
         }
-        public static readonly PropertyInfo<string> CSSProp = RegisterProperty<string>(c => c.CSSProperty);
-        public string CSSProperty
+        public static readonly PropertyInfo<string> CSSProperty = RegisterProperty<string>(c => c.CSSProp);
+        public string CSSProp
         {
-            get { return GetProperty(CSSProp); }
-            set { SetProperty(CSSProp, value); }
+            get { return GetProperty(CSSProperty); }
+            set { SetProperty(CSSProperty, value); }
         }
         [Create]
         [RunLocal]
         private void Create()
         {
             Description = "New Description";
-            CSSProperty = "New CSS";
+            CSSProp = "New CSS";
             BusinessRules.CheckRules();
         }
         [Fetch]
@@ -50,7 +50,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             {
                 Id = item.Id;
                 Description = item.Description;
-                CSSProperty = item.CSSProp;
+                CSSProp = item.CSSProp;
             }
         }
         [FetchChild]
@@ -58,7 +58,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         {
             Id = dto.Id;
             Description = dto.Description;
-            CSSProperty = dto.CSSProp;
+            CSSProp = dto.CSSProp;
         }
         [Insert]
         private void Insert([Inject] IOnlineStylingPropertyDal onlineStylingPropertyDal)
@@ -69,7 +69,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                 {
                     Id = this.Id,
                     Description = this.Description,
-                    CSSProp = this.CSSProperty,
+                    CSSProp = this.CSSProp,
                 };
                 onlineStylingPropertyDal.Insert(item);
                 Id = item.Id;
@@ -85,7 +85,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                 {
                     Id = this.Id,
                     Description = this.Description,
-                    CSSProp = this.CSSProperty,
+                    CSSProp = this.CSSProp,
                 };
                 dal.Update(item);
             }
