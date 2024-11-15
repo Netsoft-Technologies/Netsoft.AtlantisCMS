@@ -131,6 +131,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         private void Delete(int compId, [Inject] IOnlineComponentDal compDal)
         {
             compDal.Delete(compId);
+            //FieldManager.UpdateChildren(this.Id);
         }
     }
 }

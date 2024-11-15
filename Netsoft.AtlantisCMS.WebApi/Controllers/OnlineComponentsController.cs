@@ -117,7 +117,8 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             try
             {
                 await _OnlineComponentEditPortal.DeleteAsync(componentId);
-                return Ok();
+                compToDelete.StylingProps.RemoveByParent(componentId);
+                return Ok("Deleted component with associated styling");
             }
             catch (Exception ex)
             {

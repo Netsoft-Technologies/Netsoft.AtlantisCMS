@@ -31,7 +31,8 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             {
                 return NotFound();
             }
-            return Ok(pagesRequest);
+            var res = _mapper.Map<List<OnlinePageModel>>(pagesRequest);
+            return Ok(res);
         }
         [HttpGet("{pageId}")]
         public async Task<ActionResult<OnlinePageModel>> GetSinglePage(int pageId)
@@ -54,20 +55,15 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             COnlinePageEdit newPage = await _OnlinePageEditDataPortal.CreateAsync();
             newPage.PageTitle = onlinePagePost.PageTitle;
             newPage.PageOrder = onlinePagePost.PageOrder;
-            //var comp1 = newPage.Components.AddNew();
-            //comp1.ComponentId = 1;
-            //var style = comp1.ComponentStyling.AddNew();
-            //style.StylingPropertyId = 1;
-            //style.Value = "panagiotis";
-            //style.CSSVariable = "color";
-            newPage =await newPage.SaveAsync();
 
-            foreach (var comp in onlinePagePost.Components)
+            if (onlinePagePost.Components != null)
             {
-                var pagecomp=newPage.Components.AddNew();
-                pagecomp.ComponentId = comp.ComponentId;
+                foreach (var comp in onlinePagePost.Components)
+                {
+                    var pagecomp = newPage.Components.AddNew();
+                    pagecomp.ComponentId = comp.ComponentId;
+                }
             }
-
             newPage = await newPage.SaveAsync();
             var result = _mapper.Map<OnlinePageModel>(newPage);
             return Ok(result);
@@ -82,16 +78,22 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             var newPageEdit = await _OnlinePageEditDataPortal.FetchAsync(pageId);
             if (newPageEdit.PageId != pageId)
             {
-                return BadRequest("Missmatch");
+                return BadRequest(ModelState);
             }
             newPageEdit.PageId = pageId;
             newPageEdit.PageTitle = onlinePageEdit.PageTitle;
             newPageEdit.PageOrder = onlinePageEdit.PageOrder;
-            //foreach (var comp in onlinePageEdit.Components)
-            //{
-            //    var editPageComp = newPageEdit.Components.AddNew();
-            //    editPageComp.ComponentId = comp.ComponentId;
-            //}
+
+            newPageEdit.Components.RemoveByParent(pageId);
+            if (onlinePageEdit.Components != null)
+            {
+                foreach (var comp in onlinePageEdit.Components)
+                {
+                    var pagecomp = newPageEdit.Components.AddNew();
+                    pagecomp.ComponentId = comp.ComponentId;
+                }
+            }
+
             newPageEdit = await newPageEdit.SaveAsync();
             var result = _mapper.Map<OnlinePageModel>(newPageEdit);
             return Ok(result);
@@ -107,7 +109,8 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             try
             {
                 await _OnlinePageEditDataPortal.DeleteAsync(pageId);
-                return Ok();
+                pageForDeletion.Components.RemoveByParent(pageId);
+                return Ok("Deleted Page with associated Components");
             }
             catch (Exception ex)
             {

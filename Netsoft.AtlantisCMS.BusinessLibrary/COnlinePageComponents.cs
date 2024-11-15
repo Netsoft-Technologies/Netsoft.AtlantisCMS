@@ -11,6 +11,16 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
     [Serializable]
     public class COnlinePageComponents : BusinessListBase<COnlinePageComponents, COnlinePageComponent>
     {
+        public void RemoveByParent(int parentID)
+        {
+            var toRemove = (from r in this
+                            where r.ComponentId == parentID
+                            select r).ToList();
+            foreach (var pageComp in toRemove)
+            {
+                Remove(pageComp);
+            }
+        }
         public void Remove(int componentId)
         {
             var item = (from r in this

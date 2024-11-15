@@ -60,12 +60,13 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             //ComponentStyling = childPortal.CreateChild();
             BusinessRules.CheckRules();
         }
+
         [FetchChild]
         private void Fetch(DOnlinePageComponentDto compDto, [Inject] IChildDataPortal<COnlineCompStylingProps> childPortal)
         {
             ComponentId = compDto.ComponentId;
             ParentPageId = compDto.ParentPageId;
-            ComponentStyling = childPortal.FetchChild(compDto.ComponentId);
+            ComponentStyling = childPortal.FetchChild(compDto.ParentPageId);
             //ParentPageTitle = compDto.ParentPageTitle;
             //ComponentDescription = compDto.ComponentDesc;
             //ComponentHTMLClassName = compDto.ComponentHTMLClassName;
@@ -118,9 +119,14 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             FieldManager.UpdateChildren(this.ComponentId);
         }
         [Delete]
-        private void Delete(int ParentPageId, int ComponentId, [Inject] IOnlinePageComponentDal pageDal)
+        private void Delete(int ParentPageId, [Inject] IOnlinePageComponentDal pageDal)
         {
             pageDal.Delete(ParentPageId, ComponentId);
+        }
+        [DeleteSelfChild]
+        private void Delete(COnlinePageEdit parentPage, [Inject] IOnlinePageComponentDal pageCompDal)
+        {
+            pageCompDal.Delete(ParentPageId, parentPage.PageId);
         }
     }
 }

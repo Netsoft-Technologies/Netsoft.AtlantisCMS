@@ -29,6 +29,12 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             get { return GetProperty(PageOrderProperty); }
             private set { LoadProperty(PageOrderProperty, value); }
         }
+        public static readonly PropertyInfo<COnlinePageComponents> ComponentsProperty = RegisterProperty<COnlinePageComponents>(nameof(Components));
+        public COnlinePageComponents Components
+        {
+            get { return GetProperty(ComponentsProperty); }
+            private set { LoadProperty(ComponentsProperty, value); }
+        }
         [Fetch]
         private void Fetch(int id, [Inject]IOnlinePageDal pageDal, [Inject]IDataPortal portal)
         {
@@ -38,11 +44,12 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             PageOrder = item.PageOrder;
         }
         [FetchChild]
-        private void FetchChild(DOnlinePageDto itemDto)
+        private void FetchChild(DOnlinePageDto itemDto, [Inject] IChildDataPortal<COnlinePageComponents> childPortal)
         {
             PageId = itemDto.PageId;
             PageTitle = itemDto.PageTitle;
             PageOrder = itemDto.PageOrder;
+            Components = childPortal.FetchChild(itemDto.PageId);
         }
     }
 }
