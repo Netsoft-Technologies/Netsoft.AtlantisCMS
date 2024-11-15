@@ -12,7 +12,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
     [Serializable]
     public class COnlineComponentRO : ReadOnlyBase<COnlineComponentRO>
     {
-        public static readonly PropertyInfo<int> CompIdProperty = RegisterProperty<int>(p => p.ComponentId);
+        public static readonly PropertyInfo<int> CompIdProperty = RegisterProperty<int>(p => p.Id);
         public int Id
         {
             get { return GetProperty(CompIdProperty); }
@@ -66,7 +66,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             StylingGroupId = item.StylingGroupId;
         }
         [FetchChild]
-        private void FetchChild(DOnlineComponentDto compDto)
+        private void FetchChild(DOnlineComponentDto compDto, [Inject] IChildDataPortal<COnlineCompStylingProps> childPortal)
         {
             Id = compDto.Id;
             Description = compDto.Description;
@@ -74,6 +74,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             HTMLElementId = compDto.HTMLElementId;
             StringContentId = compDto.StringContentId;
             StylingGroupId = compDto.StylingGroupId;
+            StylingProps = childPortal.FetchChild(compDto.Id);
         }
     }
 }

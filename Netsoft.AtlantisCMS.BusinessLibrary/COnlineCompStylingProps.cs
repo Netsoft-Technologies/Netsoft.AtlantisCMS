@@ -11,6 +11,16 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
     [Serializable]
     public class COnlineCompStylingProps : BusinessListBase<COnlineCompStylingProps, COnlineCompStylingProp>
     {
+        public void RemoveByParent(int parentID)
+        {
+            var toRemove = (from r in this
+                            where r.ComponentId == parentID
+                            select r).ToList();
+            foreach (var styleprop in toRemove)
+            {
+                Remove(styleprop);
+            }
+        }
         public void Remove(int stylingPropId)
         {
             var item = (from r in this

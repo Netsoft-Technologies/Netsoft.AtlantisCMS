@@ -132,5 +132,10 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         {
             styleDal.Delete(stylePropId, ComponentId);
         }
+        [DeleteSelfChild]
+        private void Delete(COnlineComponentEdit parentComp, [Inject] IOnlineComponentStylingPropertyDal styleDal)
+        {
+            styleDal.Delete(StylingPropertyId, parentComp.Id);
+        }
     }
 }

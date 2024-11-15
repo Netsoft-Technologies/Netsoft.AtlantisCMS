@@ -56,15 +56,19 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             newComp.HTMLElementId = compModel.HTMLElementId;
             newComp.StringContentId = compModel.StringContentId;
             newComp.StylingGroupId = compModel.StylingGroupId;
-            newComp = await newComp.SaveAsync();
 
-            foreach (var style in compModel.StylingProps)
+            if (compModel.StylingProps != null)
             {
-                var compStyle = newComp.StylingProps.AddNew();
-                compStyle.StylingPropertyId = style.StylingPropertyId;
+                foreach (var stylePropModel in compModel.StylingProps)
+                {
+                    var newStyleProp = newComp.StylingProps.AddNew();
+                    newStyleProp.StylingPropertyId = stylePropModel.StylingPropertyId;
+                    newStyleProp.ComponentId = newComp.Id;
+                    newStyleProp.Value = stylePropModel.Value;
+                }
             }
-            //newComp = await newComp.SaveAsync();
 
+            newComp = await newComp.SaveAsync();
             var res = _mapper.Map<OnlineComponentModel>(newComp);
             return Ok(res);
         }
@@ -84,6 +88,20 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             editComp.HTMLClassName = compModel.HTMLClassName;
             editComp.HTMLElementId = compModel.HTMLElementId;
             editComp.StringContentId = compModel.StringContentId;
+            editComp.StylingGroupId = compModel.StylingGroupId;
+
+            editComp.StylingProps.RemoveByParent(componentId);
+            if (compModel.StylingProps != null)
+            {
+                foreach (var stylePropModel in compModel.StylingProps)
+                {
+                    var newStyleProp = editComp.StylingProps.AddNew();
+                    newStyleProp.StylingPropertyId = stylePropModel.StylingPropertyId;
+                    newStyleProp.ComponentId = editComp.Id;
+                    newStyleProp.Value = stylePropModel.Value;
+                }
+            }
+
             editComp = await editComp.SaveAsync();
             var res = _mapper.Map<OnlineComponentModel>(editComp);
             return Ok(res);

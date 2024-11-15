@@ -96,7 +96,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         {
             using (BypassPropertyChecks)
             {
-                var componentDto = new DOnlineComponentDto
+                var component = new DOnlineComponentDto
                 {
                     Description = this.Description,
                     HTMLClassName = this.HTMLClassName,
@@ -104,8 +104,8 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                     StringContentId = this.StringContentId,
                     StylingGroupId = this.StylingGroupId
                 };
-                compDal.Insert(componentDto);
-                this.Id = componentDto.Id;
+                compDal.Insert(component);
+                this.Id = component.Id;
             }
             FieldManager.UpdateChildren(this);
         }
@@ -125,7 +125,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                 };
                 compDal.Update(item);
             }
-            FieldManager.UpdateChildren(this.Id);
+            FieldManager.UpdateChildren(this);
         }
         [Delete]
         private void Delete(int compId, [Inject] IOnlineComponentDal compDal)
