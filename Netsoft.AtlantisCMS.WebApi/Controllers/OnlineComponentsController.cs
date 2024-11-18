@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Csla;
+using Csla.Core.FieldManager;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Netsoft.AtlantisCMS.BusinessLibrary;
@@ -85,8 +86,8 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             editComp.HTMLElementId = compModel.HTMLElementId;
             editComp.StringContentId = compModel.StringContentId;
             editComp.StylingGroupId = compModel.StylingGroupId;
-
-            editComp.StylingProps.RemoveByParent(componentId);
+            editComp.StylingProps.Clear();
+            
             if (compModel.StylingProps != null)
             {
                 foreach (var stylePropModel in compModel.StylingProps)
