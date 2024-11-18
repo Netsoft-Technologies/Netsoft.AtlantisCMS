@@ -123,6 +123,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         {
             pageDal.Delete(ParentPageId, ComponentId);
         }
+
         [DeleteSelfChild]
         private void Delete(COnlinePageEdit parentPage, [Inject] IOnlinePageComponentDal pageCompDal)
         {

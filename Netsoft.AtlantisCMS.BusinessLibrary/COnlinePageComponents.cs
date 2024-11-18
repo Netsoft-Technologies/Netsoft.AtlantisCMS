@@ -14,7 +14,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         public void RemoveByParent(int parentID)
         {
             var toRemove = (from r in this
-                            where r.ComponentId == parentID
+                            where r.ParentPageId == parentID
                             select r).ToList();
             foreach (var pageComp in toRemove)
             {

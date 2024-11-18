@@ -70,7 +70,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             PageOrder= pageDto.PageOrder;
         }
         [Insert]
-        [Transactional]
+        [Transactional] //needs check if component with matching ID exists, else exception
         private void Insert([Inject]IOnlinePageDal pageDal)
         {
             using (BypassPropertyChecks)
