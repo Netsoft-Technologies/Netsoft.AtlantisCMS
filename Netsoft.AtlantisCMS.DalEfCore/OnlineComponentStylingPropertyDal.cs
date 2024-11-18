@@ -66,12 +66,12 @@ namespace Netsoft.AtlantisCMS.DalEfCore
             //db.SaveChanges();
             //dto.StylingPropertyId = newStyleProp.StylingPropertyId;
             //dto.ComponentId = newStyleProp.ComponentId;
-            var newStyleProp = (from r in db._OnlineComponent_StylingProperties
-                                 where r.ComponentId == dto.ComponentId && r.StylingPropertyId == dto.StylingPropertyId
-                                 select r).FirstOrDefault();
-            if (newStyleProp == null)
+            var checkEntry = (from r in db._OnlineComponent_StylingProperties
+                                 where  r.StylingPropertyId == dto.StylingPropertyId && r.ComponentId == dto.ComponentId
+                                select r).FirstOrDefault();
+            if (checkEntry == null)
             {
-                newStyleProp = new OnlineCompStylingProp_Entity
+                var newStyleProp = new OnlineCompStylingProp_Entity
                 {
                     StylingPropertyId = dto.StylingPropertyId,
                     ComponentId = dto.ComponentId,
@@ -82,7 +82,7 @@ namespace Netsoft.AtlantisCMS.DalEfCore
             }
             else
             {
-                newStyleProp.Value = dto.Value;
+                checkEntry.Value = dto.Value;
             }
             db.SaveChanges();
         }
@@ -104,7 +104,7 @@ namespace Netsoft.AtlantisCMS.DalEfCore
         public void Delete (int compId, int styleId)
         {
             var deleteStyleProp = (from r in db._OnlineComponent_StylingProperties
-                                   where r.StylingPropertyId == styleId
+                                   where r.StylingPropertyId == styleId && r.ComponentId == compId
                                    select r).FirstOrDefault();
             if (deleteStyleProp != null)
             {
