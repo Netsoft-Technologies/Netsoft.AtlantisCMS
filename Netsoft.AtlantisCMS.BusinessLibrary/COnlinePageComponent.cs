@@ -65,8 +65,8 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         private void Fetch(DOnlinePageComponentDto compDto, [Inject] IChildDataPortal<COnlineCompStylingProps> childPortal)
         {
             ComponentId = compDto.ComponentId;
-            ParentPageId = compDto.ParentPageId;
-            ComponentStyling = childPortal.FetchChild(compDto.ParentPageId);
+            //ParentPageId = compDto.ParentPageId;
+            //ComponentStyling = childPortal.FetchChild(compDto.ParentPageId);
             //ParentPageTitle = compDto.ParentPageTitle;
             //ComponentDescription = compDto.ComponentDesc;
             //ComponentHTMLClassName = compDto.ComponentHTMLClassName;
@@ -82,7 +82,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             {
                 var item = new DOnlinePageComponentDto
                 {
-                    ParentPageId = parent.PageId,
+                    //ParentPageId = parent.PageId,
                     ComponentId = this.ComponentId
                     //StylingProperty = ComponentStyling
                 };
@@ -98,7 +98,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             {
                 var item = new DOnlinePageComponentDto
                 {
-                    ParentPageId = this.ParentPageId,
+                    //ParentPageId = this.ParentPageId,
                     ComponentId = this.ComponentId,
                 };
                 componentDal.Insert(item);
@@ -111,7 +111,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             {
                 var item = new DOnlinePageComponentDto
                 {
-                    ParentPageId = this.ParentPageId,
+                    //ParentPageId = this.ParentPageId,
                     ComponentId = this.ComponentId
                 };
                 componentDal.Update(this.ParentPageId, this.ComponentId, item);
@@ -127,7 +127,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         [DeleteSelfChild]
         private void Delete(COnlinePageEdit parentPage, [Inject] IOnlinePageComponentDal pageCompDal)
         {
-            pageCompDal.Delete(ParentPageId, parentPage.PageId);
+            pageCompDal.Delete(parentPage.PageId, ComponentId);
         }
     }
 }

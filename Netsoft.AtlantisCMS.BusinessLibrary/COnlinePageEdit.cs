@@ -98,7 +98,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                 };
                 pageDal.Update(item);
             }
-            FieldManager.UpdateChildren(this.PageId);
+            FieldManager.UpdateChildren(this);
         }
         [Delete]
         private void Delete(int id, [Inject] IOnlinePageDal pageDal)
