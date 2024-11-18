@@ -20,7 +20,7 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             _OnlineCompPropEditPortal = OnlinePropEdit;
             _mapper = mapper;
         }
-        [HttpGet()]
+        [HttpGet]
         public async Task<ActionResult<OnlineComponentStylingPropertyModel>> GetOnlineCompStylingProps()
         {
             var onlineCompPropRequest = await _OnlineCompPropsPortal.FetchAsync();
@@ -35,7 +35,7 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
         public async Task<ActionResult<OnlineComponentStylingPropertyModel>> GetOnlineCompStylingProperty(int compId, int styleId)
         {
             var compStyle = await _OnlineCompPropEditPortal.FetchAsync(compId, styleId);
-            if (compStyle == null)
+            if (compStyle.ComponentId == 0)
             {
                 return NotFound();
             }

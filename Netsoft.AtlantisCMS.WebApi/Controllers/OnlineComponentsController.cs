@@ -80,10 +80,6 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
                 return BadRequest(ModelState);
             }
             var editComp = await _OnlineComponentEditPortal.FetchAsync(componentId);
-            if (editComp.Id != componentId)
-            {
-                return BadRequest(ModelState);
-            }
             editComp.Description = compModel.Description;
             editComp.HTMLClassName = compModel.HTMLClassName;
             editComp.HTMLElementId = compModel.HTMLElementId;
@@ -97,7 +93,7 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
                 {
                     var newStyleProp = editComp.StylingProps.AddNew();
                     newStyleProp.StylingPropertyId = stylePropModel.StylingPropertyId;
-                    newStyleProp.ComponentId = editComp.Id;
+                    newStyleProp.ComponentId = componentId;
                     newStyleProp.Value = stylePropModel.Value;
                 }
             }

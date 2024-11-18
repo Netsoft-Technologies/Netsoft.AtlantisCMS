@@ -35,7 +35,7 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
         public async Task<ActionResult<OnlineSettingModels>> GetOnlineSetting(int settingId)
         {
             var setting = await _OnlineSettingsEditPortal.FetchAsync(settingId);
-            if (setting == null)
+            if (setting.PropertyId == 0)
             {
                 return NotFound();
             }

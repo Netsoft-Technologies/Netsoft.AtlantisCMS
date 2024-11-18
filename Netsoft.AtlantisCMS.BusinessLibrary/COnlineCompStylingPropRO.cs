@@ -11,20 +11,20 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
     [Serializable]
     public class COnlineCompStylingPropRO : ReadOnlyBase<COnlineCompStylingPropRO>
     {
-        public static readonly PropertyInfo<int> StylingPropIDProperty = RegisterProperty<int>(c => c.StylingPropId);
-        public int StylingPropId
+        public static readonly PropertyInfo<int> StylingPropIDProperty = RegisterProperty<int>(c => c.StylingPropertyId);
+        public int StylingPropertyId
         {
             get { return GetProperty(StylingPropIDProperty); }
             private set { LoadProperty(StylingPropIDProperty, value); }
         }
-        public static readonly PropertyInfo<int> CompIdProperty = RegisterProperty<int>(c => c.CompId);
-        public int CompId
+        public static readonly PropertyInfo<int> CompIdProperty = RegisterProperty<int>(c => c.ComponentId);
+        public int ComponentId
         {
             get { return GetProperty(CompIdProperty); }
             private set { LoadProperty(CompIdProperty, value); }
         }
-        public static readonly PropertyInfo<string> StyleValueProp = RegisterProperty<string>(c => c.StyleValue);
-        public string StyleValue
+        public static readonly PropertyInfo<string> StyleValueProp = RegisterProperty<string>(c => c.Value);
+        public string Value
         {
             get { return GetProperty(StyleValueProp); }
             private set { LoadProperty(StyleValueProp, value); }
@@ -33,16 +33,16 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         private void Fetch(int compId, int stylingPropId, [Inject] IOnlineComponentStylingPropertyDal dal, [Inject] IDataPortal<COnlineCompStylingPropRO> dataPortal)
         {
             var style = dal.Fetch(compId, stylingPropId);
-            StylingPropId = style.StylingPropertyId;
-            CompId = style.ComponentId;
-            StyleValue = style.Value;
+            StylingPropertyId = style.StylingPropertyId;
+            ComponentId = style.ComponentId;
+            Value = style.Value;
         }
         [FetchChild]
         private void FetchChild(DOnlineComponentStylingPropertyDto dto)
         {
-            StylingPropId = dto.StylingPropertyId;
-            CompId = dto.ComponentId;
-            StyleValue = dto.Value;
+            StylingPropertyId = dto.StylingPropertyId;
+            ComponentId = dto.ComponentId;
+            Value = dto.Value;
         }
     }
 }
