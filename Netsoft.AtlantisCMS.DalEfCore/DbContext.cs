@@ -29,11 +29,16 @@ namespace Netsoft.AtlantisCMS.DalEfCore
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
        => options.UseSqlServer(_connectionString);
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<OnlineCompStylingProp_Entity>().HasKey(e => new { e.StylingPropertyId, e.ComponentId });
+            modelBuilder.Entity<OnlinePageComponents_Entity>().HasKey(e => new { e.PageId, e.ComponentId });
+            base.OnModelCreating(modelBuilder);
+        }
     }
 
     public class OnlineCompStylingProp_Entity
     {
-        [Key]
         public int StylingPropertyId { get; set; }
         public int ComponentId { get; set; }
         public string Value { get; set; }
@@ -58,7 +63,6 @@ namespace Netsoft.AtlantisCMS.DalEfCore
     }
     public class OnlinePageComponents_Entity
     { 
-        [Key]
         public int ComponentId { get; set; }
         public int PageId { get; set; }
         //public string? ParentPageTitle { get; set; }        
