@@ -35,9 +35,9 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
         public async Task<ActionResult<OnlineSettingModels>> GetOnlineSetting(int settingId)
         {
             var setting = await _OnlineSettingsEditPortal.FetchAsync(settingId);
-            if (setting == null)
+            if (setting.PropertyId == 0)
             {
-                return NotFound();
+                return NotFound($"Setting with id: '{settingId}' was not found.");
             }
             var res = _mapper.Map<OnlineSettingModels>(setting);
             return Ok(res);
@@ -106,7 +106,10 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
                 return BadRequest(ModelState);
             }
             var settingEdit = await _OnlineSettingsEditPortal.FetchAsync(settingId);
-            if( settingEdit.PropertyId != settingId)
+            if(settingEdit == null || settingEdit.PropertyId == 0) {
+                return NotFound($"Setting with id: '{settingId}' was not found.");
+            }
+            if(settingEdit.PropertyId != settingId)
             {
                 return BadRequest("Missmatch");
             }

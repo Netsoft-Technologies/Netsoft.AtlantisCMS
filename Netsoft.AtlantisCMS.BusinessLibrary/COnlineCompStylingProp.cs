@@ -52,6 +52,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         private void Fetch(int parentCompId, int stylingPropId, [Inject] IOnlineComponentStylingPropertyDal styleDal)
         {
             var styleData = styleDal.Fetch(parentCompId, stylingPropId);
+            if (styleData == null) return;
             using (BypassPropertyChecks)
             {
                 StylingPropertyId = styleData.StylingPropertyId;
@@ -136,7 +137,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         [DeleteSelfChild]
         private void Delete(COnlineComponentEdit parentComp, [Inject] IOnlineComponentStylingPropertyDal styleDal)
         {
-            styleDal.Delete(StylingPropertyId, parentComp.Id);
+            styleDal.Delete(parentComp.Id, StylingPropertyId);
         }
     }
 }

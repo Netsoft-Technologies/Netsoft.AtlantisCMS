@@ -16,27 +16,27 @@ namespace Netsoft.AtlantisCMS.WebApi.Infrastructure
 
             CreateMap<OnlineComponentModel, COnlineComponentEdit>().ReverseMap();
             CreateMap<OnlineComponentModel, COnlineComponentRO>().ReverseMap();
-            CreateMap<COnlineComponentEdit, OnlineComponentModel>().ReverseMap();
+            //CreateMap<COnlineComponentEdit, OnlineComponentModel>().ReverseMap();
             //CreateMap<COnlineComponentRO, OnlineComponentModel>().ReverseMap();
             CreateMap<OnlineComponentCreateRequestModel, COnlineComponentRO>().ReverseMap();
 
             CreateMap<OnlineSettingModels, COnlineSettingEdit>().ReverseMap();
             CreateMap<OnlineSettingModels, COnlineSettingRO>().ReverseMap();
-            CreateMap<COnlineSettingEdit, OnlineSettingModels>().ReverseMap();
+            //CreateMap<COnlineSettingEdit, OnlineSettingModels>().ReverseMap();
 
             CreateMap<OnlineStylingPropertyModel, COnlineStylingPropertyEdit>().ReverseMap();
             CreateMap<OnlineStylingPropertyModel, COnlineStylingPropertyRO>().ReverseMap();
-            CreateMap<COnlineStylingPropertyEdit, OnlineStylingPropertyModel>().ReverseMap();
+            //CreateMap<COnlineStylingPropertyEdit, OnlineStylingPropertyModel>().ReverseMap();
 
             CreateMap<OnlineStringModels, COnlineStringEdit>().ReverseMap();
             CreateMap<OnlineStringModels, COnlineStringRO>().ReverseMap();
-            CreateMap<COnlineStringEdit, OnlineStringModels>().ReverseMap();
+            //CreateMap<COnlineStringEdit, OnlineStringModels>().ReverseMap();
 
             CreateMap<OnlinePageModel, COnlinePageRO>().ReverseMap();
             CreateMap<OnlinePageModel, COnlinePageEdit>().ReverseMap();
-            CreateMap<COnlinePageEdit, OnlinePageModel>().ReverseMap();
+            //CreateMap<COnlinePageEdit, OnlinePageModel>().ReverseMap();
 
-            CreateMap<COnlinePageComponentRO, OnlinePageComponentModel>().ReverseMap();
+            //CreateMap<COnlinePageComponentRO, OnlinePageComponentModel>().ReverseMap();
             CreateMap<OnlinePageComponentModel, COnlinePageComponentRO>().ReverseMap();
             CreateMap<OnlinePageComponentModel, COnlinePageComponent>().ReverseMap();
             CreateMap<OnlinePageComponentModel, COnlineCompStylingProp>().ReverseMap();

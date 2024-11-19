@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Csla;
+using Csla.Core.FieldManager;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Netsoft.AtlantisCMS.BusinessLibrary;
@@ -36,9 +37,9 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
         public async Task<ActionResult<OnlineComponentModel>> GetOnlineComponent(int componentId)
         {
             var singleCompReq = await _OnlineComponentEditPortal.FetchAsync(componentId);
-            if (singleCompReq == null)
+            if (singleCompReq == null || singleCompReq.Id == 0)
             {
-                return NotFound();
+                return NotFound($"Component with id: '{componentId}' was not found.");
             }
             var res = _mapper.Map<OnlineComponentModel>(singleCompReq);
             return Ok(res);
@@ -80,24 +81,20 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
                 return BadRequest(ModelState);
             }
             var editComp = await _OnlineComponentEditPortal.FetchAsync(componentId);
-            if (editComp.Id != componentId)
-            {
-                return BadRequest(ModelState);
-            }
             editComp.Description = compModel.Description;
             editComp.HTMLClassName = compModel.HTMLClassName;
             editComp.HTMLElementId = compModel.HTMLElementId;
             editComp.StringContentId = compModel.StringContentId;
             editComp.StylingGroupId = compModel.StylingGroupId;
-
-            editComp.StylingProps.RemoveByParent(componentId);
+            editComp.StylingProps.Clear();
+            
             if (compModel.StylingProps != null)
             {
                 foreach (var stylePropModel in compModel.StylingProps)
                 {
                     var newStyleProp = editComp.StylingProps.AddNew();
                     newStyleProp.StylingPropertyId = stylePropModel.StylingPropertyId;
-                    newStyleProp.ComponentId = editComp.Id;
+                    newStyleProp.ComponentId = componentId;
                     newStyleProp.Value = stylePropModel.Value;
                 }
             }
