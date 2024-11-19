@@ -59,23 +59,23 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             return Ok(result);
         }
         [HttpPut("{stringId}")]
-        public async Task<ActionResult<OnlineStringModels>> Edit(int stringId, OnlineStringModels onlineString)
+        public async Task<ActionResult<OnlineStringModels>> Edit(int stringId, OnlineStringModels newString)
         {
-            if (!ModelState.IsValid || onlineString == null)
+            if (!ModelState.IsValid || newString == null)
             {
                 return BadRequest("Invalid Request");
             }
-            var editOnlineStyleProp = await _OnlineStringEditDataPortal.FetchAsync(stringId);
-            if (editOnlineStyleProp.Id != stringId)
+            var existingString = await _OnlineStringEditDataPortal.FetchAsync(stringId);
+            if (existingString.Id != stringId)
             {
                 return BadRequest("Invalid Request");
             }
-            editOnlineStyleProp.Title = onlineString.Title;
-            editOnlineStyleProp.MessageId = editOnlineStyleProp.MessageId;
-            editOnlineStyleProp.Message = onlineString.Message;
-            editOnlineStyleProp.MessageType= onlineString.MessageType;
-            editOnlineStyleProp = await editOnlineStyleProp.SaveAsync();
-            var result = _mapper.Map<OnlineStringModels>(editOnlineStyleProp);
+            existingString.Title = newString.Title;
+            existingString.MessageId = newString.MessageId;
+            existingString.Message = newString.Message;
+            existingString.MessageType= newString.MessageType;
+            existingString = await existingString.SaveAsync();
+            var result = _mapper.Map<OnlineStringModels>(existingString);
             return Ok(result);
         }
         [HttpDelete("{stringId}")]

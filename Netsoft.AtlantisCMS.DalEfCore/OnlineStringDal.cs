@@ -64,6 +64,7 @@ namespace Netsoft.AtlantisCMS.DalEfCore
             dtoData.Title = dto.Title;
             dtoData.MessageId = dto.MessageId;
             dtoData.Message = dto.Message;
+            dtoData.MessageType = dto.MessageType;
             var result = db.SaveChanges();
         }
         public void Delete(int id)
