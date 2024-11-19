@@ -37,7 +37,7 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             var compStyle = await _OnlineCompPropEditPortal.FetchAsync(compId, styleId);
             if (compStyle.ComponentId == 0)
             {
-                return NotFound();
+                return NotFound($"Styling Property with id: '{styleId}' was not found for Component with id: '{compId}'.");
             }
             var res = _mapper.Map<OnlineComponentStylingPropertyModel>(compStyle);
             return Ok(res);
@@ -65,7 +65,10 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
                 return BadRequest(ModelState);
             }
             var editCompStyle = await _OnlineCompPropEditPortal.FetchAsync(compId, styleId);
-            if (reqModel.StylingPropertyId != styleId || reqModel.ComponentId != compId)
+            if(editCompStyle.StylingPropertyId == 0 || editCompStyle.ComponentId == 0) {
+                return NotFound($"Styling Property with id: '{styleId}' was not found for Component with id: '{compId}'.");
+            }
+            if (editCompStyle.StylingPropertyId != styleId || editCompStyle.ComponentId != compId)
             {
                 return BadRequest(ModelState);
             }
@@ -80,7 +83,7 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             var compStyleForDeletion = await _OnlineCompPropEditPortal.FetchAsync(compId, styleId);
             if (compStyleForDeletion == null || compStyleForDeletion.StylingPropertyId == 0)
             {
-                return NotFound($"Component style with id(Component, Style): ({compId}, {styleId}) not found.");
+                return NotFound($"Styling Property with id: '{styleId}' was not found for Component with id: '{compId}'.");
             }
             try
             {

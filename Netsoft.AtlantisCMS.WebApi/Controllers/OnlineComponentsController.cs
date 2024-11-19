@@ -37,9 +37,9 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
         public async Task<ActionResult<OnlineComponentModel>> GetOnlineComponent(int componentId)
         {
             var singleCompReq = await _OnlineComponentEditPortal.FetchAsync(componentId);
-            if (singleCompReq == null)
+            if (singleCompReq == null || singleCompReq.Id == 0)
             {
-                return NotFound();
+                return NotFound($"Component with id: '{componentId}' was not found.");
             }
             var res = _mapper.Map<OnlineComponentModel>(singleCompReq);
             return Ok(res);
