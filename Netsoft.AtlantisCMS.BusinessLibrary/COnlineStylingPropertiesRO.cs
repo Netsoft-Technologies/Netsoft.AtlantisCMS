@@ -12,15 +12,15 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
     public class COnlineStylingPropertiesRO : ReadOnlyListBase<COnlineStylingPropertiesRO, COnlineStylingPropertyRO>
     {
         [Fetch]
-        private void Fetch([Inject] IOnlineStylingPropertyDal stylePropDal, [Inject]IChildDataPortal<COnlineStylingPropertyRO> childPortal)
+        private void Fetch([Inject] IOnlineStylingPropertyDal stylePropertyDal, [Inject]IChildDataPortal<COnlineStylingPropertyRO> styleChildPortal)
         {
             using (LoadListMode)
             {
                 List<DOnlineStylingPropertyDto> list = null;
-                list = stylePropDal.Fetch();
+                list = stylePropertyDal.Fetch();
                 foreach (var item in list)
                 {
-                    Add(childPortal.FetchChild(item));
+                    Add(styleChildPortal.FetchChild(item));
                 }
             }
         }

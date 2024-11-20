@@ -81,6 +81,14 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
                 return BadRequest(ModelState);
             }
             var editComp = await _OnlineComponentEditPortal.FetchAsync(componentId);
+            if (editComp.Id == 0)
+            {
+                return NotFound($"Component with id: '{componentId}' was not found.");
+            }
+            if (editComp.Id != componentId)
+            {
+                return BadRequest(ModelState);
+            }
             editComp.Description = compModel.Description;
             editComp.HTMLClassName = compModel.HTMLClassName;
             editComp.HTMLElementId = compModel.HTMLElementId;

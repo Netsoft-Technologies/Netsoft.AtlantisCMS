@@ -51,9 +51,9 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             BusinessRules.CheckRules();
         }
         [Fetch]
-        private void Fetch(int id, [Inject]IOnlineStringDal onlineStringDal)
+        private void Fetch(int stringId, [Inject]IOnlineStringDal stringDal)
         {
-            var data = onlineStringDal.Fetch(id);
+            var data = stringDal.Fetch(stringId);
             if (data == null)
             {
                 return;
@@ -68,20 +68,20 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             }
         }
         [FetchChild]
-        private void Fetch(DOnlineStringDto dto)
+        private void Fetch(DOnlineStringDto stringDto)
         {
-            Id = dto.Id;
-            Title = dto.Title;
-            MessageId = dto.MessageId;
-            Message = dto.Message;
-            MessageType = dto.MessageType;
+            Id = stringDto.Id;
+            Title = stringDto.Title;
+            MessageId = stringDto.MessageId;
+            Message = stringDto.Message;
+            MessageType = stringDto.MessageType;
         }
         [Insert]
-        private void Insert([Inject] IOnlineStringDal dal)
+        private void Insert([Inject] IOnlineStringDal stringDal)
         {
             using (BypassPropertyChecks)
             {
-                var item = new DOnlineStringDto
+                var settingDto = new DOnlineStringDto
                 {
                     Id = this.Id,
                     Title = this.Title,
@@ -89,17 +89,17 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                     Message = this.Message,
                     MessageType = this.MessageType
                 };
-                dal.Insert(item);
-                Id = item.Id;
+                stringDal.Insert(settingDto);
+                Id = settingDto.Id;
             }
             FieldManager.UpdateChildren(this);
         }
         [Update]
-        private void Update([Inject] IOnlineStringDal dal)
+        private void Update([Inject] IOnlineStringDal stringDal)
         {
             using (BypassPropertyChecks)
             {
-                var item = new DOnlineStringDto
+                var settingDto = new DOnlineStringDto
                 {
                     Id = this.Id,
                     Title = this.Title,
@@ -107,14 +107,14 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                     Message = this.Message,
                     MessageType = this.MessageType
                 };
-                dal.Update(item);
+                stringDal.Update(settingDto);
             }
             FieldManager.UpdateChildren(this.Id);
         }
         [Delete]
-        private void Delete(int id, [Inject] IOnlineStringDal dal)
+        private void Delete(int id, [Inject] IOnlineStringDal stringDal)
         {
-            dal.Delete(id);
+            stringDal.Delete(id);
         }
     }
 }

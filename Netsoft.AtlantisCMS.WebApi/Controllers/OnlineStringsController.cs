@@ -96,6 +96,10 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error deleting string: {ex.Message}");
             }
         }
+
+
+        //PLACEHOLDER IN CASE MULTI-ENTRY POST IS NEEDED
+
         //[HttpPost("createMultiple")]
         //public async Task<ActionResult<List<OnlineStringModels>>> CreateMultiple(List<OnlineStringModels> onlineStrings)
         //{

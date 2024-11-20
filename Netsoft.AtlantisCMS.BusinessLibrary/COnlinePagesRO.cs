@@ -12,7 +12,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
     public class COnlinePagesRO : ReadOnlyListBase<COnlinePagesRO, COnlinePageRO>
     {
         [Fetch]
-        private void Fetch([Inject]IOnlinePageDal pageDal, [Inject]IChildDataPortal<COnlinePageRO> cPortal)
+        private void Fetch([Inject]IOnlinePageDal pageDal, [Inject]IChildDataPortal<COnlinePageRO> pageChildPortal)
         {
             using (LoadListMode)
             {
@@ -20,7 +20,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                 list = pageDal.Fetch();
                 foreach (var item in list)
                 {
-                    Add(cPortal.FetchChild(item));
+                    Add(pageChildPortal.FetchChild(item));
                 }
             }
         }

@@ -12,15 +12,15 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
     public class COnlineSettingsRO : ReadOnlyListBase<COnlineSettingsRO, COnlineSettingRO>
     {
         [Fetch]
-        private void Fetch([Inject] IOnlineSettingDal dal, [Inject]IChildDataPortal<COnlineSettingRO> portal)
+        private void Fetch([Inject] IOnlineSettingDal settingDal, [Inject]IChildDataPortal<COnlineSettingRO> settingChildPortal)
         {
             using (LoadListMode)
             {
                 List<DOnlineSettingDto> list = null;
-                list = dal.Fetch();
-                foreach (var item in list)
+                list = settingDal.Fetch();
+                foreach (var settingDto in list)
                 {
-                    Add(portal.FetchChild(item));
+                    Add(settingChildPortal.FetchChild(settingDto));
                 }
             }
         }

@@ -35,6 +35,8 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             get { return GetProperty(ComponentsProperty); }
             private set { LoadProperty(ComponentsProperty, value); }
         }
+
+        //most likely not needed to inject DataPortal
         [Fetch]
         private void Fetch(int id, [Inject]IOnlinePageDal pageDal, [Inject]IDataPortal portal)
         {

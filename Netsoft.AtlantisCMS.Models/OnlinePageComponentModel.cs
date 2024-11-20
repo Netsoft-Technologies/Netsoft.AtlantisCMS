@@ -10,17 +10,5 @@ namespace Netsoft.AtlantisCMS.Models
     {
         public int ComponentId { get; set; }
         //public int ParentPageId { get; set; }
-
-        //public List<OnlineComponentStylingPropertyModel> ComponentStyling { get; set; }
-        //public string ParentPageTitle { get; set; }
-        //public string ComponentDescription { get; set; }
-        //public string ComponentHTMLClassName { get; set; }
-        //public string ComponentHTMLElementId { get; set; }
-
-        //public List<OnlinePageComponentModel> StylingProperties { get; set; }
-        //public OnlinePageComponentModel()
-        //{
-        //    StylingProperties = new List<OnlinePageComponentModel>();
-        //}
     }
 }

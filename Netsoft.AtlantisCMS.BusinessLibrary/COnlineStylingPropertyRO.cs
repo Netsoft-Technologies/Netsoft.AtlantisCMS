@@ -30,10 +30,12 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             get { return GetProperty(CSSProperty); }
             private set { LoadProperty(CSSProperty, value); }
         }
+
+        //most likely not needed to inject DataPortal
         [Fetch]
-        private void Fetch(int id, [Inject] IOnlineStylingPropertyDal styleDal, [Inject]IDataPortal<COnlineStylingPropertyRO> dataPortal)
+        private void Fetch(int styleId, [Inject] IOnlineStylingPropertyDal styleDal, [Inject]IDataPortal<COnlineStylingPropertyRO> dataPortal)
         {
-            var style = styleDal.Fetch(id);
+            var style = styleDal.Fetch(styleId);
             Id = style.Id;
             Description = style.Description;
             CSSProp = style.CSSProp;
