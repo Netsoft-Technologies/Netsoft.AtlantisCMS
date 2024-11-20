@@ -70,7 +70,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             PageOrder= pageDto.PageOrder;
         }
         [Insert]
-        [Transactional] //needs check if component with matching ID exists, else exception
+        [Transactional]
         private void Insert([Inject]IOnlinePageDal pageDal)
         {
             using (BypassPropertyChecks)
@@ -101,9 +101,9 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             FieldManager.UpdateChildren(this);
         }
         [Delete]
-        private void Delete(int id, [Inject] IOnlinePageDal pageDal)
+        private void Delete(int pageId, [Inject] IOnlinePageDal pageDal)
         {
-            pageDal.Delete(id);
+            pageDal.Delete(pageId);
         }
     }
 }

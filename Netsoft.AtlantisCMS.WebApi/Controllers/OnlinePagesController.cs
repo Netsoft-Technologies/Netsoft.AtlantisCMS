@@ -40,7 +40,7 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
             var page = await _OnlinePageEditDataPortal.FetchAsync(pageId);
             if (page == null || page.PageId == 0)
             {
-                return NotFound();
+                return NotFound($"Page with id: '{pageId}' was not found");
             }
             var result = _mapper.Map<OnlinePageModel>(page);
             return Ok(result);
@@ -76,6 +76,10 @@ namespace Netsoft.AtlantisCMS.WebApi.Controllers
                 return BadRequest(ModelState);
             }
             var newPageEdit = await _OnlinePageEditDataPortal.FetchAsync(pageId);
+            if (newPageEdit.PageId == 0)
+            {
+                return NotFound($"Page with id: {pageId} not found.");
+            }
             if (newPageEdit.PageId != pageId)
             {
                 return BadRequest(ModelState);

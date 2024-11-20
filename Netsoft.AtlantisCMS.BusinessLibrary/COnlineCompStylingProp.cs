@@ -33,14 +33,6 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             set { SetProperty(StyleValueProperty, value); }
         }
 
-        //unused for now, may be used in the future
-        //public static readonly PropertyInfo<string> CSSVariableProperty = RegisterProperty<string>(p => p.CSSVariable);
-        //public string CSSVariable
-        //{
-        //    get { return GetProperty(CSSVariableProperty); }
-        //    set { SetProperty(CSSVariableProperty, value); }
-        //}
-
         [Create]
         [RunLocal]
         private void Create()
@@ -58,7 +50,6 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                 StylingPropertyId = styleData.StylingPropertyId;
                 ComponentId = styleData.ComponentId;
                 Value = styleData.Value;
-                //CSSVariable = styleData.CSSVariable;
             }
         }
         [FetchChild]
@@ -67,7 +58,6 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             StylingPropertyId = styleDto.StylingPropertyId;
             ComponentId = styleDto.ComponentId;
             Value = styleDto.Value;
-            //CSSVariable = styleDto.CSSVariable;
         }
         [Insert]
         private void Insert([Inject] IOnlineComponentStylingPropertyDal styleDal)
@@ -78,8 +68,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                 {
                     StylingPropertyId = StylingPropertyId,
                     ComponentId = ComponentId,
-                    Value = this.Value,
-                    //CSSVariable = this.CSSVariable,
+                    Value = this.Value
                 };
                 styleDal.Insert(newStyleValue);
             }
@@ -94,8 +83,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                 {
                     StylingPropertyId = this.StylingPropertyId,
                     ComponentId = parentComp.Id,
-                    Value = this.Value,
-                    //CSSVariable = this.CSSVariable,
+                    Value = this.Value
                 };
                 styleDal.Insert(newStyleValue);
             }
@@ -110,24 +98,11 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                 {
                     StylingPropertyId = StylingPropertyId,
                     ComponentId = ComponentId,
-                    Value = this.Value,
-                    //CSSVariable = this.CSSVariable,
+                    Value = this.Value
                 };
                 styleDal.Update(this.ComponentId, this.StylingPropertyId, editStyleValue);
             }
         }
-        //[UpdateChild]
-        //private void UpdateChild([Inject] IOnlineComponentStylingPropertyDal styleDal) {
-        //    using (BypassPropertyChecks) {
-        //        var editStyleValue = new DOnlineComponentStylingPropertyDto {
-        //            StylingPropertyId = this.StylingPropertyId,
-        //            ComponentId = this.ComponentId,
-        //            Value = this.Value,
-        //            CSSVariable = this.CSSVariable
-        //        };
-        //        styleDal.Update(editStyleValue);
-        //    }
-        //}
         [Delete]
         private void Delete(int compId, int styleId, [Inject] IOnlineComponentStylingPropertyDal styleDal)
         {

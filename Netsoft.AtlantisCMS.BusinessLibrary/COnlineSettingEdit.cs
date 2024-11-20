@@ -288,9 +288,9 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             BusinessRules.CheckRules();
         }
         [Fetch]
-        private void Fetch(int id, [Inject] IOnlineSettingDal dal)
+        private void Fetch(int settingId, [Inject] IOnlineSettingDal settingDal)
         {
-            var data = dal.Fetch(id);
+            var data = settingDal.Fetch(settingId);
             if (data == null)
             {
                 return;
@@ -345,60 +345,60 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             }
         }
         [FetchChild]
-        private void Fetch(DOnlineSettingDto item)
+        private void Fetch(DOnlineSettingDto settingDto)
         {
-            PropertyId = item.PropertyId;
-            AcceptCustomerSignIn = item.AcceptCustomerSignIn;
-            AcceptPMSSignIn = item.AcceptPMSSignIn;
-            AcceptGoogleSignIn = item.AcceptGoogleSignIn;
-            FacebookLink = item.FacebookLink;
-            InstagramLink = item.InstagramLink;
-            GoogleLink = item.GoogleLink;
-            TwitterLink = item.TwitterLink;
-            AcceptTreatments = item.AcceptTreatments;
-            AcceptPackages = item.AcceptPackages;
-            AcceptMemberships = item.AcceptMemberships;
-            AcceptCosmetics = item.AcceptCosmetics;
-            SendConfirmationEmail = item.SendConfirmationEmail;
-            ConfirmationEmailTemplateId = item.ConfirmationEmailTemplateId;
-            SendInfoEmail = item.SendInfoEmail;
-            SendInfoEmailList = item.SendInfoEmailList;
-            ValidPaymentCreditCard = item.ValidPaymentCreditCard;
-            CreditCardPaymentTypeId = item.CreditCardPaymentTypeId;
-            ValidPaymentPayPal = item.ValidPaymentPayPal;
-            PayPalPaymentTypeId = item.PayPalPaymentTypeId;
-            ValidPaymentPayOnDay = item.ValidPaymentPayOnDay;
-            ValidPaymentViva = item.ValidPaymentViva;
-            VivaPaymentTypeId = item.VivaPaymentTypeId;
-            InvoiceIssue = item.InvoiceIssue;
-            CreditCreate = item.CreditCreate;
-            SendInvoiceEmail = item.SendInvoiceEmail;
-            InvoiceEmailTemplateId = item.InvoiceEmailTemplateId;
-            SendEnquiryEmail = item.SendEnquiryEmail;
-            EnquiryEmailTemplateId = item.EnquiryEmailTemplateId;
-            GoogleAnalyticsGtag1 = item.GoogleAnalyticsGtag1;
-            GoogleAnalyticsGtag2 = item.GoogleAnalyticsGtag2;
-            PaymentMerchantId = item.PaymentMerchantId;
-            PaymentSecretCode = item.PaymentSecretCode;
-            PaymentConfirmUrl = item.PaymentConfirmUrl;
-            PaymentCancelUrl = item.PaymentCancelUrl;
-            PaymentGatewayUrl = item.PaymentGatewayUrl;
-            SendCancellationEmail = item.SendCancellationEmail;
-            CancellationEmailTemplateId = item.CancellationEmailTemplateId;
-            SendCancellationInfoEmail = item.SendCancellationInfoEmail;
-            CancellationInfoEmailList = item.CancellationInfoEmailList;
-            SendRescheduleEmail = item.SendRescheduleEmail;
-            RescheduleEmailTemplateId = item.RescheduleEmailTemplateId;
-            SendRescheduleInfoEmail = item.SendRescheduleInfoEmail;
-            RescheduleInfoEmailList = item.RescheduleInfoEmailList;
-            HTMLPagesStylingId = item.HTMLPagesStylingId;
+            PropertyId = settingDto.PropertyId;
+            AcceptCustomerSignIn = settingDto.AcceptCustomerSignIn;
+            AcceptPMSSignIn = settingDto.AcceptPMSSignIn;
+            AcceptGoogleSignIn = settingDto.AcceptGoogleSignIn;
+            FacebookLink = settingDto.FacebookLink;
+            InstagramLink = settingDto.InstagramLink;
+            GoogleLink = settingDto.GoogleLink;
+            TwitterLink = settingDto.TwitterLink;
+            AcceptTreatments = settingDto.AcceptTreatments;
+            AcceptPackages = settingDto.AcceptPackages;
+            AcceptMemberships = settingDto.AcceptMemberships;
+            AcceptCosmetics = settingDto.AcceptCosmetics;
+            SendConfirmationEmail = settingDto.SendConfirmationEmail;
+            ConfirmationEmailTemplateId = settingDto.ConfirmationEmailTemplateId;
+            SendInfoEmail = settingDto.SendInfoEmail;
+            SendInfoEmailList = settingDto.SendInfoEmailList;
+            ValidPaymentCreditCard = settingDto.ValidPaymentCreditCard;
+            CreditCardPaymentTypeId = settingDto.CreditCardPaymentTypeId;
+            ValidPaymentPayPal = settingDto.ValidPaymentPayPal;
+            PayPalPaymentTypeId = settingDto.PayPalPaymentTypeId;
+            ValidPaymentPayOnDay = settingDto.ValidPaymentPayOnDay;
+            ValidPaymentViva = settingDto.ValidPaymentViva;
+            VivaPaymentTypeId = settingDto.VivaPaymentTypeId;
+            InvoiceIssue = settingDto.InvoiceIssue;
+            CreditCreate = settingDto.CreditCreate;
+            SendInvoiceEmail = settingDto.SendInvoiceEmail;
+            InvoiceEmailTemplateId = settingDto.InvoiceEmailTemplateId;
+            SendEnquiryEmail = settingDto.SendEnquiryEmail;
+            EnquiryEmailTemplateId = settingDto.EnquiryEmailTemplateId;
+            GoogleAnalyticsGtag1 = settingDto.GoogleAnalyticsGtag1;
+            GoogleAnalyticsGtag2 = settingDto.GoogleAnalyticsGtag2;
+            PaymentMerchantId = settingDto.PaymentMerchantId;
+            PaymentSecretCode = settingDto.PaymentSecretCode;
+            PaymentConfirmUrl = settingDto.PaymentConfirmUrl;
+            PaymentCancelUrl = settingDto.PaymentCancelUrl;
+            PaymentGatewayUrl = settingDto.PaymentGatewayUrl;
+            SendCancellationEmail = settingDto.SendCancellationEmail;
+            CancellationEmailTemplateId = settingDto.CancellationEmailTemplateId;
+            SendCancellationInfoEmail = settingDto.SendCancellationInfoEmail;
+            CancellationInfoEmailList = settingDto.CancellationInfoEmailList;
+            SendRescheduleEmail = settingDto.SendRescheduleEmail;
+            RescheduleEmailTemplateId = settingDto.RescheduleEmailTemplateId;
+            SendRescheduleInfoEmail = settingDto.SendRescheduleInfoEmail;
+            RescheduleInfoEmailList = settingDto.RescheduleInfoEmailList;
+            HTMLPagesStylingId = settingDto.HTMLPagesStylingId;
         }
         [Insert]
         private void Insert([Inject] IOnlineSettingDal dal)
         {
             using (BypassPropertyChecks)
             {
-                var item = new DOnlineSettingDto
+                var settingDto = new DOnlineSettingDto
                 {
                     PropertyId = this.PropertyId,
                     AcceptCustomerSignIn = this.AcceptCustomerSignIn,
@@ -446,8 +446,8 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                     RescheduleInfoEmailList = this.RescheduleInfoEmailList,
                     HTMLPagesStylingId = this.HTMLPagesStylingId,
                 };
-                dal.Insert(item);
-                PropertyId = item.PropertyId;
+                dal.Insert(settingDto);
+                PropertyId = settingDto.PropertyId;
             }
             FieldManager.UpdateChildren(this);
         }
@@ -456,7 +456,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         {
             using (BypassPropertyChecks)
             {
-                var item = new DOnlineSettingDto
+                var settingDto = new DOnlineSettingDto
                 {
                     PropertyId = this.PropertyId,
                     AcceptCustomerSignIn = this.AcceptCustomerSignIn,
@@ -504,7 +504,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                     RescheduleInfoEmailList = this.RescheduleInfoEmailList,
                     HTMLPagesStylingId = this.HTMLPagesStylingId
                 };
-                dal.Update(item);
+                dal.Update(settingDto);
             }
             FieldManager.UpdateChildren(this.PropertyId);
         }

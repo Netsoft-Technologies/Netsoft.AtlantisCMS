@@ -38,19 +38,21 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             CSSProp = "New CSS";
             BusinessRules.CheckRules();
         }
+
+        //most likely not needed to inject DataPortal
         [Fetch]
-        private void Fetch(int id, [Inject]IOnlineStylingPropertyDal stylingPropertyDal, [Inject]IDataPortal<COnlineStylingPropertyRO> portal)
+        private void Fetch(int styleId, [Inject]IOnlineStylingPropertyDal stylingPropertyDal, [Inject]IDataPortal<COnlineStylingPropertyRO> portal) 
         {
-            var item = stylingPropertyDal.Fetch(id);
-            if (item == null)
+            var settingDto = stylingPropertyDal.Fetch(styleId);
+            if (settingDto == null)
             {
                 return;
             }
             using (BypassPropertyChecks)
             {
-                Id = item.Id;
-                Description = item.Description;
-                CSSProp = item.CSSProp;
+                Id = settingDto.Id;
+                Description = settingDto.Description;
+                CSSProp = settingDto.CSSProp;
             }
         }
         [FetchChild]
@@ -65,14 +67,14 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         {
             using (BypassPropertyChecks)
             {
-                var item = new DOnlineStylingPropertyDto
+                var settingDto = new DOnlineStylingPropertyDto
                 {
                     Id = this.Id,
                     Description = this.Description,
                     CSSProp = this.CSSProp,
                 };
-                onlineStylingPropertyDal.Insert(item);
-                Id = item.Id;
+                onlineStylingPropertyDal.Insert(settingDto);
+                Id = settingDto.Id;
             }
             FieldManager.UpdateChildren(this);
         }
@@ -81,13 +83,13 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
         {
             using (BypassPropertyChecks)
             {
-                var item = new DOnlineStylingPropertyDto
+                var settingDto = new DOnlineStylingPropertyDto
                 {
                     Id = this.Id,
                     Description = this.Description,
                     CSSProp = this.CSSProp,
                 };
-                dal.Update(item);
+                dal.Update(settingDto);
             }
             FieldManager.UpdateChildren(this.Id);
         }

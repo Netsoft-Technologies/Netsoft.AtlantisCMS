@@ -43,24 +43,24 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
             private set { LoadProperty(MessageTypeProperty, value); }
         }
         [Fetch]
-        private void Fetch(int id, [Inject] IOnlineStringDal onlineStringDal, [Inject] IDataPortal<COnlineStringRO> propPortal)
+        private void Fetch(int stringId, [Inject] IOnlineStringDal stringDal, [Inject] IDataPortal<COnlineStringRO> propPortal)
         {
-            var item = onlineStringDal.Fetch(id);
-            Id = item.Id;
-            Title = item.Title;
-            MessageId = item.MessageId;
-            Message = item.Message;
-            MessageType = item.MessageType;
+            var settingDto = stringDal.Fetch(stringId);
+            Id = settingDto.Id;
+            Title = settingDto.Title;
+            MessageId = settingDto.MessageId;
+            Message = settingDto.Message;
+            MessageType = settingDto.MessageType;
         }
 
         [FetchChild]
-        private void FetchChild(DOnlineStringDto dto)
+        private void FetchChild(DOnlineStringDto stringDto)
         {
-            Id = dto.Id;
-            Title = dto.Title;
-            MessageId = dto.MessageId;
-            Message = dto.Message;
-            MessageType = dto.MessageType;
+            Id = stringDto.Id;
+            Title = stringDto.Title;
+            MessageId = stringDto.MessageId;
+            Message = stringDto.Message;
+            MessageType = stringDto.MessageType;
         }
     }
 }

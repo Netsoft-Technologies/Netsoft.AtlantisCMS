@@ -12,7 +12,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
     public class COnlineStringsRO : ReadOnlyListBase<COnlineStringsRO, COnlineStringRO>
     {
         [Fetch]
-        private void Fetch([Inject] IOnlineStringDal stringDal, [Inject] IChildDataPortal<COnlineStringRO> stringPortal)
+        private void Fetch([Inject] IOnlineStringDal stringDal, [Inject] IChildDataPortal<COnlineStringRO> stringChildPortal)
         {
             using (LoadListMode)
             {
@@ -20,7 +20,7 @@ namespace Netsoft.AtlantisCMS.BusinessLibrary
                 list = stringDal.Fetch();
                 foreach (var item in list)
                 {
-                    Add(stringPortal.FetchChild(item));
+                    Add(stringChildPortal.FetchChild(item));
                 }
             }
         }
